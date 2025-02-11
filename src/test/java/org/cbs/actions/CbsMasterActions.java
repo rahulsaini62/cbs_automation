@@ -6,6 +6,7 @@ import org.cbs.enums.PlatformType;
 import org.cbs.enums.WaitStrategy;
 import org.cbs.pages.CbsMasterPage;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,7 @@ import java.util.List;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementActions.onElement;
-import static org.cbs.actions.elements.ElementFinder.finds;
-import static org.cbs.actions.elements.ElementFinder.waitForElementVisible;
+import static org.cbs.actions.elements.ElementFinder.*;
 import static org.cbs.actions.elements.TextBoxActions.onTextBox;
 import static org.cbs.data.DataReader.loadCbsMasterProps;
 import static org.cbs.manager.ParallelSession.getSession;
@@ -25,7 +25,7 @@ import static org.cbs.pages.SimulationsPage.simulationsPage;
 import static org.cbs.utils.PropertiesUtil.getApplicationProps;
 
 public class CbsMasterActions extends SharedActions {
-
+    SoftAssert softAssert;
     private final PlatformType platformType;
     private static final Logger LOGGER = getLogger();
 
@@ -66,6 +66,10 @@ public class CbsMasterActions extends SharedActions {
         withMouse(cbsMasterPage().getSubmitBtnOnCreateServiceTypePopup()).click();
     }
 
+    public void verifySubmitBtnShouldEnabledOnCreateServiceTypePopup() {
+        softAssert.assertTrue(withMouse(cbsMasterPage().getSubmitBtnOnCreateServiceTypePopup()).isEnabled());
+    }
+
     public void enterInServiceTypeNameTxtBxOnCreateServiceTypePopup(String serviceTypeName) {
         onTextBox(cbsMasterPage().getServiceTypeNameTxtBxOnCreateServiceTypePopup()).enterText(serviceTypeName);
     }
@@ -77,5 +81,20 @@ public class CbsMasterActions extends SharedActions {
         List<String> actualColumnNameList = new ArrayList<>();
         finds(cbsMasterPage().getServiceTypeMasterTableColumnList(), WaitStrategy.VISIBLE).forEach(WebElement -> actualColumnNameList.add(WebElement.getText()));
         Assert.assertEquals(actualColumnNameList, expectedColumnNameList, "Column Name are not as per expected");
+    }
+
+    public void verifyServiceTypeNameFieldErrorMsgOnCreateServiceTypePopupShouldDisplay(String expectedErrorMessage) {
+        onElement(cbsMasterPage().getServiceTypeNameFieldErrorMsgOnCreateServiceTypePopup()).getText();
+        softAssert.assertEquals(onElement(cbsMasterPage().getServiceTypeNameFieldErrorMsgOnCreateServiceTypePopup()).getText(), expectedErrorMessage, "Create Service Type Field Error Message on Create Service Type Popup is not displayed");
+        softAssert.assertAll();
+    }
+
+    public void verifyServiceTypeNameFieldErrorMsgOnCreateServiceTypePopupShouldNotDisplay() {
+        softAssert.assertFalse(verifyElementIsDisplayed(cbsMasterPage().getServiceTypeNameFieldErrorMsgOnCreateServiceTypePopup()), "Create Service Type Field Error Message on Create Service Type Popup is not displayed");
+        softAssert.assertAll();
+    }
+
+    public void activeInactiveGivenServiceTypeStatus(boolean condition){
+
     }
 }

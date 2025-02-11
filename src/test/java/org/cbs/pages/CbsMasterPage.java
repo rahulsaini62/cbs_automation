@@ -64,6 +64,13 @@ public class CbsMasterPage {
             .name("Service Type Name Text Box On Create Service Type Popup")
             .build();
 
+    private final Locator serviceTypeNameFieldErrorMsgOnCreateServiceTypePopup = Locator.buildLocator()
+            .web(xpath("//div[@class='popup-body']//p"))
+            .android(accessibilityId("test-CHECKOUT"))
+            .ios(accessibilityId("test-CHECKOUT"))
+            .name("Service Type Name Text Box On Create Service Type Popup")
+            .build();
+
     private final Locator cancelBtnOnCreateServiceTypePopup = Locator.buildLocator()
             .web(xpath("//div[@class='popup-body']//button[@type='button']"))
             .android(accessibilityId("test-CHECKOUT"))
@@ -84,4 +91,13 @@ public class CbsMasterPage {
             .ios(accessibilityId("test-CHECKOUT"))
             .name("service Type Master Table Column List")
             .build();
+
+    private final Locator getGivenServiceTypeStatus (String serviceTypeName){
+        return Locator.buildLocator()
+                .web(xpath("//td[text()='"+serviceTypeName+"']/..//input"))
+                .android(accessibilityId("test-CHECKOUT"))
+                .ios(accessibilityId("test-CHECKOUT"))
+                .name("service Type Master Table Column List")
+                .build();
+    }
 }

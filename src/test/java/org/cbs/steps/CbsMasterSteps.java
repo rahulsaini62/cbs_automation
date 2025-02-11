@@ -4,9 +4,17 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import net.datafaker.Faker;
 import org.cbs.actions.CbsMasterActions;
+import org.testng.asserts.SoftAssert;
+
+import java.util.List;
+import java.util.Map;
+
+import static org.cbs.manager.ParallelSession.getSession;
 
 public class CbsMasterSteps {
+    Faker faker = new Faker();
 
     private final CbsMasterActions cbsMasterActions;
 
@@ -57,5 +65,48 @@ public class CbsMasterSteps {
     @And("Verify given column name should display under service type master section on cbs master page.")
     public void verifyGivenColumnNameShouldDisplayUnderServiceTypeMasterSectionOnCbsMasterPage() {
         cbsMasterActions.verifyGivenListOfColumnShouldDisplayCreateServiceTypePopup();
+    }
+
+    @And("User enter below value in service type name and verify appropriate error messages under create service type popup on cbs master page.")
+    public void userEnterBelowValueInServiceTypeNameAndVerifyAppropriateErrorMessagesUnderCreateServiceTypePopupOnCbsMasterPage(DataTable dataTable) {
+        List<Map<String, String>> userList = dataTable.asMaps(String.class, String.class);
+
+        for (Map<String, String> user : userList) {
+            String serviceTypeName = user.get("serviceTypeName");
+            String error = user.get("error");
+            String errorMessage = user.get("errorMessage");
+
+            cbsMasterActions.enterInServiceTypeNameTxtBxOnCreateServiceTypePopup(serviceTypeName);
+            if (error.equalsIgnoreCase("yes")) {
+                cbsMasterActions.verifyServiceTypeNameFieldErrorMsgOnCreateServiceTypePopupShouldDisplay(errorMessage);
+            } else {
+                cbsMasterActions.verifyServiceTypeNameFieldErrorMsgOnCreateServiceTypePopupShouldNotDisplay();
+                cbsMasterActions.verifySubmitBtnShouldEnabledOnCreateServiceTypePopup();
+            }
+        }
+
+    }
+
+    @And("User enter random service type name under create service type popup on cbs master page.")
+    public void userEnterRandomServiceTypeNameUnderCreateServiceTypePopupOnCbsMasterPage() {
+        getSession().getSharedData().put("serviceTypeName", faker.name().fullName());
+        cbsMasterActions.enterInServiceTypeNameTxtBxOnCreateServiceTypePopup(getSession().getSharedData().get("serviceTypeName").toString());
+    }
+
+    @And("User enter existing service type name under create service type popup on cbs master page.")
+    public void userEnterExistingServiceTypeNameUnderCreateServiceTypePopupOnCbsMasterPage() {
+        cbsMasterActions.enterInServiceTypeNameTxtBxOnCreateServiceTypePopup(getSession().getSharedData().get("serviceTypeName").toString());
+    }
+
+    @And("Verify service type error message as {string} under create service type popup on cbs master page.")
+    public void verifyServiceTypeErrorMessageAsUnderCreateServiceTypePopupOnCbsMasterPage(String errorMessage) {
+        cbsMasterActions.verifyServiceTypeNameFieldErrorMsgOnCreateServiceTypePopupShouldDisplay(errorMessage);
+    }
+
+    @And("User make existing service type in {string} state on cbs master page.")
+    public void userMakeExistingServiceTypeInStateOnCbsMasterPage(String activeInactive) {
+        if (activeInactive.equalsIgnoreCase("active")){
+            condition=true;
+        }
     }
 }
