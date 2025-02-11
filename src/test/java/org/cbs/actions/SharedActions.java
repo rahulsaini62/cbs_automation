@@ -108,22 +108,6 @@ public class SharedActions {
                 .isEqualTo(200);
     }
 
-    /**
-     * clicks on the users menu
-     */
-    public void verifyAndClickOnUsersMenuOption() {
-        onElement(commonPage().getUsersMenu()).verifyIsDisplayed()
-                .isTrue();
-        withMouse(commonPage().getUsersMenu()).jsxClick();
-    }
-
-    /**
-     * select Organizations Menu option
-     */
-    public void selectOrganizationsMenuOption() {
-        withMouse(commonPage().getOrganizationsTabUnderUserTabUnderMenu()).click();
-    }
-
     public static void logoutWithApi() {
         Map<String, String> header = new HashMap<>();
         header.put("device_id", getSession().getSharedData("deviceId")
@@ -142,14 +126,6 @@ public class SharedActions {
 
     public static boolean verifyElementIsDisplayed(Locator locator) {
         return !finds(locator).isEmpty();
-    }
-
-    public static void clickOnAccountIcon(){
-        withMouse (commonPage ().getAccountIcon ()).jsxClick ();
-    }
-
-    public static void clickOnAuditLogBtn(){
-        withMouse (commonPage ().getAuditLogBtn ()).jsxClick ();
     }
 
     public void pasteInTxtBox(Locator locator) {

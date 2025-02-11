@@ -48,10 +48,10 @@ public class LoginActions extends SharedActions {
             withMouse(loginPage().getStaySignInBtn()).click();
         }
 //        withMouse(loginPage().getStaySignInBtn()).click();
-        waitForURLContains("code");
+//        waitForURLContains("code");
 //        waitForElementVisible(commonPage().getPageLoader());
 //        waitForElementInvisibility(commonPage().getPageLoader());
-        setTokenAndDeviceIdFromLocalStorage();
+//        setTokenAndDeviceIdFromLocalStorage();
     }
 
     public void navigateToAppUrl(String appUrl) {

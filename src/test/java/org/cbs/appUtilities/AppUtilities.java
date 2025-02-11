@@ -11,16 +11,4 @@ public class AppUtilities {
 
     }
 
-    /**
-     * Logout from the application
-     */
-    public void logout(){
-        waitForElementVisible (commonPage ().getUserImage ());
-        withMouse(commonPage ().getUserImage ()).jsxClick();
-        waitForElementVisible(commonPage ().getLogoutBtn ());
-        withMouse(commonPage ().getLogoutBtn ()).jsxClick();
-        waitForElementClickable(commonPage().getLastLogoutBtn());
-        withMouse(commonPage().getLastLogoutBtn()).jsxClick();
-        waitForElementVisible(commonPage().getLogoutToastMessage());
-    }
 }

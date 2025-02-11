@@ -12,11 +12,14 @@ public class DashboardSteps {
         this.dashboardActions = new DashboardActions();
     }
 
-    @And("User click on {string} tab under {string} tab under menu on dashboard page.")
-    public void userClickOnTabUnderTabUnderMenuOnDashboardPage(String arg0, String arg1) {
+    @And("User click on {string} tab under menu on dashboard page.")
+    public void userClickOnTabUnderMenuOnDashboardPage(String tabName) {
+        dashboardActions.clickOnGivenTabUnderMenu(tabName);
     }
 
     @And("Verify user landed on the dashboard of the cbs web app.")
     public void verifyUserLandedOnTheDashboardOfTheCbsWebApp() {
     }
+
+
 }

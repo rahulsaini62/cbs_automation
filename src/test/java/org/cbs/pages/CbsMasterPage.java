@@ -8,23 +8,23 @@ import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.xpath;
 
 @Getter
-public class SimulationsPage {
-    private static final SimulationsPage SIMULATIONS_PAGE = new SimulationsPage();
+public class CbsMasterPage {
+    private static final CbsMasterPage CBS_MASTER_PAGE = new CbsMasterPage();
 
     /**
-     * Gets Simulations page instance.
+     * Gets Cbs Master page instance.
      *
-     * @return Simulations page instance
+     * @return Cbs Master page instance
      */
-    public static SimulationsPage simulationsPage() {
-        return SIMULATIONS_PAGE;
+    public static CbsMasterPage cbsMasterPage() {
+        return CBS_MASTER_PAGE;
     }
 
     private final Locator pageTitle = Locator.buildLocator()
-            .web(xpath("//p[text()='Simulations']"))
+            .web(xpath("//p[text()='Wastage Master']"))
             .android(accessibilityId("test-CHECKOUT"))
             .ios(accessibilityId("test-CHECKOUT"))
-            .name("Simulations page title")
+            .name("page title")
             .build();
 
 
