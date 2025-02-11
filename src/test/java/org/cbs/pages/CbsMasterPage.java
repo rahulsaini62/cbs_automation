@@ -27,5 +27,14 @@ public class CbsMasterPage {
             .name("page title")
             .build();
 
+    public final Locator getServiceTypeMasterSectionTitle(String titleName) {
+        return Locator.buildLocator()
+                .web(xpath("//p[text()='" + titleName + "']"))
+                .android(accessibilityId("test-CHECKOUT"))
+                .ios(accessibilityId("test-CHECKOUT"))
+                .name("Service Type Master Section Title")
+                .build();
+    }
+
 
 }

@@ -26,4 +26,9 @@ public class CbsMasterActions extends SharedActions{
                 "Simulation page is not displayed");
     }
 
+    public void verifyServiceTypeMasterSectionTitleShouldDisplay(String titleName) {
+        Assert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getServiceTypeMasterSectionTitle(titleName)),
+                "Simulation page is not displayed");
+    }
+
 }

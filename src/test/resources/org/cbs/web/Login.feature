@@ -13,13 +13,15 @@ Feature: Login Feature
 
   @TC-STM-01
   Scenario: Verify valid login on CBS portal.
-#    Then   Wait for the cbs page loader.
     And  Verify user landed on the dashboard of the cbs web app.
-
     And Verify simulations page should display.
-
     And User click on "CBS Masters" tab under menu on dashboard page.
-    Then Verify cbs master page should display.
+    And Verify cbs master page should display.
+    And Verify "Service Type Master" section should display on cbs master page.
+
+
+    And Verify "Role Master" section should display on cbs master page.
+
 
 
 
