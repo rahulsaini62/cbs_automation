@@ -1,5 +1,6 @@
 package org.cbs.actions;
 
+import io.cucumber.datatable.DataTable;
 import org.apache.logging.log4j.Logger;
 import org.cbs.enums.PlatformType;
 import org.cbs.pages.CbsMasterPage;
@@ -7,10 +8,15 @@ import org.testng.Assert;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
+import static org.cbs.actions.elements.ElementActions.onElement;
+import static org.cbs.actions.elements.ElementFinder.waitForElementVisible;
+import static org.cbs.actions.elements.TextBoxActions.onTextBox;
 import static org.cbs.manager.ParallelSession.getSession;
 import static org.cbs.pages.CbsMasterPage.cbsMasterPage;
 import static org.cbs.pages.DashboardPage.commonPage;
+import static org.cbs.pages.LoginPage.loginPage;
 import static org.cbs.pages.SimulationsPage.simulationsPage;
+import static org.cbs.utils.PropertiesUtil.getApplicationProps;
 
 public class CbsMasterActions extends SharedActions{
 
@@ -31,8 +37,14 @@ public class CbsMasterActions extends SharedActions{
                 "Service Type Master Section Title is not displayed");
     }
 
+    public void verifyCreateServiceTypeBtnShouldDisplay(){
+        Assert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getCreateServiceTypeBtn()),
+                "Create Service Type Btn is not displayed");
+    }
+
     public void clickOnCreateServiceTypeBtn(){
-        withMouse(cbsMasterPage().getCreateServiceTypeBtn()).click();
+        waitForElementVisible(cbsMasterPage().getCreateServiceTypeBtn());
+        withMouse(cbsMasterPage().getCreateServiceTypeBtn()).jsxClick();
     }
 
     public void verifyCreateServiceTypePopupShouldDisplay() {
@@ -48,4 +60,13 @@ public class CbsMasterActions extends SharedActions{
         withMouse(cbsMasterPage().getSubmitBtnOnCreateServiceTypePopup()).click();
     }
 
+    public void enterInServiceTypeNameTxtBxOnCreateServiceTypePopup(String serviceTypeName){
+        onTextBox(cbsMasterPage().getServiceTypeNameTxtBxOnCreateServiceTypePopup()).enterText(serviceTypeName);
+    }
+
+    public void verifyGivenListOfColumnShouldDisplayCreateServiceTypePopup(DataTable dataTable){
+
+
+
+    }
 }
