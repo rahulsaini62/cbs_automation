@@ -19,8 +19,10 @@ Feature: Login Feature
     And Verify cbs master page should display.
     And Verify "Service Type Master" section should display on cbs master page.
 
-
     And Verify "Role Master" section should display on cbs master page.
+    And User click on create service type button on cbs master page.
+    Then Verify create service type popup should display on cbs master page.
+
 
 
 

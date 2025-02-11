@@ -31,4 +31,8 @@ public class CbsMasterActions extends SharedActions{
                 "Simulation page is not displayed");
     }
 
+    public void clickCreateServiceTypeBtn(){
+        withMouse(cbsMasterPage().getCreateServiceTypeBtn()).click();
+    }
+
 }
