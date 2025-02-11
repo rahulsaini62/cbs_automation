@@ -23,10 +23,7 @@ Feature: Login Feature
     And User click on create service type button on cbs master page.
     Then Verify create service type popup should display on cbs master page.
 
-
-
-
-
-
+    And User click on cancel button under create service type popup on cbs master page.
+    And User click on submit button under create service type popup on cbs master page.
 
 

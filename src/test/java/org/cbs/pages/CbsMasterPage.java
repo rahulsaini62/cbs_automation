@@ -57,11 +57,26 @@ public class CbsMasterPage {
             .name("Service Type Name Field Title On Create Service Type Popup")
             .build();
 
-    private final Locator serviceTypeNameFieldTitleOnCreateServiceTypePopup = Locator.buildLocator()
-            .web(xpath("//div[@class='popup-body']//label"))
+    private final Locator serviceTypeNameTxtBxOnCreateServiceTypePopup = Locator.buildLocator()
+            .web(xpath("//div[@class='popup-body']//input"))
             .android(accessibilityId("test-CHECKOUT"))
             .ios(accessibilityId("test-CHECKOUT"))
-            .name("Service Type Name Field Title On Create Service Type Popup")
+            .name("Service Type Name Text Box On Create Service Type Popup")
             .build();
+
+    private final Locator cancelBtnOnCreateServiceTypePopup = Locator.buildLocator()
+            .web(xpath("//div[@class='popup-body']//button[@type='button']"))
+            .android(accessibilityId("test-CHECKOUT"))
+            .ios(accessibilityId("test-CHECKOUT"))
+            .name("Cancel Button On Create Service Type Popup")
+            .build();
+
+    private final Locator submitBtnOnCreateServiceTypePopup = Locator.buildLocator()
+            .web(xpath("//div[@class='popup-body']//button[@type='submit']"))
+            .android(accessibilityId("test-CHECKOUT"))
+            .ios(accessibilityId("test-CHECKOUT"))
+            .name("Submit Button On Create Service Type Popup")
+            .build();
+
 
 }
