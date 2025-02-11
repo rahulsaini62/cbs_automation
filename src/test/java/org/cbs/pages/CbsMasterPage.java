@@ -57,11 +57,4 @@ public class CbsMasterPage {
             .name("Service Type Name Field Title On Create Service Type Popup")
             .build();
 
-    private final Locator serviceTypeNameFieldTitleOnCreateServiceTypePopup = Locator.buildLocator()
-            .web(xpath("//div[@class='popup-body']//label"))
-            .android(accessibilityId("test-CHECKOUT"))
-            .ios(accessibilityId("test-CHECKOUT"))
-            .name("Service Type Name Field Title On Create Service Type Popup")
-            .build();
-
 }

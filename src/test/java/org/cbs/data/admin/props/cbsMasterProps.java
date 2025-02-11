@@ -1,4 +1,4 @@
 package org.cbs.data.admin.props;
 
-public class RoleMasterProps {
+public class cbsMasterProps {
 }

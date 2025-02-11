@@ -93,35 +93,6 @@ public class SharedActions {
         assertNotEquals(expected, actual);
     }
 
-    public static void logout() {
-        Map<String, String> header = new HashMap<>();
-        header.put("device_id", getSession().getSharedData("deviceId")
-                .toString());
-        header.put("Authorization", "Bearer " + getSession().getSharedData("token")
-                .toString());
-        ApiRequest request = LogoutRequests.getLogout(header);
-        ApiResponse response = ApiActions.withRequest(request, TEST_RESTFUL_ADMIN.name()
-                        .toLowerCase())
-                .execute();
-        response.verifyStatusCode()
-                .isEqualTo(200);
-    }
-
-    public static void logoutWithApi() {
-        Map<String, String> header = new HashMap<>();
-        header.put("device_id", getSession().getSharedData("deviceId")
-                .toString());
-        header.put("authorization", getSession().getSharedData("token")
-                .toString());
-        LOGGER.info(" Header value :{}", header);
-        ApiRequest request = LogoutRequests.getLogout(header);
-        ApiResponse response = ApiActions.withRequest(request, TEST_RESTFUL_ADMIN.name()
-                        .toLowerCase())
-                .execute();
-        response.verifyStatusCode()
-                .isEqualTo(200);
-    }
-
 
     public static boolean verifyElementIsDisplayed(Locator locator) {
         return !finds(locator).isEmpty();

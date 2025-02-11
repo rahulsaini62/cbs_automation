@@ -8,23 +8,23 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import java.nio.file.Path;
 
 import org.apache.logging.log4j.Logger;
-import org.cbs.data.admin.props.RoleMasterProps;
+import org.cbs.data.admin.props.cbsMasterProps;
 import org.cbs.utils.JsonUtil;
 
 public final class DataReader {
     private static final Logger LOGGER = getLogger ();
 
-    public static RoleMasterProps loadRoleMasterProps () {
-        RoleMasterProps roleMasterProps = null;
+    public static cbsMasterProps loadCbsMasterProps () {
+        cbsMasterProps cbsMasterProps = null;
         LOGGER.traceEntry ();
         final var defaultPath = Path.of (getProperty ("user.dir"), "src/test/resources/data.json/admin/props/")
             .toString ();
         final var configDirectory = ofNullable (getenv ("PROPERTIES_PROPS_PATH")).orElse (
             ofNullable (getProperty ("login.props.path")).orElse (defaultPath));
-        final var configPath = Path.of (configDirectory, "roleMaster-props.json")
+        final var configPath = Path.of (configDirectory, "cbsMaster-props.json")
             .toString ();
-        roleMasterProps = JsonUtil.fromFile (configPath, RoleMasterProps.class);
-        return LOGGER.traceExit (roleMasterProps);
+        cbsMasterProps = JsonUtil.fromFile (configPath, cbsMasterProps.class);
+        return LOGGER.traceExit (cbsMasterProps);
     }
 
 }
