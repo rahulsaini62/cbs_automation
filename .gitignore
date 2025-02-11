@@ -52,6 +52,5 @@ src/main/resources/application.properties
 src/test/java/org/cbs/runner/RunCucumberTest.java
 .git/
 .github/
-src/test/resources/cbs-config.json
 src/test/java/org/cbs/base
 src/test/resources/junit-platform.properties
