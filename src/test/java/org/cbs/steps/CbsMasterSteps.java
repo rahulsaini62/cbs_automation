@@ -21,6 +21,15 @@ public class CbsMasterSteps {
     @And("Verify {string} section should display on cbs master page.")
     public void verifySectionShouldDisplayOnCbsMasterPage(String titleName) {
         cbsMasterActions.verifyServiceTypeMasterSectionTitleShouldDisplay(titleName);
+    }
+
+    @And("User click on create service type button on cbs master page.")
+    public void userClickOnCreateServiceTypeButtonOnCbsMasterPage() {
+        cbsMasterActions.clickCreateServiceTypeBtn();
+    }
+
+    @Then("Verify create service type popup should display on cbs master page.")
+    public void verifyCreateServiceTypePopupShouldDisplayOnCbsMasterPage() {
 
     }
 }
