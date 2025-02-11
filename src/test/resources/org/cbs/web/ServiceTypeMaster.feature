@@ -16,13 +16,14 @@ Feature: Login Feature
     And  Verify user landed on the dashboard of the cbs web app.
     And Verify simulations page should display.
     And User click on "CBS Masters" tab under menu on dashboard page.
-    And Verify cbs master page should display.
+    Then Verify cbs master page should display.
     And Verify "Service Type Master" section should display on cbs master page.
     And Verify create service type button should display under service type master section on cbs master page.
-    And Verify below column name should display under service type master section on cbs master page.
-      | Service Type |
-      | Status       |
-      | Action       |
+    And Verify given column name should display under service type master section on cbs master page.
+
+
+
+
     And User click on create service type button on cbs master page.
     Then Verify create service type popup should display on cbs master page.
     And User enter service type name as "testing" under create service type popup on cbs master page.

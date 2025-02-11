@@ -78,5 +78,10 @@ public class CbsMasterPage {
             .name("Submit Button On Create Service Type Popup")
             .build();
 
-
+    private final Locator serviceTypeMasterTableColumnList = Locator.buildLocator()
+            .web(xpath("//p[text()='Service Type Master']/../..//tr[1]//div[contains(@class,'Labels')]"))
+            .android(accessibilityId("test-CHECKOUT"))
+            .ios(accessibilityId("test-CHECKOUT"))
+            .name("service Type Master Table Column List")
+            .build();
 }

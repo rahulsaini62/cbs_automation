@@ -54,8 +54,8 @@ public class CbsMasterSteps {
         cbsMasterActions.verifyCreateServiceTypeBtnShouldDisplay();
     }
 
-    @And("Verify below column name should display under service type master section on cbs master page.")
-    public void verifyBelowColumnNameShouldDisplayUnderServiceTypeMasterSectionOnCbsMasterPage(DataTable dataTable) {
-        cbsMasterActions.verifyGivenListOfColumnShouldDisplayCreateServiceTypePopup(dataTable);
+    @And("Verify given column name should display under service type master section on cbs master page.")
+    public void verifyGivenColumnNameShouldDisplayUnderServiceTypeMasterSectionOnCbsMasterPage() {
+        cbsMasterActions.verifyGivenListOfColumnShouldDisplayCreateServiceTypePopup();
     }
 }
