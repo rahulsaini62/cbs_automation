@@ -28,11 +28,24 @@ public class CbsMasterActions extends SharedActions{
 
     public void verifyServiceTypeMasterSectionTitleShouldDisplay(String titleName) {
         Assert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getServiceTypeMasterSectionTitle(titleName)),
-                "Simulation page is not displayed");
+                "Service Type Master Section Title is not displayed");
     }
 
-    public void clickCreateServiceTypeBtn(){
+    public void clickOnCreateServiceTypeBtn(){
         withMouse(cbsMasterPage().getCreateServiceTypeBtn()).click();
+    }
+
+    public void verifyCreateServiceTypePopupShouldDisplay() {
+        Assert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getTitleOnCreateServiceTypePopup()),
+                "Create Service Type Popup is not displayed");
+    }
+
+    public void clickOnCancelBtnOnCreateServiceTypePopup(){
+        withMouse(cbsMasterPage().getCancelBtnOnCreateServiceTypePopup()).click();
+    }
+
+    public void clickOnSubmitBtnOnCreateServiceTypePopup(){
+        withMouse(cbsMasterPage().getSubmitBtnOnCreateServiceTypePopup()).click();
     }
 
 }

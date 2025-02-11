@@ -25,11 +25,21 @@ public class CbsMasterSteps {
 
     @And("User click on create service type button on cbs master page.")
     public void userClickOnCreateServiceTypeButtonOnCbsMasterPage() {
-        cbsMasterActions.clickCreateServiceTypeBtn();
+        cbsMasterActions.clickOnCreateServiceTypeBtn();
     }
 
     @Then("Verify create service type popup should display on cbs master page.")
     public void verifyCreateServiceTypePopupShouldDisplayOnCbsMasterPage() {
+        cbsMasterActions.verifyCreateServiceTypePopupShouldDisplay();
+    }
 
+    @And("User click on cancel button under create service type popup on cbs master page.")
+    public void userClickOnCancelButtonUnderCreateServiceTypePopupOnCbsMasterPage() {
+        cbsMasterActions.clickOnCancelBtnOnCreateServiceTypePopup();
+    }
+
+    @And("User click on submit button under create service type popup on cbs master page.")
+    public void userClickOnSubmitButtonUnderCreateServiceTypePopupOnCbsMasterPage() {
+        cbsMasterActions.clickOnSubmitBtnOnCreateServiceTypePopup();
     }
 }
