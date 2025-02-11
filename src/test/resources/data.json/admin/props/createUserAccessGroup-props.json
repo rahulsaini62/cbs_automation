@@ -1,0 +1,15 @@
+{
+  "heading_txt": "Create User Access Group",
+  "group_name_place_txt": "Enter Group Name",
+  "search_place_txt": "Search",
+  "breadcrumb_txt": ["User Access Group",
+    "Create Access Group"],
+
+  "table_heading": [
+    "Name",
+    "Sites",
+    "Modules",
+    "Status"
+  ],
+  "user_group_view": "Cancel\nCreate\nQuivio User Management"
+}

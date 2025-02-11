@@ -1,0 +1,55 @@
+{
+  "page_url": "/user-access-group",
+  "breadcrumb": "User Access Group",
+  "page_heading": "User Access Group",
+  "deactivate_user_access_modal_text": "Deactivate User Access Group?",
+  "table_header": [
+    "Group Name",
+    "Organizations",
+    "Modules",
+    "Status",
+    "Actions"
+  ],
+  "next_nav_label": "Next",
+  "previous_nav_label": "Previous",
+  "rows_per_page_label": "^Rows per page: \\d+$",
+  "search_label": "Search",
+  "button_icons_labels": [
+    "Filters",
+    "New"
+  ],
+  "no_result_found_text": "No Result Found",
+  "search_min_char_limit": 3,
+  "filter_checkbox_title": "Filters",
+  "filter_checkbox_reset_label": "Reset",
+  "filter_checkbox_wrapper_labels": [
+    "Module",
+    "Status",
+    "Number of organizations"
+  ],
+  "filter_checkbox_bottom_wrapper_labels": [
+    "Cancel",
+    "Apply"
+  ],
+  "module_select_quivio_user_management_text": "Quivio User Management",
+  "status_select_active_text": "Active",
+  "status_select_inactive_text": "Inactive",
+  "deactivate_modal_title_text": "Deactivate User Access Group?",
+  "deactivate_modal_subtitle_text": "Are you sure you would like to deactivate the user access group?",
+  "deactivate_modal_placeholder_text": "*Add a Reason",
+  "deactivate_modal_button_area_texts": [
+    "Cancel",
+    "Deactivate"
+  ],
+  "deactivate_success_message": "Deactivated Successfully",
+  "activate_modal_title_text": "Activate User Access Group",
+  "activate_modal_subtitle_text": "Are you sure you would like to activate the user access group?",
+  "activate_modal_placeholder_text": "*Add a Reason",
+  "activate_modal_button_area_texts": [
+    "Cancel",
+    "Activate"
+  ],
+  "activate_success_message": "Activated Successfully",
+  "activate_nav_text" : "Activate",
+  "deactivate_nav_text" : "Deactivate"
+}

@@ -1,0 +1,234 @@
+package org.cbs.actions;
+
+import org.apache.logging.log4j.Logger;
+import org.cbs.actions.api.ApiActions;
+import org.cbs.api.restful.request.LogoutRequests;
+import org.cbs.builders.ApiRequest;
+import org.cbs.builders.ApiResponse;
+import org.cbs.builders.Locator;
+import org.cbs.enums.PlatformType;
+import org.openqa.selenium.Keys;
+import org.testng.Assert;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.cbs.actions.CommonActions.sleep;
+import static org.cbs.actions.drivers.DriverActions.withDriver;
+import static org.cbs.actions.elements.ClickableActions.withMouse;
+import static org.cbs.actions.elements.ElementActions.onElement;
+import static org.cbs.actions.elements.ElementFinder.*;
+import static org.cbs.actions.elements.TextBoxActions.onTextBox;
+import static org.cbs.enums.ApiConfigKey.TEST_RESTFUL_ADMIN;
+import static org.cbs.manager.ParallelSession.getSession;
+import static org.cbs.pages.DashboardPage.commonPage;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
+
+public class SharedActions {
+    private final PlatformType platformType;
+    private static final Logger LOGGER = getLogger();
+
+    public SharedActions() {
+        this.platformType = getSession().getPlatformType();
+    }
+
+    /**
+     * Wait for the page loader.
+     */
+    public void waitForThePageLoader() {
+        waitForElementVisible(commonPage().getPageLoader());
+        waitForElementInvisibility(commonPage().getPageLoader());
+    }
+
+    /**
+     * Wait for table loader
+     */
+    public void waitForTheTableLoader() {
+        //waitForElementVisible (commonPage ().getTableLoader ());
+        waitForElementInvisibility(commonPage().getTableLoader());
+    }
+
+    /**
+     * Send Keys to the text-field
+     */
+    public void sendKeys(Locator locator, String text) {
+        waitForElementVisible(commonPage().getUserImage());
+        withMouse(locator).click();
+        withMouse(locator).clear();
+        onTextBox(locator).enterText(text);
+    }
+
+
+    public void selectAllAndClearTxtBx(Locator locator) {
+        String os = System.getProperty("os.name")
+                .toLowerCase();
+        Keys modifierKey;
+        if (os.contains("mac")) {
+            modifierKey = Keys.COMMAND;
+        } else {
+            modifierKey = Keys.CONTROL;
+        }
+        onTextBox(locator).enterText(Keys.chord(modifierKey, "a") + Keys.BACK_SPACE);
+    }
+
+    public <T> void verifyEquals(T actual, T expected) {
+        assertEquals(actual, expected);
+    }
+
+    public <T> void verifyAllMatch(List<T> list, T condition) {
+        assertTrue(list.stream()
+                .allMatch(val -> val.equals(condition)));
+    }
+
+    public <T> void verifyContains(List<T> list, T condition) {
+        assertTrue(list.stream()
+                .anyMatch(val -> val.toString()
+                        .contains(condition.toString())));
+    }
+
+    public <T> void verifyNotEquals(T actual, T expected) {
+        assertNotEquals(expected, actual);
+    }
+
+    public static void logout() {
+        Map<String, String> header = new HashMap<>();
+        header.put("device_id", getSession().getSharedData("deviceId")
+                .toString());
+        header.put("Authorization", "Bearer " + getSession().getSharedData("token")
+                .toString());
+        ApiRequest request = LogoutRequests.getLogout(header);
+        ApiResponse response = ApiActions.withRequest(request, TEST_RESTFUL_ADMIN.name()
+                        .toLowerCase())
+                .execute();
+        response.verifyStatusCode()
+                .isEqualTo(200);
+    }
+
+    /**
+     * clicks on the users menu
+     */
+    public void verifyAndClickOnUsersMenuOption() {
+        onElement(commonPage().getUsersMenu()).verifyIsDisplayed()
+                .isTrue();
+        withMouse(commonPage().getUsersMenu()).jsxClick();
+    }
+
+    /**
+     * select Organizations Menu option
+     */
+    public void selectOrganizationsMenuOption() {
+        withMouse(commonPage().getOrganizationsTabUnderUserTabUnderMenu()).click();
+    }
+
+    public static void logoutWithApi() {
+        Map<String, String> header = new HashMap<>();
+        header.put("device_id", getSession().getSharedData("deviceId")
+                .toString());
+        header.put("authorization", getSession().getSharedData("token")
+                .toString());
+        LOGGER.info(" Header value :{}", header);
+        ApiRequest request = LogoutRequests.getLogout(header);
+        ApiResponse response = ApiActions.withRequest(request, TEST_RESTFUL_ADMIN.name()
+                        .toLowerCase())
+                .execute();
+        response.verifyStatusCode()
+                .isEqualTo(200);
+    }
+
+
+    public static boolean verifyElementIsDisplayed(Locator locator) {
+        return !finds(locator).isEmpty();
+    }
+
+    public static void clickOnAccountIcon(){
+        withMouse (commonPage ().getAccountIcon ()).jsxClick ();
+    }
+
+    public static void clickOnAuditLogBtn(){
+        withMouse (commonPage ().getAuditLogBtn ()).jsxClick ();
+    }
+
+    public void pasteInTxtBox(Locator locator) {
+        String os = System.getProperty("os.name")
+                .toLowerCase();
+        Keys modifierKey;
+        if (os.contains("mac")) {
+            modifierKey = Keys.COMMAND;
+        } else {
+            modifierKey = Keys.CONTROL;
+        }
+        onTextBox(locator).enterText(Keys.chord(modifierKey, "v"));
+    }
+
+    public void verifyCopyAndPaste(final Locator locator, final String expected) {
+        final String att1 = onElement(locator).getAttribute("value");
+        LOGGER.info("Attribute value after entering text:{}", att1);
+        onTextBox(locator).enterText(
+                Keys.chord(Keys.CONTROL, "a") + Keys.chord(Keys.CONTROL, "c") + Keys.chord(Keys.BACK_SPACE));
+        withDriver().waitUntil(driver -> {
+            final String att2 = onElement(locator).getAttribute("value");
+            return att2 == null || att2.trim()
+                    .isEmpty();
+        });
+        final String att2 = onElement(locator).getAttribute("value");
+        Assert.assertTrue(att2 == null || att2.trim()
+                .isEmpty());
+        sleep(100);
+        pasteInTxtBox(locator);
+
+        withDriver().waitUntil(driver -> {
+            final String actualName = onElement(locator).getAttribute("value");
+            return actualName != null && !actualName.trim()
+                    .isEmpty();
+        });
+
+        final String actualName = onElement(locator).getAttribute("value");
+        LOGGER.info("Attribute value after Pasting the copied text:{}", actualName);
+        Assert.assertEquals(actualName, expected);
+    }
+
+    public void verifyCopyAndPasteForPhoneNumber(final Locator locator, String phoneNum) {
+        final String att1 = onElement(locator).getAttribute("value");
+        LOGGER.info("Attribute phone number after entering text:{}", att1);
+        final int length = phoneNum.length();
+        onTextBox(locator).enterText(Keys.chord(Keys.CONTROL, "a") + Keys.chord(Keys.CONTROL, "c"));
+        for (int i = 0; i < length; i++) {
+            onTextBox(locator).enterText(Keys.chord(Keys.BACK_SPACE));
+            sleep(100);
+        }
+        final String att2 = onElement(locator).getAttribute("value");
+        Assert.assertTrue(att2 == null || att2.trim()
+                .isEmpty());
+        sleep(200);
+        pasteInTxtBox(locator);
+
+        withDriver().waitUntil(driver -> {
+            final String phNumber = onElement(locator).getAttribute("value");
+            return phNumber != null && !phNumber.trim()
+                    .isEmpty();
+        });
+        final String actuaNum = onElement(locator).getAttribute("value");
+        LOGGER.info("Attribute phone number after Pasting the copied text:{}", actuaNum);
+        Assert.assertEquals(actuaNum, "+1" + " " + phoneNum);
+    }
+
+    public void verifyElementAttributeNotEmpty(Locator locator, String attributeKey) {
+        withDriver().waitUntil(driver -> {
+            final String attributeValue = onElement(locator).getAttribute(attributeKey);
+            return attributeValue != null && !attributeValue.isEmpty();
+        });
+    }
+
+    public void clearAndEnterTxtBx (final Locator textboxLocator, final String randomUserText) {
+        waitForElementVisible (textboxLocator);
+        withMouse (textboxLocator).click ();
+        onTextBox (textboxLocator).enterText (Keys.chord (Keys.CONTROL, "a")); // Select all text
+        onTextBox (textboxLocator).enterText (Keys.chord (Keys.BACK_SPACE)); // Clear the text
+        onTextBox (textboxLocator).enterText (randomUserText);
+    }
+
+}
