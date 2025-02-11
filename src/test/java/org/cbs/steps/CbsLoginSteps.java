@@ -20,6 +20,7 @@ public class CbsLoginSteps {
     @Then ("User login with username as {string} and password as {string} on cbs admin")
     public void userLoginWithUsernameAsAndPasswordAsOnCbsAdmin (final String username, final String password) {
         this.loginActions.loginWithGivenCred (username, password);
+
     }
 
 }
