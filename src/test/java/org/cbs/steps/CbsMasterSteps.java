@@ -1,5 +1,6 @@
 package org.cbs.steps;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -41,5 +42,20 @@ public class CbsMasterSteps {
     @And("User click on submit button under create service type popup on cbs master page.")
     public void userClickOnSubmitButtonUnderCreateServiceTypePopupOnCbsMasterPage() {
         cbsMasterActions.clickOnSubmitBtnOnCreateServiceTypePopup();
+    }
+
+    @And("User enter service type name as {string} under create service type popup on cbs master page.")
+    public void userEnterServiceTypeNameAsUnderCreateServiceTypePopupOnCbsMasterPage(String serviceTypeName) {
+        cbsMasterActions.enterInServiceTypeNameTxtBxOnCreateServiceTypePopup(serviceTypeName);
+    }
+
+    @And("Verify create service type button should display under service type master section on cbs master page.")
+    public void verifyCreateServiceTypeButtonShouldDisplayUnderServiceTypeMasterSectionOnCbsMasterPage() {
+        cbsMasterActions.verifyCreateServiceTypeBtnShouldDisplay();
+    }
+
+    @And("Verify below column name should display under service type master section on cbs master page.")
+    public void verifyBelowColumnNameShouldDisplayUnderServiceTypeMasterSectionOnCbsMasterPage(DataTable dataTable) {
+        cbsMasterActions.verifyGivenListOfColumnShouldDisplayCreateServiceTypePopup(dataTable);
     }
 }
