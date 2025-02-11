@@ -83,6 +83,7 @@ public class CbsMasterSteps {
                 cbsMasterActions.verifyServiceTypeNameFieldErrorMsgOnCreateServiceTypePopupShouldNotDisplay();
                 cbsMasterActions.verifySubmitBtnShouldEnabledOnCreateServiceTypePopup();
             }
+            cbsMasterActions.clearServiceTypeNameTxtBxOnCreateServiceTypePopup();
         }
 
     }
@@ -105,8 +106,23 @@ public class CbsMasterSteps {
 
     @And("User make existing service type in {string} state on cbs master page.")
     public void userMakeExistingServiceTypeInStateOnCbsMasterPage(String activeInactive) {
-        if (activeInactive.equalsIgnoreCase("active")){
-            condition=true;
+        if (activeInactive.equalsIgnoreCase("active")) {
+//            condition=true;
         }
+    }
+
+    @And("Verify UI of create service type popup.")
+    public void verifyUIOfCreateServiceTypePopup() {
+        cbsMasterActions.verifyServiceTypeNameFieldShouldDisplayOnCreateServiceTypePopup();
+        cbsMasterActions.verifyCancelBtnShouldDisplayOnCreateServiceTypePopup();
+        cbsMasterActions.verifyCancelBtnShouldEnabledDisplayOnCreateServiceTypePopup();
+        cbsMasterActions.verifySubmitBtnShouldDisplayOnCreateServiceTypePopup();
+        cbsMasterActions.verifySubmitBtnShouldDisabledOnCreateServiceTypePopup();
+
+    }
+
+    @Then("Verify {string} toast message should display.")
+    public void verifyToastMessageShouldDisplay(String expectedToastMessage) {
+        cbsMasterActions.verifyGivenToastMessageShouldDisplay(expectedToastMessage);
     }
 }

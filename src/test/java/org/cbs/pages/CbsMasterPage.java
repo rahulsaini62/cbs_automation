@@ -100,4 +100,11 @@ public class CbsMasterPage {
                 .name("service Type Master Table Column List")
                 .build();
     }
+
+    private final Locator toastMessage = Locator.buildLocator()
+            .web(cssSelector(".Toastify__toast-body"))
+            .android(accessibilityId("test-CHECKOUT"))
+            .ios(accessibilityId("test-CHECKOUT"))
+            .name("service Type Master Table Column List")
+            .build();
 }

@@ -74,6 +74,10 @@ public class CbsMasterActions extends SharedActions {
         onTextBox(cbsMasterPage().getServiceTypeNameTxtBxOnCreateServiceTypePopup()).enterText(serviceTypeName);
     }
 
+    public void clearServiceTypeNameTxtBxOnCreateServiceTypePopup() {
+        onTextBox(cbsMasterPage().getServiceTypeNameTxtBxOnCreateServiceTypePopup()).clear();
+    }
+
     public void verifyGivenListOfColumnShouldDisplayCreateServiceTypePopup() {
 
         List<String> expectedColumnNameList = loadCbsMasterProps().getServiceTypeMasterTableColumn();
@@ -84,7 +88,6 @@ public class CbsMasterActions extends SharedActions {
     }
 
     public void verifyServiceTypeNameFieldErrorMsgOnCreateServiceTypePopupShouldDisplay(String expectedErrorMessage) {
-        onElement(cbsMasterPage().getServiceTypeNameFieldErrorMsgOnCreateServiceTypePopup()).getText();
         softAssert.assertEquals(onElement(cbsMasterPage().getServiceTypeNameFieldErrorMsgOnCreateServiceTypePopup()).getText(), expectedErrorMessage, "Create Service Type Field Error Message on Create Service Type Popup is not displayed");
         softAssert.assertAll();
     }
@@ -96,5 +99,35 @@ public class CbsMasterActions extends SharedActions {
 
     public void activeInactiveGivenServiceTypeStatus(boolean condition){
 
+    }
+
+    public void verifyServiceTypeNameFieldShouldDisplayOnCreateServiceTypePopup(){
+        softAssert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getServiceTypeNameFieldTitleOnCreateServiceTypePopup()),"");
+        softAssert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getServiceTypeNameTxtBxOnCreateServiceTypePopup()),"");
+        softAssert.assertAll();
+    }
+    public void verifyCancelBtnShouldDisplayOnCreateServiceTypePopup(){
+        softAssert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getCancelBtnOnCreateServiceTypePopup()),"");
+        softAssert.assertAll();
+    }
+
+    public void verifyCancelBtnShouldEnabledDisplayOnCreateServiceTypePopup(){
+        softAssert.assertTrue(withMouse(cbsMasterPage().getCancelBtnOnCreateServiceTypePopup()).isEnabled(),"");
+        softAssert.assertAll();
+    }
+
+    public void verifySubmitBtnShouldDisplayOnCreateServiceTypePopup(){
+        softAssert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getSubmitBtnOnCreateServiceTypePopup()),"");
+        softAssert.assertAll();
+    }
+
+    public void verifySubmitBtnShouldDisabledOnCreateServiceTypePopup(){
+        softAssert.assertFalse(withMouse(cbsMasterPage().getSubmitBtnOnCreateServiceTypePopup()).isEnabled(),"");
+        softAssert.assertAll();
+    }
+
+    public void verifyGivenToastMessageShouldDisplay(String expectedToastMessage){
+        softAssert.assertEquals(onElement(cbsMasterPage().getToastMessage()).getText(), expectedToastMessage, "Create Service Type Field Error Message on Create Service Type Popup is not displayed");
+        softAssert.assertAll();
     }
 }
