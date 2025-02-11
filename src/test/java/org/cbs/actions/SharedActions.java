@@ -2,7 +2,6 @@ package org.cbs.actions;
 
 import org.apache.logging.log4j.Logger;
 import org.cbs.actions.api.ApiActions;
-import org.cbs.api.restful.request.LogoutRequests;
 import org.cbs.builders.ApiRequest;
 import org.cbs.builders.ApiResponse;
 import org.cbs.builders.Locator;
@@ -197,14 +196,6 @@ public class SharedActions {
             final String attributeValue = onElement(locator).getAttribute(attributeKey);
             return attributeValue != null && !attributeValue.isEmpty();
         });
-    }
-
-    public void clearAndEnterTxtBx (final Locator textboxLocator, final String randomUserText) {
-        waitForElementVisible (textboxLocator);
-        withMouse (textboxLocator).click ();
-        onTextBox (textboxLocator).enterText (Keys.chord (Keys.CONTROL, "a")); // Select all text
-        onTextBox (textboxLocator).enterText (Keys.chord (Keys.BACK_SPACE)); // Clear the text
-        onTextBox (textboxLocator).enterText (randomUserText);
     }
 
 }
