@@ -29,19 +29,6 @@ public class BaseTests {
                 PlatformType.valueOf(platformType), driverKey);
     }
 
-    @After (order = 2)
-    public void logOut() {
-        for(int i=0;i<3;i++){
-            try {
-                SharedActions.logoutWithApi();
-                break;
-            }catch (Exception e){
-                log.info(e.getMessage());
-            }
-        }
-
-    }
-
     @After (order = 1)
     public void afterScenario(final Scenario scenario) {
         if (scenario.isFailed()) {
