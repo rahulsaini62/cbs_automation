@@ -48,9 +48,9 @@ allure-results
 htmlReport
 one-config.json
 path/to/report.json
-#src/main/resources/application.properties
-#src/test/java/org/cbs/runner/RunCucumberTest.java
+src/main/resources/application.properties
+src/test/java/org/cbs/runner/RunCucumberTest.java
 .git/
 .github/
-#src/test/java/org/cbs/base
-#src/test/resources/junit-platform.properties
+src/test/java/org/cbs/base
+src/test/resources/junit-platform.properties
