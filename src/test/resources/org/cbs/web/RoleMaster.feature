@@ -28,5 +28,20 @@ Feature: Role Master Feature
     And User click on create role button on cbs master page.
     Then Verify role master create popup should get open on cbs master page.
 
-
-
+  @TC-RM-03
+  Scenario: Validate the input for Role Name with invalid role name.
+    When Verify user landed on the dashboard of the cbs web app.
+    And Verify simulations page should display.
+    And User click on "CBS Masters" tab under menu on dashboard page.
+    And Verify cbs master page should display.
+    And User click on create role button on cbs master page.
+    And Verify role master create popup should get open on cbs master page.
+    Then User enter below value in role name and verify appropriate error messages under create role popup on cbs master page.
+      | roleName                  | error | errorMessage                                       |
+      | "    "                    | yes   | Please enter Role Name                             |
+      | testing  234              | yes   | Role Name should not contain consecutive spaces    |
+      | <maxCharacterLimitExceed> | yes   | Max limit exceeded for Role Name                   |
+      | 1234testing               | no    | No Error Message                                   |
+      | test@#$%                  | no    | No Error Message                                   |
+      | t                         | no    | No Error Message                                   |
+      | "   testing"              | no    | No Error Message                                   |

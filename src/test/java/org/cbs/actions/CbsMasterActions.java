@@ -167,6 +167,7 @@ public class CbsMasterActions extends SharedActions {
     }
 
     public void clickCreateRoleButton(){
+        waitForElementInvisibility(cbsMasterPage().getLoginSuccessPopup());
         waitForElementClickable(cbsMasterPage().getCreateRoleBtn());
         withMouse(cbsMasterPage().getCreateRoleBtn()).click();
     }
@@ -181,12 +182,24 @@ public class CbsMasterActions extends SharedActions {
 
         onElement(cbsMasterPage().getCreateRolePopupSubmitBtn()).verifyIsEnabled().isFalse();
 
-
-
     }
 
+    public void enterTextInCreateRoleTxtBox(String text){
+        onTextBox(cbsMasterPage().getCreateRolePopupTxtBox()).enterText(text);
+    }
 
-
-
+    public String createRoleTxtErrorMsg(){
+        return onElement(cbsMasterPage().getCreateRolePopupHelperMsg()).getText();
+    }
+    public void verifyRoleNameErrorMsgOnCreateRolePopup(String expectedErrorMessage) {
+        softAssert.assertEquals(onElement(cbsMasterPage().getCreateRolePopupHelperMsg()).getText(),
+                expectedErrorMessage, "Create Role Field Error Message on Create Role Popup not displayed");
+        softAssert.assertAll();
+    }
+    public void verifySubmitBtnShouldEnabledOnCreateRolePopup() {
+        softAssert.assertTrue(withMouse(cbsMasterPage().getCreateRolePopupSubmitBtn()).isEnabled());
+    }
+    public void clearRoleNameTxtBxOnCreateRolePopup() {
+        onTextBox(cbsMasterPage().getCreateRolePopupTxtBox()).clear();
+    }
 }
-

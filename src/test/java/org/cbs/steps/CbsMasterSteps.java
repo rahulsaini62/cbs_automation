@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.cbs.manager.ParallelSession.getSession;
+import static org.junit.Assert.assertEquals;
 
 public class CbsMasterSteps {
     Faker faker = new Faker();
@@ -104,10 +105,6 @@ public class CbsMasterSteps {
         cbsMasterActions.verifyServiceTypeNameFieldErrorMsgOnCreateServiceTypePopupShouldDisplay(errorMessage);
     }
 
-    @And("User make existing service type in {string} state on cbs master page.")
-    public void userMakeExistingServiceTypeInStateOnCbsMasterPage(String activeInactive) {
-        if (activeInactive.equalsIgnoreCase("active")){
-           // condition=true;
     @And("User make existing service type as {string} state on cbs master page.")
     public void userMakeExistingServiceTypeAsStateOnCbsMasterPage(String activeInactive) {
         if (activeInactive.equalsIgnoreCase("active")) {
@@ -125,10 +122,12 @@ public class CbsMasterSteps {
 
     @And("User click on create role button on cbs master page.")
     public void userClickOnCreateRoleButtonOnCbsMasterPage() {
+        cbsMasterActions.clickCreateRoleButton();
     }
 
     @Then("Verify role master create popup should get open on cbs master page.")
     public void verifyRoleMasterCreatePopupShouldGetOpenOnCbsMasterPage() {
+        cbsMasterActions.verifyCreateRolePopupVisibility();
     }
 
     @And("Verify UI of create service type popup.")
@@ -159,5 +158,39 @@ public class CbsMasterSteps {
     @And("Verify newly created service type should display under service type master section on cbs master page.")
     public void verifyNewlyCreatedServiceTypeShouldDisplayUnderServiceTypeMasterSectionOnCbsMasterPage() {
         cbsMasterActions.verifyNewlyCreatedServiceTypeShouldDisplay(getSession().getSharedData().get("serviceTypeName").toString());
+    }
+
+    @And("User enter the {string} on cbs master page.")
+    public void userEnterTheOnCbsMasterPage(String arg0) {
+        if (arg0.equals("<CharLimitExceed>")) {
+            arg0 = faker.lorem().characters(201);
+        }
+        cbsMasterActions.enterTextInCreateRoleTxtBox(arg0);
+    }
+
+    @Then("Verify user should see the error message {string} on cbs master page.")
+    public void verifyUserShouldSeeTheErrorMessageOnCbsMasterPage(String arg0) {
+        String actMsg = cbsMasterActions.createRoleTxtErrorMsg();
+        assertEquals("Validation failed for role name!",actMsg,arg0);
+    }
+
+    @Then("User enter below value in role name and verify appropriate error messages under create role popup on cbs master page.")
+    public void userEnterBelowValueInRoleNameAndVerifyAppropriateErrorMessagesUnderCreateRolePopupOnCbsMasterPage(DataTable dataTable) {
+        dataTable.asMaps(String.class, String.class).forEach(user -> {
+            String roleName = user.get("roleName").replace("\"", "");
+
+            if ("<maxCharacterLimitExceed>".equals(roleName)) {
+                roleName = faker.lorem().characters(201);
+            }
+            cbsMasterActions.enterTextInCreateRoleTxtBox(roleName);
+
+            if ("yes".equalsIgnoreCase(user.get("error"))) {
+                cbsMasterActions.verifyRoleNameErrorMsgOnCreateRolePopup(user.get("errorMessage"));
+            } else {
+                cbsMasterActions.verifySubmitBtnShouldEnabledOnCreateRolePopup();
+            }
+
+            cbsMasterActions.clearRoleNameTxtBxOnCreateRolePopup();
+        });
     }
 }

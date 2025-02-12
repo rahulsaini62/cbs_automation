@@ -103,7 +103,7 @@ public class CbsMasterPage {
 
     public final Locator getGivenServiceTypeStatus(String serviceTypeName) {
         return Locator.buildLocator()
-                .web(xpath("//td[text()='"+serviceTypeName+"']/..//input"))
+                .web(xpath("//td[text()='" + serviceTypeName + "']/..//input"))
                 .android(accessibilityId("test-CHECKOUT"))
                 .ios(accessibilityId("test-CHECKOUT"))
                 .name("service Type Master Table Column List")
@@ -159,7 +159,7 @@ public class CbsMasterPage {
             .build();
 
     private final Locator createRolePopupTxtBox = Locator.buildLocator()
-            .web(xpath("//input[contains(@id ,':r3l:')]"))
+            .web(xpath("//div[@class='popup-body']//input"))
             .name("Create Role Popup Txt Box")
             .build();
 
@@ -178,7 +178,13 @@ public class CbsMasterPage {
             .name("Create Role Popup Cancel Btn")
             .build();
 
+    private final Locator loginSuccessPopup = Locator.buildLocator()
+            .web(xpath("//div[contains(text(),'Login successful')]"))
+            .name("Login Success Popup")
+            .build();
 
-
-
+    private final Locator createRolePopupHelperMsg = Locator.buildLocator()
+            .web(cssSelector("p.MuiFormHelperText-filled"))
+            .name("Create Role Popup Helper Msg")
+            .build();
 }
