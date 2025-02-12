@@ -72,7 +72,7 @@ public class CbsMasterSteps {
         List<Map<String, String>> userList = dataTable.asMaps(String.class, String.class);
 
         for (Map<String, String> user : userList) {
-            String serviceTypeName = user.get("serviceTypeName");
+            String serviceTypeName = user.get("serviceTypeName").replaceAll("\"", "");
             String error = user.get("error");
             String errorMessage = user.get("errorMessage");
 
@@ -90,7 +90,7 @@ public class CbsMasterSteps {
 
     @And("User enter random service type name under create service type popup on cbs master page.")
     public void userEnterRandomServiceTypeNameUnderCreateServiceTypePopupOnCbsMasterPage() {
-        getSession().getSharedData().put("serviceTypeName", faker.name().fullName());
+        getSession().getSharedData().put("serviceTypeName", faker.lorem().characters(20));
         cbsMasterActions.enterInServiceTypeNameTxtBxOnCreateServiceTypePopup(getSession().getSharedData().get("serviceTypeName").toString());
     }
 
@@ -104,10 +104,12 @@ public class CbsMasterSteps {
         cbsMasterActions.verifyServiceTypeNameFieldErrorMsgOnCreateServiceTypePopupShouldDisplay(errorMessage);
     }
 
-    @And("User make existing service type in {string} state on cbs master page.")
-    public void userMakeExistingServiceTypeInStateOnCbsMasterPage(String activeInactive) {
+    @And("User make existing service type as {string} state on cbs master page.")
+    public void userMakeExistingServiceTypeAsStateOnCbsMasterPage(String activeInactive) {
         if (activeInactive.equalsIgnoreCase("active")) {
-//            condition=true;
+            cbsMasterActions.activeInactiveGivenServiceTypeStatus(getSession().getSharedData().get("serviceTypeName").toString(), true);
+        } else {
+            cbsMasterActions.activeInactiveGivenServiceTypeStatus(getSession().getSharedData().get("serviceTypeName").toString(), false);
         }
     }
 
@@ -124,5 +126,20 @@ public class CbsMasterSteps {
     @Then("Verify {string} toast message should display.")
     public void verifyToastMessageShouldDisplay(String expectedToastMessage) {
         cbsMasterActions.verifyGivenToastMessageShouldDisplay(expectedToastMessage);
+    }
+
+    @And("User click cancel button on discard changes popup.")
+    public void userClickCancelButtonOnDiscardChangesPopup() {
+        cbsMasterActions.clickOnCancelBtnOnDiscardChangesPopup();
+    }
+
+    @And("User click proceed button on discard changes popup.")
+    public void userClickProceedButtonOnDiscardChangesPopup() {
+        cbsMasterActions.clickOnProceedBtnOnDiscardChangesPopup();
+    }
+
+    @And("Verify newly created service type should display under service type master section on cbs master page.")
+    public void verifyNewlyCreatedServiceTypeShouldDisplayUnderServiceTypeMasterSectionOnCbsMasterPage() {
+        cbsMasterActions.verifyNewlyCreatedServiceTypeShouldDisplay(getSession().getSharedData().get("serviceTypeName").toString());
     }
 }

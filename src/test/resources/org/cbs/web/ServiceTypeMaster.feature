@@ -39,14 +39,16 @@ Feature: Service Type Master Feature
       | test@#$%                                                                                                                                                                                                  | no    | No Error Message                                   |
       | t                                                                                                                                                                                                         | no    | No Error Message                                   |
       | "   testing"                                                                                                                                                                                              | no    | No Error Message                                   |
-    And User click on cancel button under create service type popup on cbs master page.
+#    And User click on cancel button under create service type popup on cbs master page.
+#    And User click proceed button on discard changes popup.
 
-    When User click on create service type button on cbs master page.
+#    When User click on create service type button on cbs master page.
     And User enter random service type name under create service type popup on cbs master page.
     And User click on submit button under create service type popup on cbs master page.
     Then Verify "Created successfully" toast message should display.
+    And Verify newly created service type should display under service type master section on cbs master page.
 
-    And User make existing service type in "active" state on cbs master page.
+#    And User make existing service type as "active" state on cbs master page.
     When User click on create service type button on cbs master page.
     And User enter existing service type name under create service type popup on cbs master page.
     And User click on submit button under create service type popup on cbs master page.

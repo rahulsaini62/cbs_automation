@@ -92,19 +92,44 @@ public class CbsMasterPage {
             .name("service Type Master Table Column List")
             .build();
 
-    private final Locator getGivenServiceTypeStatus (String serviceTypeName){
+    public final Locator getGivenServiceTypeName(String serviceTypeName) {
         return Locator.buildLocator()
-                .web(xpath("//td[text()='"+serviceTypeName+"']/..//input"))
+                .web(xpath("//td[text()='" + serviceTypeName + "']"))
                 .android(accessibilityId("test-CHECKOUT"))
                 .ios(accessibilityId("test-CHECKOUT"))
                 .name("service Type Master Table Column List")
                 .build();
     }
 
+    public final Locator getGivenServiceTypeStatus(String serviceTypeName) {
+        return Locator.buildLocator()
+                .web(xpath("//td[text()='" + serviceTypeName + "']/..//input"))
+                .android(accessibilityId("test-CHECKOUT"))
+                .ios(accessibilityId("test-CHECKOUT"))
+                .name("service Type Master Table Column List")
+                .build();
+    }
+
+
     private final Locator toastMessage = Locator.buildLocator()
             .web(cssSelector(".Toastify__toast-body"))
             .android(accessibilityId("test-CHECKOUT"))
             .ios(accessibilityId("test-CHECKOUT"))
             .name("service Type Master Table Column List")
+            .build();
+
+
+    private final Locator cancelBtnOnDiscardChangesPopup = Locator.buildLocator()
+            .web(cssSelector("//h1[text()='Discard Changes']/../..//button[text()='Cancel']"))
+            .android(accessibilityId("test-CHECKOUT"))
+            .ios(accessibilityId("test-CHECKOUT"))
+            .name("Cancel Button")
+            .build();
+
+    private final Locator proceedBtnOnDiscardChangesPopup = Locator.buildLocator()
+            .web(cssSelector("//h1[text()='Discard Changes']/../..//button[text()='Proceed']"))
+            .android(accessibilityId("test-CHECKOUT"))
+            .ios(accessibilityId("test-CHECKOUT"))
+            .name("Proceed Button")
             .build();
 }
