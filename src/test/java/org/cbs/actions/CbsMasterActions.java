@@ -23,6 +23,7 @@ import static org.cbs.pages.DashboardPage.commonPage;
 import static org.cbs.pages.LoginPage.loginPage;
 import static org.cbs.pages.SimulationsPage.simulationsPage;
 import static org.cbs.utils.PropertiesUtil.getApplicationProps;
+import static org.junit.Assert.assertTrue;
 
 public class CbsMasterActions extends SharedActions {
     SoftAssert softAssert;
@@ -97,4 +98,40 @@ public class CbsMasterActions extends SharedActions {
     public void activeInactiveGivenServiceTypeStatus(boolean condition){
 
     }
+
+    public void verifyRoleMasterConfigurationVisibility(){
+        onElement(cbsMasterPage().getRoleMasterTitle()).verifyText().isEqualTo(loadCbsMasterProps().getRoleMasterTitle());
+
+        onElement(cbsMasterPage().getCreateRoleBtn()).verifyText().isEqualTo(loadCbsMasterProps().getCreateRoleTxt());
+
+        List<String> expectedColumnNameList = loadCbsMasterProps().getRoleMasterColumnTxt();
+
+        List<String> actualColumnNameList = new ArrayList<>();
+        finds(cbsMasterPage().getRoleMasterColumnsTxt(), WaitStrategy.VISIBLE).forEach(WebElement -> actualColumnNameList.add(WebElement.getText()));
+        Assert.assertEquals(actualColumnNameList, expectedColumnNameList, "Column Name are not as per expected");
+    }
+
+    public void clickCreateRoleButton(){
+        waitForElementClickable(cbsMasterPage().getCreateRoleBtn());
+        withMouse(cbsMasterPage().getCreateRoleBtn()).click();
+    }
+
+    public void verifyCreateRolePopupVisibility(){
+        Assert.assertTrue((verifyElementIsDisplayed(cbsMasterPage().getCreateRolePopupTitle())),"Create Popup not visible");
+        onElement(cbsMasterPage().getCreateRolePopupTitle()).verifyText().isEqualTo(loadCbsMasterProps().getCreateRolePopupTitle());
+
+        onElement(cbsMasterPage().getRoleNameTxt()).verifyText().isEqualTo(loadCbsMasterProps().getRoleNameTxt());
+
+        onElement(cbsMasterPage().getCreateRolePopupCancelBtn()).verifyIsEnabled().isTrue();
+
+        onElement(cbsMasterPage().getCreateRolePopupSubmitBtn()).verifyIsEnabled().isFalse();
+
+
+
+    }
+
+
+
+
 }
+

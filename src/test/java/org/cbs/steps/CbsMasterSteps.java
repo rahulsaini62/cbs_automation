@@ -106,7 +106,21 @@ public class CbsMasterSteps {
     @And("User make existing service type in {string} state on cbs master page.")
     public void userMakeExistingServiceTypeInStateOnCbsMasterPage(String activeInactive) {
         if (activeInactive.equalsIgnoreCase("active")){
-            condition=true;
+           // condition=true;
         }
+    }
+
+    @Then("Verify Role Master Configuration is visible on cbs master page.")
+    public void verifyRoleMasterConfigurationIsVisibleOnCbsMasterPage() {
+        cbsMasterActions.verifyRoleMasterConfigurationVisibility();
+
+    }
+
+    @And("User click on create role button on cbs master page.")
+    public void userClickOnCreateRoleButtonOnCbsMasterPage() {
+    }
+
+    @Then("Verify role master create popup should get open on cbs master page.")
+    public void verifyRoleMasterCreatePopupShouldGetOpenOnCbsMasterPage() {
     }
 }

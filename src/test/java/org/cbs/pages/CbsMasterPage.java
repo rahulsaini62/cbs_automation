@@ -100,4 +100,53 @@ public class CbsMasterPage {
                 .name("service Type Master Table Column List")
                 .build();
     }
+
+    private final Locator roleMasterTitle = Locator.buildLocator()
+            .web(xpath("//p[contains(text(),'Role Master')]"))
+            .name("Role Master Title")
+            .build();
+
+    private final Locator roleMasterColumnsTxt = Locator.buildLocator()
+            .web(xpath("//p[text()='Role Master']/../..//tr[1]//div[contains(@class,'Labels')]"))
+            .name("Role Master Columns Txt")
+            .build();
+
+    private final Locator createRoleBtn = Locator.buildLocator()
+            .web(xpath("//button[contains(text(),'Create Role')]"))
+            .name("Create Role Button")
+            .build();
+
+    private final Locator createRolePopupTitle = Locator.buildLocator()
+            .web(cssSelector("h1.MuiTypography-h3"))
+            .name("Create Role Popup Title")
+            .build();
+
+    private final Locator roleNameTxt = Locator.buildLocator()
+            .web(xpath("//label[contains(text(),'Role Name')]"))
+            .name("Role Name Txt")
+            .build();
+
+    private final Locator createRolePopupTxtBox = Locator.buildLocator()
+            .web(xpath("//input[contains(@id ,':r3l:')]"))
+            .name("Create Role Popup Txt Box")
+            .build();
+
+    private final Locator createRolePopupBtnWrapper = Locator.buildLocator()
+            .web(cssSelector("div.flex.al-center.js-center button"))
+            .name("Create Role Popup Button Wrapper")
+            .build();
+
+    private final Locator createRolePopupCancelBtn = Locator.buildLocator()
+            .web(cssSelector("div.popup-body div.flex.al-center.js-center > :first-child"))
+            .name("Create Role Popup Cancel Btn")
+            .build();
+
+    private final Locator createRolePopupSubmitBtn = Locator.buildLocator()
+            .web(cssSelector("div.popup-body div.flex.al-center.js-center :nth-child(2)"))
+            .name("Create Role Popup Cancel Btn")
+            .build();
+
+
+
+
 }
