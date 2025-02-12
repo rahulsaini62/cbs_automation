@@ -26,7 +26,7 @@ import static org.cbs.utils.PropertiesUtil.getApplicationProps;
 import static org.junit.Assert.assertTrue;
 
 public class CbsMasterActions extends SharedActions {
-    SoftAssert softAssert;
+    SoftAssert softAssert = new SoftAssert();
     private final PlatformType platformType;
     private static final Logger LOGGER = getLogger();
 
@@ -75,6 +75,10 @@ public class CbsMasterActions extends SharedActions {
         onTextBox(cbsMasterPage().getServiceTypeNameTxtBxOnCreateServiceTypePopup()).enterText(serviceTypeName);
     }
 
+    public void clearServiceTypeNameTxtBxOnCreateServiceTypePopup() {
+        onTextBox(cbsMasterPage().getServiceTypeNameTxtBxOnCreateServiceTypePopup()).clear();
+    }
+
     public void verifyGivenListOfColumnShouldDisplayCreateServiceTypePopup() {
 
         List<String> expectedColumnNameList = loadCbsMasterProps().getServiceTypeMasterTableColumn();
@@ -85,7 +89,6 @@ public class CbsMasterActions extends SharedActions {
     }
 
     public void verifyServiceTypeNameFieldErrorMsgOnCreateServiceTypePopupShouldDisplay(String expectedErrorMessage) {
-        onElement(cbsMasterPage().getServiceTypeNameFieldErrorMsgOnCreateServiceTypePopup()).getText();
         softAssert.assertEquals(onElement(cbsMasterPage().getServiceTypeNameFieldErrorMsgOnCreateServiceTypePopup()).getText(), expectedErrorMessage, "Create Service Type Field Error Message on Create Service Type Popup is not displayed");
         softAssert.assertAll();
     }
@@ -95,8 +98,60 @@ public class CbsMasterActions extends SharedActions {
         softAssert.assertAll();
     }
 
-    public void activeInactiveGivenServiceTypeStatus(boolean condition){
+    public void activeInactiveGivenServiceTypeStatus(String serviceTypeName, boolean condition) {
+        if (condition) {
+            if (!withMouse(cbsMasterPage().getGivenServiceTypeStatus(serviceTypeName)).isEnabled()) {
+                withMouse(cbsMasterPage().getGivenServiceTypeStatus(serviceTypeName)).click();
+            }
+        } else {
+            if (withMouse(cbsMasterPage().getGivenServiceTypeStatus(serviceTypeName)).isEnabled()) {
+                withMouse(cbsMasterPage().getGivenServiceTypeStatus(serviceTypeName)).click();
+            }
+        }
+    }
 
+    public void verifyServiceTypeNameFieldShouldDisplayOnCreateServiceTypePopup() {
+        softAssert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getServiceTypeNameFieldTitleOnCreateServiceTypePopup()), "");
+        softAssert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getServiceTypeNameTxtBxOnCreateServiceTypePopup()), "");
+        softAssert.assertAll();
+    }
+
+    public void verifyCancelBtnShouldDisplayOnCreateServiceTypePopup() {
+        softAssert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getCancelBtnOnCreateServiceTypePopup()), "");
+        softAssert.assertAll();
+    }
+
+    public void verifyCancelBtnShouldEnabledDisplayOnCreateServiceTypePopup() {
+        softAssert.assertTrue(withMouse(cbsMasterPage().getCancelBtnOnCreateServiceTypePopup()).isEnabled(), "");
+        softAssert.assertAll();
+    }
+
+    public void verifySubmitBtnShouldDisplayOnCreateServiceTypePopup() {
+        softAssert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getSubmitBtnOnCreateServiceTypePopup()), "");
+        softAssert.assertAll();
+    }
+
+    public void verifySubmitBtnShouldDisabledOnCreateServiceTypePopup() {
+        softAssert.assertFalse(withMouse(cbsMasterPage().getSubmitBtnOnCreateServiceTypePopup()).isEnabled(), "");
+        softAssert.assertAll();
+    }
+
+    public void verifyGivenToastMessageShouldDisplay(String expectedToastMessage) {
+        softAssert.assertEquals(onElement(cbsMasterPage().getToastMessage()).getText(), expectedToastMessage, "Create Service Type Field Error Message on Create Service Type Popup is not displayed");
+        softAssert.assertAll();
+    }
+
+    public void clickOnCancelBtnOnDiscardChangesPopup() {
+        withMouse(cbsMasterPage().getCancelBtnOnDiscardChangesPopup()).click();
+    }
+
+    public void clickOnProceedBtnOnDiscardChangesPopup() {
+        withMouse(cbsMasterPage().getProceedBtnOnDiscardChangesPopup()).click();
+    }
+
+    public void verifyNewlyCreatedServiceTypeShouldDisplay(String expectedServiceType) {
+        Assert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getGivenServiceTypeName(expectedServiceType)),
+                "Newly Created Service Type not displayed");
     }
 
     public void verifyRoleMasterConfigurationVisibility(){

@@ -72,7 +72,7 @@ public class CbsMasterSteps {
         List<Map<String, String>> userList = dataTable.asMaps(String.class, String.class);
 
         for (Map<String, String> user : userList) {
-            String serviceTypeName = user.get("serviceTypeName");
+            String serviceTypeName = user.get("serviceTypeName").replaceAll("\"", "");
             String error = user.get("error");
             String errorMessage = user.get("errorMessage");
 
@@ -83,13 +83,14 @@ public class CbsMasterSteps {
                 cbsMasterActions.verifyServiceTypeNameFieldErrorMsgOnCreateServiceTypePopupShouldNotDisplay();
                 cbsMasterActions.verifySubmitBtnShouldEnabledOnCreateServiceTypePopup();
             }
+            cbsMasterActions.clearServiceTypeNameTxtBxOnCreateServiceTypePopup();
         }
 
     }
 
     @And("User enter random service type name under create service type popup on cbs master page.")
     public void userEnterRandomServiceTypeNameUnderCreateServiceTypePopupOnCbsMasterPage() {
-        getSession().getSharedData().put("serviceTypeName", faker.name().fullName());
+        getSession().getSharedData().put("serviceTypeName", faker.lorem().characters(20));
         cbsMasterActions.enterInServiceTypeNameTxtBxOnCreateServiceTypePopup(getSession().getSharedData().get("serviceTypeName").toString());
     }
 
@@ -107,6 +108,12 @@ public class CbsMasterSteps {
     public void userMakeExistingServiceTypeInStateOnCbsMasterPage(String activeInactive) {
         if (activeInactive.equalsIgnoreCase("active")){
            // condition=true;
+    @And("User make existing service type as {string} state on cbs master page.")
+    public void userMakeExistingServiceTypeAsStateOnCbsMasterPage(String activeInactive) {
+        if (activeInactive.equalsIgnoreCase("active")) {
+            cbsMasterActions.activeInactiveGivenServiceTypeStatus(getSession().getSharedData().get("serviceTypeName").toString(), true);
+        } else {
+            cbsMasterActions.activeInactiveGivenServiceTypeStatus(getSession().getSharedData().get("serviceTypeName").toString(), false);
         }
     }
 
@@ -122,5 +129,35 @@ public class CbsMasterSteps {
 
     @Then("Verify role master create popup should get open on cbs master page.")
     public void verifyRoleMasterCreatePopupShouldGetOpenOnCbsMasterPage() {
+    }
+
+    @And("Verify UI of create service type popup.")
+    public void verifyUIOfCreateServiceTypePopup() {
+        cbsMasterActions.verifyServiceTypeNameFieldShouldDisplayOnCreateServiceTypePopup();
+        cbsMasterActions.verifyCancelBtnShouldDisplayOnCreateServiceTypePopup();
+        cbsMasterActions.verifyCancelBtnShouldEnabledDisplayOnCreateServiceTypePopup();
+        cbsMasterActions.verifySubmitBtnShouldDisplayOnCreateServiceTypePopup();
+        cbsMasterActions.verifySubmitBtnShouldDisabledOnCreateServiceTypePopup();
+
+    }
+
+    @Then("Verify {string} toast message should display.")
+    public void verifyToastMessageShouldDisplay(String expectedToastMessage) {
+        cbsMasterActions.verifyGivenToastMessageShouldDisplay(expectedToastMessage);
+    }
+
+    @And("User click cancel button on discard changes popup.")
+    public void userClickCancelButtonOnDiscardChangesPopup() {
+        cbsMasterActions.clickOnCancelBtnOnDiscardChangesPopup();
+    }
+
+    @And("User click proceed button on discard changes popup.")
+    public void userClickProceedButtonOnDiscardChangesPopup() {
+        cbsMasterActions.clickOnProceedBtnOnDiscardChangesPopup();
+    }
+
+    @And("Verify newly created service type should display under service type master section on cbs master page.")
+    public void verifyNewlyCreatedServiceTypeShouldDisplayUnderServiceTypeMasterSectionOnCbsMasterPage() {
+        cbsMasterActions.verifyNewlyCreatedServiceTypeShouldDisplay(getSession().getSharedData().get("serviceTypeName").toString());
     }
 }
