@@ -6,8 +6,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import net.datafaker.Faker;
 import org.cbs.actions.CbsMasterActions;
+import org.cbs.actions.SharedActions;
 import org.testng.asserts.SoftAssert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -192,5 +194,39 @@ public class CbsMasterSteps {
 
             cbsMasterActions.clearRoleNameTxtBxOnCreateRolePopup();
         });
+    }
+
+    @And("User enter existing role name in role name txt box on cbs master page.")
+    public void userEnterExistingRoleNameInRoleNameTxtBoxOnCbsMasterPage() {
+        String existingRoleName = cbsMasterActions.getRoleNameValues().
+                get(faker.random().nextInt(0,cbsMasterActions.getRoleNameValues().size()));
+        cbsMasterActions.enterTextInCreateRoleTxtBox(existingRoleName);
+    }
+    @And("User click on submit button under create role name popup on cbs master page.")
+    public void userClickOnSubmitButtonUnderCreateRoleNamePopupOnCbsMasterPage() {
+        cbsMasterActions.clickSubmitButtonOnCreateRoleNamePopup();
+    }
+
+    @Then("Verify error message for duplicate role name should display on cbs master page.")
+    public void verifyErrorMessageForDuplicateRoleNameShouldDisplayOnCbsMasterPage() {
+        cbsMasterActions.verifyErrorMessageForDuplicateRoleName();
+    }
+
+
+    @And("User enter valid role name in role name txt box on cbs master page.")
+    public void userEnterValidRoleNameInRoleNameTxtBoxOnCbsMasterPage() {
+        getSession().setSharedData("validName" ,faker.name().firstName());
+        cbsMasterActions.enterTextInCreateRoleTxtBox(getSession().getSharedData("validName"));
+    }
+
+    @Then("Verify success toaster message display on cbs master page.")
+    public void verifySuccessToasterMessageDisplayOnCbsMasterPage() {
+        cbsMasterActions.verifyCreatedSuccessfullyToasterMsg();
+    }
+
+    @And("Verify same entry should shown in cbs role table on cbs master page.")
+    public void verifySameEntryShouldShownInCbsRoleTableOnCbsMasterPage() {
+        ArrayList<String> roleNameValues = cbsMasterActions.getRoleNameValues();
+        cbsMasterActions.verifyContains(roleNameValues,getSession().getSharedData("validName"));
     }
 }

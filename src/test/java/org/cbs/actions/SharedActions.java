@@ -84,7 +84,7 @@ public class SharedActions {
     }
 
     public <T> void verifyContains(List<T> list, T condition) {
-        assertTrue(list.stream()
+        assertTrue("Value not found in the list",list.stream()
                 .anyMatch(val -> val.toString()
                         .contains(condition.toString())));
     }

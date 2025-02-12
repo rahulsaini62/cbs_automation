@@ -16,7 +16,7 @@ public class cbsMasterProps {
     private String createRolePopupTitle;
     private String roleNameTxt;
     private String createRoleTxtBoxPlaceholderTxt;
-
-
+    private String duplicateRoleNameErrorMsg;
+    private String createdSuccessMsg;
 
 }

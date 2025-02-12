@@ -154,7 +154,7 @@ public class CbsMasterActions extends SharedActions {
                 "Newly Created Service Type not displayed");
     }
 
-    public void verifyRoleMasterConfigurationVisibility(){
+    public void verifyRoleMasterConfigurationVisibility() {
         onElement(cbsMasterPage().getRoleMasterTitle()).verifyText().isEqualTo(loadCbsMasterProps().getRoleMasterTitle());
 
         onElement(cbsMasterPage().getCreateRoleBtn()).verifyText().isEqualTo(loadCbsMasterProps().getCreateRoleTxt());
@@ -166,14 +166,14 @@ public class CbsMasterActions extends SharedActions {
         Assert.assertEquals(actualColumnNameList, expectedColumnNameList, "Column Name are not as per expected");
     }
 
-    public void clickCreateRoleButton(){
+    public void clickCreateRoleButton() {
         waitForElementInvisibility(cbsMasterPage().getLoginSuccessPopup());
         waitForElementClickable(cbsMasterPage().getCreateRoleBtn());
         withMouse(cbsMasterPage().getCreateRoleBtn()).click();
     }
 
-    public void verifyCreateRolePopupVisibility(){
-        Assert.assertTrue((verifyElementIsDisplayed(cbsMasterPage().getCreateRolePopupTitle())),"Create Popup not visible");
+    public void verifyCreateRolePopupVisibility() {
+        Assert.assertTrue((verifyElementIsDisplayed(cbsMasterPage().getCreateRolePopupTitle())), "Create Popup not visible");
         onElement(cbsMasterPage().getCreateRolePopupTitle()).verifyText().isEqualTo(loadCbsMasterProps().getCreateRolePopupTitle());
 
         onElement(cbsMasterPage().getRoleNameTxt()).verifyText().isEqualTo(loadCbsMasterProps().getRoleNameTxt());
@@ -184,22 +184,51 @@ public class CbsMasterActions extends SharedActions {
 
     }
 
-    public void enterTextInCreateRoleTxtBox(String text){
+    public void enterTextInCreateRoleTxtBox(String text) {
         onTextBox(cbsMasterPage().getCreateRolePopupTxtBox()).enterText(text);
     }
 
-    public String createRoleTxtErrorMsg(){
+    public String createRoleTxtErrorMsg() {
         return onElement(cbsMasterPage().getCreateRolePopupHelperMsg()).getText();
     }
+
     public void verifyRoleNameErrorMsgOnCreateRolePopup(String expectedErrorMessage) {
         softAssert.assertEquals(onElement(cbsMasterPage().getCreateRolePopupHelperMsg()).getText(),
                 expectedErrorMessage, "Create Role Field Error Message on Create Role Popup not displayed");
         softAssert.assertAll();
     }
+
     public void verifySubmitBtnShouldEnabledOnCreateRolePopup() {
         softAssert.assertTrue(withMouse(cbsMasterPage().getCreateRolePopupSubmitBtn()).isEnabled());
     }
+
     public void clearRoleNameTxtBxOnCreateRolePopup() {
         onTextBox(cbsMasterPage().getCreateRolePopupTxtBox()).clear();
     }
+
+    public ArrayList<String> getRoleNameValues() {
+        ArrayList<String> roleNameValues = new ArrayList<>();
+        finds(cbsMasterPage().getRoleNameValues(), WaitStrategy.VISIBLE).forEach(webElement -> roleNameValues.add(webElement.getText()));
+
+        return roleNameValues;
+    }
+
+    public void clickSubmitButtonOnCreateRoleNamePopup() {
+        withMouse(cbsMasterPage().getCreateRolePopupSubmitBtn()).click();
+    }
+
+    public void verifyErrorMessageForDuplicateRoleName() {
+        waitForLoader();
+        onElement(cbsMasterPage().getCreateRolePopupHelperMsg()).verifyText()
+                .isEqualTo(loadCbsMasterProps().getDuplicateRoleNameErrorMsg());
+    }
+    public void waitForLoader(){
+        waitForElementInvisibility(cbsMasterPage().getLoader());
+    }
+
+    public void verifyCreatedSuccessfullyToasterMsg(){
+        waitForElementVisible(cbsMasterPage().getCreatedSuccessfullyToaster());
+        onElement(cbsMasterPage().getCreatedSuccessfullyToaster()).verifyText().isEqualTo(loadCbsMasterProps().getCreatedSuccessMsg());
+    }
+
 }

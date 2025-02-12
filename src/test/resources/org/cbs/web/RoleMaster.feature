@@ -28,7 +28,7 @@ Feature: Role Master Feature
     And User click on create role button on cbs master page.
     Then Verify role master create popup should get open on cbs master page.
 
-  @TC-RM-03
+  @TC-RM-03 @TC-RM-04
   Scenario: Validate the input for Role Name with invalid role name.
     When Verify user landed on the dashboard of the cbs web app.
     And Verify simulations page should display.
@@ -45,3 +45,28 @@ Feature: Role Master Feature
       | test@#$%                  | no    | No Error Message                                   |
       | t                         | no    | No Error Message                                   |
       | "   testing"              | no    | No Error Message                                   |
+
+  @TC-RM-05
+  Scenario: Check error message for duplicate role name.
+    When Verify user landed on the dashboard of the cbs web app.
+    And Verify simulations page should display.
+    And User click on "CBS Masters" tab under menu on dashboard page.
+    And Verify cbs master page should display.
+    And User click on create role button on cbs master page.
+    And Verify role master create popup should get open on cbs master page.
+    And User enter existing role name in role name txt box on cbs master page.
+    And User click on submit button under create role name popup on cbs master page.
+    Then Verify error message for duplicate role name should display on cbs master page.
+
+  @TC-RM-O7
+  Scenario: Verify successful submission of data for create role.
+    When Verify user landed on the dashboard of the cbs web app.
+    And Verify simulations page should display.
+    And User click on "CBS Masters" tab under menu on dashboard page.
+    And Verify cbs master page should display.
+    And User click on create role button on cbs master page.
+    And Verify role master create popup should get open on cbs master page.
+    And User enter valid role name in role name txt box on cbs master page.
+    And User click on submit button under create role name popup on cbs master page.
+    Then Verify success toaster message display on cbs master page.
+    And Verify same entry should shown in cbs role table on cbs master page.

@@ -10,5 +10,7 @@
   "create_role_popup_btn_wrapper_txt" : ["Cancel","Submit"],
   "create_role_popup_title" : "Create Role",
    "role_name_txt" : "Role Name*",
-  "create_role_txt_box_placeholder_txt" : "Enter here"
+  "create_role_txt_box_placeholder_txt" : "Enter here",
+  "duplicate_role_name_error_msg" : "Duplicate entry not allowed for Role Name.",
+  "created_success_msg" : "Created successfully"
 }

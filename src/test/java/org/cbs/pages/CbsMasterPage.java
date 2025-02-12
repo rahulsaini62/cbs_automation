@@ -175,7 +175,7 @@ public class CbsMasterPage {
 
     private final Locator createRolePopupSubmitBtn = Locator.buildLocator()
             .web(cssSelector("div.popup-body div.flex.al-center.js-center :nth-child(2)"))
-            .name("Create Role Popup Cancel Btn")
+            .name("Create Role Popup Submite Btn")
             .build();
 
     private final Locator loginSuccessPopup = Locator.buildLocator()
@@ -186,5 +186,20 @@ public class CbsMasterPage {
     private final Locator createRolePopupHelperMsg = Locator.buildLocator()
             .web(cssSelector("p.MuiFormHelperText-filled"))
             .name("Create Role Popup Helper Msg")
+            .build();
+
+    private final Locator roleNameValues = Locator.buildLocator()
+            .web(cssSelector("div.for-rm tr[data-index]"))
+            .name("Role Name Values")
+            .build();
+
+    private final Locator loader = Locator.buildLocator()
+            .web(cssSelector("div.MuiBackdrop-root.css-5ezogp"))
+            .name("Loader")
+            .build();
+
+    private final Locator createdSuccessfullyToaster = Locator.buildLocator()
+            .web(xpath("//div[contains(text(),'Created successfully')]"))
+            .name("Toaster for Created Successfully")
             .build();
 }
