@@ -46,6 +46,7 @@ Feature: Service Type Master Feature
     And User enter random service type name under create service type popup on cbs master page.
     And User click on submit button under create service type popup on cbs master page.
     Then Verify "Created successfully" toast message should display.
+    Then Verify cbs master page should display.
     And Verify newly created service type should display under service type master section on cbs master page.
 
 #    And User make existing service type as "active" state on cbs master page.
@@ -54,5 +55,6 @@ Feature: Service Type Master Feature
     And User click on submit button under create service type popup on cbs master page.
     And Verify service type error message as "Duplicate entry not allowed for Service Type Name." under create service type popup on cbs master page.
 
+    When User enter random service type name under create service type popup on cbs master page.
 
 
