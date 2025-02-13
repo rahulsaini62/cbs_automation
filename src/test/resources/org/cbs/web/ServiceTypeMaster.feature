@@ -16,7 +16,9 @@ Feature: Service Type Master Feature
     And  Verify user landed on the dashboard of the cbs web app.
     And Verify simulations page should display.
     And User click on "CBS Masters" tab under menu on dashboard page.
-    Then Verify cbs master page should display.
+#    TC-STM-12
+#    Then Verify loader display during data fetching on cbs master page.
+    And Verify cbs master page should display.
     #TC-STM-01
     And Verify "Service Type Master" section should display on cbs master page.
     And Verify create service type button should display under service type master section on cbs master page.
@@ -39,12 +41,9 @@ Feature: Service Type Master Feature
       | test@#$%                                                                                                                                                                                                  | no    | No Error Message                                   |
       | t                                                                                                                                                                                                         | no    | No Error Message                                   |
       | "   testing"                                                                                                                                                                                              | no    | No Error Message                                   |
-#    And User click on cancel button under create service type popup on cbs master page.
-#    And User click proceed button on discard changes popup.
-
-#    When User click on create service type button on cbs master page.
     And User enter random service type name under create service type popup on cbs master page.
     And User click on submit button under create service type popup on cbs master page.
+#    TC-STM-07
     Then Verify "Created successfully" toast message should display.
     Then Verify cbs master page should display.
     And Verify newly created service type should display under service type master section on cbs master page.
@@ -53,8 +52,30 @@ Feature: Service Type Master Feature
     When User click on create service type button on cbs master page.
     And User enter existing service type name under create service type popup on cbs master page.
     And User click on submit button under create service type popup on cbs master page.
+#    TC-STM-05
     And Verify service type error message as "Duplicate entry not allowed for Service Type Name." under create service type popup on cbs master page.
 
     When User enter random service type name under create service type popup on cbs master page.
+    And User click on cancel button under create service type popup on cbs master page.
+#    TC-STM-09
+    Then Verify discard changes popup ui.
+
+#    TC-STM-10
+    When User click cancel button on discard changes popup.
+    Then Verify create service type popup should display on cbs master page.
+#    And Verify service type should be prefilled on create service type popup.     // value missing on HTML
+    When User click on cancel button under create service type popup on cbs master page.
+    And User click proceed button on discard changes popup.
+    When Verify discard changes popup should not display.
+    And Verify cbs master page should display.
+#  TC-STM-13
+#    Then Verify pressing enter on a CTA simulates a mouse click event.
+#    And Verify pressing esc on a popup simulates clicking cancel.
+
+
+
+
+
+
 
 

@@ -72,7 +72,7 @@ public class CbsMasterPage {
             .build();
 
     private final Locator cancelBtnOnCreateServiceTypePopup = Locator.buildLocator()
-            .web(xpath("//div[@class='popup-body']//button[@type='button']"))
+            .web(xpath("//button[text()='Cancel']"))
             .android(accessibilityId("test-CHECKOUT"))
             .ios(accessibilityId("test-CHECKOUT"))
             .name("Cancel Button On Create Service Type Popup")
@@ -118,16 +118,32 @@ public class CbsMasterPage {
             .name("service Type Master Table Column List")
             .build();
 
+    public final Locator getTitleOnDiscardChangesPopup(String name) {
+        return Locator.buildLocator()
+                .web(xpath("//h1[text()='" + name + "']"))
+                .android(accessibilityId("test-CHECKOUT"))
+                .ios(accessibilityId("test-CHECKOUT"))
+                .name("Cancel Button")
+                .build();
+    }
+
+
+    private final Locator msgOnDiscardChangesPopup = Locator.buildLocator()
+            .web(xpath("//h1/../..//p"))
+            .android(accessibilityId("test-CHECKOUT"))
+            .ios(accessibilityId("test-CHECKOUT"))
+            .name("Cancel Button")
+            .build();
 
     private final Locator cancelBtnOnDiscardChangesPopup = Locator.buildLocator()
-            .web(cssSelector("//h1[text()='Discard Changes']/../..//button[text()='Cancel']"))
+            .web(xpath("//h1[text()='Discard Changes']/../..//button[text()='Cancel']"))
             .android(accessibilityId("test-CHECKOUT"))
             .ios(accessibilityId("test-CHECKOUT"))
             .name("Cancel Button")
             .build();
 
     private final Locator proceedBtnOnDiscardChangesPopup = Locator.buildLocator()
-            .web(cssSelector("//h1[text()='Discard Changes']/../..//button[text()='Proceed']"))
+            .web(xpath("//h1[text()='Discard Changes']/../..//button[text()='Proceed']"))
             .android(accessibilityId("test-CHECKOUT"))
             .ios(accessibilityId("test-CHECKOUT"))
             .name("Proceed Button")

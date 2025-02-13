@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.cbs.enums.PlatformType;
 import org.cbs.enums.WaitStrategy;
 import org.cbs.pages.CbsMasterPage;
+import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.cbs.actions.CommonActions.sleep;
+import static org.cbs.actions.CommonActions.useKeys;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementActions.onElement;
 import static org.cbs.actions.elements.ElementFinder.*;
@@ -59,8 +62,14 @@ public class CbsMasterActions extends SharedActions {
                 "Create Service Type Popup is not displayed");
     }
 
+    public void verifyCreateServiceTypePopupShouldNotDisplay() {
+        Assert.assertFalse(verifyElementIsDisplayed(cbsMasterPage().getTitleOnCreateServiceTypePopup()),
+                "Create Service Type Popup is not displayed");
+    }
+
     public void clickOnCancelBtnOnCreateServiceTypePopup() {
-        withMouse(cbsMasterPage().getCancelBtnOnCreateServiceTypePopup()).click();
+        sleep(1000);
+        withMouse(cbsMasterPage().getCancelBtnOnCreateServiceTypePopup()).jsxClick();
     }
 
     public void clickOnSubmitBtnOnCreateServiceTypePopup() {
@@ -141,12 +150,40 @@ public class CbsMasterActions extends SharedActions {
         softAssert.assertAll();
     }
 
+    public void verifyDiscardChangesPpShouldNotDisplay(String expectedMessage) {
+        sleep(2000);
+        softAssert.assertFalse(onElement(cbsMasterPage().getTitleOnDiscardChangesPopup(expectedMessage)).isDisplayed(), "Title is not as expected");
+        softAssert.assertAll();
+    }
+
+    public void verifyTitleShouldDisplayOnDiscardChangesPp(String expectedMessage) {
+        waitForElementVisible(cbsMasterPage().getTitleOnDiscardChangesPopup(expectedMessage));
+        softAssert.assertTrue(onElement(cbsMasterPage().getTitleOnDiscardChangesPopup(expectedMessage)).isDisplayed(), "Title is not as expected");
+        softAssert.assertAll();
+    }
+
+    public void verifyMsgShouldDisplayOnDiscardChangesPp(String expectedMessage) {
+        softAssert.assertEquals(onElement(cbsMasterPage().getMsgOnDiscardChangesPopup()).getText(), expectedMessage, "Title is not as expected");
+        softAssert.assertAll();
+    }
+
+    public void verifyCancelButtonShouldDisplayOnDiscardChangesPp() {
+        softAssert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getCancelBtnOnDiscardChangesPopup()));
+        softAssert.assertAll();
+    }
+
+    public void verifyProceedButtonShouldDisplayOnDiscardChangesPp() {
+        softAssert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getProceedBtnOnDiscardChangesPopup()));
+        softAssert.assertAll();
+    }
+
     public void clickOnCancelBtnOnDiscardChangesPopup() {
         withMouse(cbsMasterPage().getCancelBtnOnDiscardChangesPopup()).click();
     }
 
     public void clickOnProceedBtnOnDiscardChangesPopup() {
         withMouse(cbsMasterPage().getProceedBtnOnDiscardChangesPopup()).click();
+        sleep(3000);
     }
 
     public void verifyNewlyCreatedServiceTypeShouldDisplay(String expectedServiceType) {
@@ -222,13 +259,35 @@ public class CbsMasterActions extends SharedActions {
         onElement(cbsMasterPage().getCreateRolePopupHelperMsg()).verifyText()
                 .isEqualTo(loadCbsMasterProps().getDuplicateRoleNameErrorMsg());
     }
-    public void waitForLoader(){
+
+    public void waitForLoader() {
         waitForElementInvisibility(cbsMasterPage().getLoader());
     }
 
-    public void verifyCreatedSuccessfullyToasterMsg(){
+    public void verifyCreatedSuccessfullyToasterMsg() {
         waitForElementVisible(cbsMasterPage().getCreatedSuccessfullyToaster());
         onElement(cbsMasterPage().getCreatedSuccessfullyToaster()).verifyText().isEqualTo(loadCbsMasterProps().getCreatedSuccessMsg());
+    }
+
+    public void verifyServiceTypeShouldBePrefilledOnCreateServiceTypePopup() {
+        sleep(3000);
+        softAssert.assertEquals(onTextBox(cbsMasterPage().getServiceTypeNameTxtBxOnCreateServiceTypePopup()).getText(), getSession().getSharedData().get("serviceTypeName").toString());
+        softAssert.assertAll();
+    }
+
+    public void verifyLoaderDisplayDuringDataFetchingOnCbsMasterPage() {
+        waitForThePageLoader();
+    }
+
+    public void verifyPressingEnterOnACTASimulatesAMouseClickEvent() {
+        sleep(1000);
+        withMouse(cbsMasterPage().getCreateServiceTypeBtn()).hover();
+        useKeys(Keys.ENTER);
+
+    }
+
+    public void verifyPressingEscOnAPopupSimulatesClickingCancel() {
+        useKeys(Keys.ESCAPE);
     }
 
 }

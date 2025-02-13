@@ -4,6 +4,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import net.datafaker.Faker;
 import org.cbs.actions.CbsMasterActions;
 import org.cbs.actions.SharedActions;
@@ -13,7 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static org.cbs.actions.CommonActions.sleep;
+import static org.cbs.actions.elements.ElementActions.onElement;
+import static org.cbs.data.DataReader.loadCbsMasterProps;
 import static org.cbs.manager.ParallelSession.getSession;
+import static org.cbs.pages.CbsMasterPage.cbsMasterPage;
 import static org.junit.Assert.assertEquals;
 
 public class CbsMasterSteps {
@@ -43,6 +48,11 @@ public class CbsMasterSteps {
     @Then("Verify create service type popup should display on cbs master page.")
     public void verifyCreateServiceTypePopupShouldDisplayOnCbsMasterPage() {
         cbsMasterActions.verifyCreateServiceTypePopupShouldDisplay();
+    }
+
+    @Then("Verify create service type popup should not display on cbs master page.")
+    public void verifyCreateServiceTypePopupShouldNotDisplayOnCbsMasterPage() {
+        cbsMasterActions.verifyCreateServiceTypePopupShouldNotDisplay();
     }
 
     @And("User click on cancel button under create service type popup on cbs master page.")
@@ -173,7 +183,7 @@ public class CbsMasterSteps {
     @Then("Verify user should see the error message {string} on cbs master page.")
     public void verifyUserShouldSeeTheErrorMessageOnCbsMasterPage(String arg0) {
         String actMsg = cbsMasterActions.createRoleTxtErrorMsg();
-        assertEquals("Validation failed for role name!",actMsg,arg0);
+        assertEquals("Validation failed for role name!", actMsg, arg0);
     }
 
     @Then("User enter below value in role name and verify appropriate error messages under create role popup on cbs master page.")
@@ -199,9 +209,10 @@ public class CbsMasterSteps {
     @And("User enter existing role name in role name txt box on cbs master page.")
     public void userEnterExistingRoleNameInRoleNameTxtBoxOnCbsMasterPage() {
         String existingRoleName = cbsMasterActions.getRoleNameValues().
-                get(faker.random().nextInt(0,cbsMasterActions.getRoleNameValues().size()));
+                get(faker.random().nextInt(0, cbsMasterActions.getRoleNameValues().size()));
         cbsMasterActions.enterTextInCreateRoleTxtBox(existingRoleName);
     }
+
     @And("User click on submit button under create role name popup on cbs master page.")
     public void userClickOnSubmitButtonUnderCreateRoleNamePopupOnCbsMasterPage() {
         cbsMasterActions.clickSubmitButtonOnCreateRoleNamePopup();
@@ -215,7 +226,7 @@ public class CbsMasterSteps {
 
     @And("User enter valid role name in role name txt box on cbs master page.")
     public void userEnterValidRoleNameInRoleNameTxtBoxOnCbsMasterPage() {
-        getSession().setSharedData("validName" ,faker.name().firstName());
+        getSession().setSharedData("validName", faker.name().firstName());
         cbsMasterActions.enterTextInCreateRoleTxtBox(getSession().getSharedData("validName"));
     }
 
@@ -227,6 +238,44 @@ public class CbsMasterSteps {
     @And("Verify same entry should shown in cbs role table on cbs master page.")
     public void verifySameEntryShouldShownInCbsRoleTableOnCbsMasterPage() {
         ArrayList<String> roleNameValues = cbsMasterActions.getRoleNameValues();
-        cbsMasterActions.verifyContains(roleNameValues,getSession().getSharedData("validName"));
+        cbsMasterActions.verifyContains(roleNameValues, getSession().getSharedData("validName"));
+    }
+
+    @Then("Verify discard changes popup ui.")
+    public void verifyDiscardChangesPopupUi() {
+        cbsMasterActions.verifyTitleShouldDisplayOnDiscardChangesPp(loadCbsMasterProps().getDiscardChangesPopupTitle());
+        cbsMasterActions.verifyMsgShouldDisplayOnDiscardChangesPp(loadCbsMasterProps().getDiscardChangesPopupMsg());
+        cbsMasterActions.verifyCancelButtonShouldDisplayOnDiscardChangesPp();
+        cbsMasterActions.verifyProceedButtonShouldDisplayOnDiscardChangesPp();
+    }
+
+    @And("Verify service type should be prefilled on create service type popup.")
+    public void verifyServiceTypeShouldBePrefilledOnCreateServiceTypePopup() {
+        cbsMasterActions.verifyServiceTypeShouldBePrefilledOnCreateServiceTypePopup();
+    }
+
+    @And("Verify discard changes popup should not display.")
+    public void verifyDiscardChangesPopupShouldNotDisplay() {
+        cbsMasterActions.verifyDiscardChangesPpShouldNotDisplay(loadCbsMasterProps().getDiscardChangesPopupTitle());
+    }
+
+    @Then("Verify loader display during data fetching on cbs master page.")
+    public void verifyLoaderDisplayDuringDataFetchingOnCbsMasterPage() {
+        cbsMasterActions.verifyLoaderDisplayDuringDataFetchingOnCbsMasterPage();
+    }
+
+    @Then("Verify pressing enter on a CTA simulates a mouse click event.")
+    public void verifyPressingEnterOnACTASimulatesAMouseClickEvent() {
+        cbsMasterActions.verifyPressingEnterOnACTASimulatesAMouseClickEvent();
+        sleep(2000);
+        cbsMasterActions.verifyCreateServiceTypePopupShouldDisplay();
+
+    }
+
+    @And("Verify pressing esc on a popup simulates clicking cancel.")
+    public void verifyPressingEscOnAPopupSimulatesClickingCancel() {
+        cbsMasterActions.verifyPressingEscOnAPopupSimulatesClickingCancel();
+        sleep(2000);
+        cbsMasterActions.verifyCreateServiceTypePopupShouldNotDisplay();
     }
 }
