@@ -15,4 +15,9 @@ public class SimulationsSteps {
     public void verifySimulationsPageShouldDisplay() {
         simulationsActions.verifySimulationsPageShouldDisplay();
     }
+
+    @And("User click create simulations button on simulations page.")
+    public void userClickCreateSimulationsButtonOnSimulationsPage() {
+        simulationsActions.clickOnCreateSimulationBtn();
+    }
 }

@@ -2,8 +2,7 @@
 @allure.label.owner:rahul.saini
 @allure.label.page:/{org}/{cbs}/web
 @allure.label.suite:Regression_Suite
-@allure.label.subSuite:cbs
-@service_type_master
+@allure.label.subSuite:service_type_master
 Feature: Service Type Master Feature
   This feature is having scenarios to test the CBS Service Type Master feature.
 
