@@ -70,3 +70,37 @@ Feature: Role Master Feature
     And User click on submit button under create role name popup on cbs master page.
     Then Verify success toaster message display on cbs master page.
     And Verify same entry should shown in cbs role table on cbs master page.
+
+  @TC_RM_09
+  Scenario: Check confirmation popup on cancellation after modifying some data
+    When Verify user landed on the dashboard of the cbs web app.
+    And Verify simulations page should display.
+    And User click on "CBS Masters" tab under menu on dashboard page.
+    And Verify cbs master page should display.
+    And User click on create role button on cbs master page.
+    And Verify role master create popup should get open on cbs master page.
+    And User enter value in role name txt box on cbs master page.
+    And User click cancel button under create role master popup on cbs master page.
+    Then Verify confirmation popup on cancellation after modifying some data on cbs master page.
+
+  @TC_RM_10
+  Scenario: Verify cancellation action on discard popup create role master .
+    When Verify user landed on the dashboard of the cbs web app.
+    And Verify simulations page should display.
+    And User click on "CBS Masters" tab under menu on dashboard page.
+    And Verify cbs master page should display.
+    And User click on create role button on cbs master page.
+    And Verify role master create popup should get open on cbs master page.
+    And User enter value in role name txt box on cbs master page.
+    And User click cancel button under create role master popup on cbs master page.
+    And User click cancel button on discard changes popup.
+    Then Verify role master create popup should get open on cbs master page.
+    And User click cancel button under create role master popup on cbs master page.
+    And User click proceed button on discard changes popup.
+    And Verify discard changes popup should not display.
+    Then Verify cbs master page should display.
+
+
+
+
+

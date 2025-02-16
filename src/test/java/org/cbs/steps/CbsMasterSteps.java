@@ -278,4 +278,19 @@ public class CbsMasterSteps {
         sleep(2000);
         cbsMasterActions.verifyCreateServiceTypePopupShouldNotDisplay();
     }
+
+    @And("User enter value in role name txt box on cbs master page.")
+    public void userEnterValueInRoleNameTxtBoxOnCbsMasterPage() {
+        cbsMasterActions.enterTextInCreateRoleTxtBox(faker.name().firstName());
+    }
+
+    @And("User click cancel button under create role master popup on cbs master page.")
+    public void userClickCancelButtonUnderCreateRoleMasterPopupOnCbsMasterPage() {
+        cbsMasterActions.clickCancelOnCreateRolePopup();
+    }
+
+    @Then("Verify confirmation popup on cancellation after modifying some data on cbs master page.")
+    public void verifyConfirmationPopupOnCancellationAfterModifyingSomeDataOnCbsMasterPage() {
+        verifyDiscardChangesPopupUi();
+    }
 }

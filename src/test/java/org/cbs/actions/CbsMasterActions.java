@@ -290,4 +290,8 @@ public class CbsMasterActions extends SharedActions {
         useKeys(Keys.ESCAPE);
     }
 
+    public void clickCancelOnCreateRolePopup(){
+        withMouse(cbsMasterPage().getCreateRolePopupCancelBtn()).click();
+    }
+
 }
