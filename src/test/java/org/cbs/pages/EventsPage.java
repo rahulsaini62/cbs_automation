@@ -20,8 +20,8 @@ public class EventsPage {
         return EVENTS_PAGE;
     }
 
-    private final Locator buildingMasterTitle = Locator.buildLocator()
-            .web(xpath("//p[text()='Building Master']"))
+    private final Locator eventsTitle = Locator.buildLocator()
+            .web(xpath("//p[text()='Events']"))
             .android(accessibilityId("test-CHECKOUT"))
             .ios(accessibilityId("test-CHECKOUT"))
             .name("Building Master Title")

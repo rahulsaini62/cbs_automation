@@ -17,7 +17,7 @@ public class EventsSteps {
 
     @Then("Verify events page should display.")
     public void verifyEventsPageShouldDisplay() {
-        eventsActions.verifyBuildingAndCafePageShouldDisplay();
+        eventsActions.verifyEventsPageShouldDisplay();
     }
 
 }
