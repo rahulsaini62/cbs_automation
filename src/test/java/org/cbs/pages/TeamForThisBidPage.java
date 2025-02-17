@@ -21,7 +21,7 @@ public class TeamForThisBidPage {
     }
 
     private final Locator pageTitle = Locator.buildLocator()
-            .web(xpath("//p[text()='Simulations']"))
+            .web(xpath("//p[text()='Team for this Bid']"))
             .android(accessibilityId("test-CHECKOUT"))
             .ios(accessibilityId("test-CHECKOUT"))
             .name("Simulations page title")
@@ -36,5 +36,9 @@ public class TeamForThisBidPage {
                 .name("Simulations page title")
                 .build();
     }
+    public final Locator submitBtn = Locator.buildLocator()
+            .web(xpath("//button[contains(text(),'Submit')]"))
+            .name("Submit Button")
+            .build();
 
 }

@@ -39,7 +39,6 @@ public class SharedActions {
      * Wait for the page loader.
      */
     public void waitForThePageLoader() {
-        waitForElementVisible(commonPage().getPageLoader());
         waitForElementInvisibility(commonPage().getPageLoader());
     }
 
@@ -168,5 +167,6 @@ public class SharedActions {
             return attributeValue != null && !attributeValue.isEmpty();
         });
     }
+
 
 }

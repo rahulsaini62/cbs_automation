@@ -14,6 +14,7 @@ public class SimulationsSteps {
     @And("Verify simulations page should display.")
     public void verifySimulationsPageShouldDisplay() {
         simulationsActions.verifySimulationsPageShouldDisplay();
+        simulationsActions.waitForThePageLoader();
     }
 
     @And("User click create simulations button on simulations page.")

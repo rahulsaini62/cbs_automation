@@ -9,6 +9,7 @@ import org.testng.Assert;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
+import static org.cbs.actions.elements.ElementActions.onElement;
 import static org.cbs.manager.ParallelSession.getSession;
 import static org.cbs.pages.SimulationsPage.simulationsPage;
 import static org.cbs.pages.TeamForThisBidPage.teamForThisBidPage;
@@ -25,5 +26,11 @@ public class TeamForThisBidActions extends SharedActions {
 
     public void selectTeamForThisBidAsOnTeamForThisBidPage(String value) {
       withMouse(teamForThisBidPage().getTeamForThisBidValue(value)).click();
+      withMouse(teamForThisBidPage().getPageTitle()).click();
+    }
+
+    public void clickSubmitBtn(){
+        onElement(teamForThisBidPage().getSubmitBtn()).verifyIsEnabled();
+        withMouse(teamForThisBidPage().getSubmitBtn()).click();
     }
 }

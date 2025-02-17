@@ -1,0 +1,66 @@
+package org.cbs.steps;
+
+import io.cucumber.java.en.And;
+import net.datafaker.Faker;
+import org.cbs.actions.SiteProfileActions;
+import org.cbs.actions.TeamForThisBidActions;
+import org.cbs.pages.SiteProfilePage;
+
+import static org.cbs.pages.SiteProfilePage.siteProfilePage;
+
+public class SiteProfileSteps {
+    private final Faker faker = new Faker();
+
+    private final SiteProfileActions siteProfileActions;
+
+    public SiteProfileSteps() {
+        this.siteProfileActions = new SiteProfileActions();
+    }
+
+
+    @And("Verify user navigate to site profile page.")
+    public void verifyUserNavigateToSiteProfilePage() {
+        siteProfileActions.verifySiteProfileNavigation();
+    }
+
+    @And("User enter name in simulation name text box on site profile page.")
+    public void userEnterNameInSimulationNameTextBoxOnSiteProfilePage() {
+        String name = faker.name().firstName();
+        siteProfileActions.enterTextInTxtBox(siteProfilePage().getSimulationNameTxtBox(),name);
+    }
+
+    @And("User enter name in prospective site name text box on site profile page.")
+    public void userEnterNameInProspectiveSiteNameTextBoxOnSiteProfilePage() {
+        String siteName = faker.commerce().productName();
+        siteProfileActions.enterTextInTxtBox(siteProfilePage().getProspectiveSiteNameTxtBox(),siteName);
+    }
+
+    @And("User enter {string} in select reference site on site profile page.")
+    public void userEnterInSelectReferenceSiteOnSiteProfilePage(String arg0) {
+        siteProfileActions.enterTextSelectReferenceSite(arg0);
+    }
+
+    @And("User enter {string} in sector txt box on site profile page.")
+    public void userEnterInSectorTxtBoxOnSiteProfilePage(String arg0) {
+        siteProfileActions.enterTextInSector(arg0);
+    }
+
+    @And("User enter {string} in operating model text box on site profile page.")
+    public void userEnterInOperatingModelTextBoxOnSiteProfilePage(String arg0) {
+       siteProfileActions.enterTextInOperatingModel(arg0);
+    }
+
+    @And("User enter {string} in city text box on site profile page.")
+    public void userEnterInCityTextBoxOnSiteProfilePage(String arg0) {
+        siteProfileActions.enterTextInCity(arg0);
+    }
+
+    @And("User enter {string} in contract type on site profile page.")
+    public void userEnterInContractTypeOnSiteProfilePage(String arg0) {
+        siteProfileActions.enterTextInContractType(arg0);
+    }
+    @And("User enter {string} in revenue assurance type on site profile page.")
+    public void userEnterInRevenueAssuranceTypeOnSiteProfilePage(String arg0) {
+        siteProfileActions.enterTextInRevenueAssuranceType(arg0);
+    }
+}

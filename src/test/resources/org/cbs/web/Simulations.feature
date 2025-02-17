@@ -12,9 +12,20 @@ Feature: Role Master Feature
 
   Scenario:Verify accessing Role Master Configuration and grid component.
     When Verify user landed on the dashboard of the cbs web app.
-    And Verify simulations page should display.
     And User click on "Simulations" tab under menu on dashboard page.
     And Verify simulations page should display.
     And User click create simulations button on simulations page.
 
-    And User select team for this bid as "rahul.saini1@appinventiv.com" on team for this bid page.
+    And User select team for this bid as "Abhishek Mishra | abhishek.mishra@appinventiv.com | TokenAuthorizer" on team for this bid page.
+    And User click on submit button on team for this bid page.
+    And Verify user navigate to site profile page.
+    And User enter name in simulation name text box on site profile page.
+    And User enter name in prospective site name text box on site profile page.
+    And User enter "CPU Hyderabad - 119A" in select reference site on site profile page.
+    And User enter "Business" in sector txt box on site profile page.
+    And User enter "Hybrid" in operating model text box on site profile page.
+    And User enter "HYDERABAD" in city text box on site profile page.
+    And User enter "P&L" in contract type on site profile page.
+    And User enter "MG" in revenue assurance type on site profile page.
+
+

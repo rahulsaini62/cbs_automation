@@ -3,6 +3,8 @@ package org.cbs.pages;
 import lombok.Getter;
 import org.cbs.builders.Locator;
 
+import java.util.function.LongConsumer;
+
 import static io.appium.java_client.AppiumBy.accessibilityId;
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.xpath;
@@ -33,6 +35,5 @@ public class SimulationsPage {
             .ios(accessibilityId("test-CHECKOUT"))
             .name("Simulations page title")
             .build();
-
 
 }

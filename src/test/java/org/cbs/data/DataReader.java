@@ -8,6 +8,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import java.nio.file.Path;
 
 import org.apache.logging.log4j.Logger;
+import org.cbs.data.admin.props.SimulationProps;
 import org.cbs.data.admin.props.cbsMasterProps;
 import org.cbs.utils.JsonUtil;
 
@@ -25,6 +26,19 @@ public final class DataReader {
             .toString ();
         cbsMasterProps = JsonUtil.fromFile (configPath, cbsMasterProps.class);
         return LOGGER.traceExit (cbsMasterProps);
+    }
+
+    public static SimulationProps loadSimulationProps () {
+        SimulationProps simulationProps = null;
+        LOGGER.traceEntry ();
+        final var defaultPath = Path.of (getProperty ("user.dir"), "src/test/resources/data.json/admin/props/")
+                .toString ();
+        final var configDirectory = ofNullable (getenv ("PROPERTIES_PROPS_PATH")).orElse (
+                ofNullable (getProperty ("login.props.path")).orElse (defaultPath));
+        final var configPath = Path.of (configDirectory, "simulation-props.json")
+                .toString ();
+        simulationProps = JsonUtil.fromFile (configPath, SimulationProps.class);
+        return LOGGER.traceExit (simulationProps);
     }
 
 }

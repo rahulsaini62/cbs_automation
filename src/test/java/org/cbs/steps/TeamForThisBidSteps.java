@@ -17,4 +17,9 @@ public class TeamForThisBidSteps {
         teamForThisBidActions.selectTeamForThisBidAsOnTeamForThisBidPage(value);
     }
 
+    @And("User click on submit button on team for this bid page.")
+    public void userClickOnSubmitButtonOnTeamForThisBidPage() {
+        teamForThisBidActions.clickSubmitBtn();
+    }
+
 }

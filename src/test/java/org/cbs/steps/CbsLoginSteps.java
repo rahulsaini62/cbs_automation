@@ -1,5 +1,6 @@
 package org.cbs.steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.cbs.actions.LoginActions;
@@ -22,5 +23,4 @@ public class CbsLoginSteps {
         this.loginActions.loginWithGivenCred (username, password);
 
     }
-
 }

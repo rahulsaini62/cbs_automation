@@ -21,9 +21,7 @@ public class DashboardPage {
     }
 
     private final Locator pageLoader = Locator.buildLocator()
-            .web(cssSelector("div.circular-loader"))
-            .android(accessibilityId("test-CHECKOUT"))
-            .ios(accessibilityId("test-CHECKOUT"))
+            .web(cssSelector("svg.MuiCircularProgress-svg.css-13o7eu2"))
             .name("Page Loader")
             .build();
 
@@ -108,4 +106,5 @@ public class DashboardPage {
 //        .web(cssSelector("[class='userText']"))
 //        .name("Account Icon")
 //        .build();
+
 }
