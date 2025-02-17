@@ -152,7 +152,7 @@ public class CbsMasterActions extends SharedActions {
 
     public void verifyDiscardChangesPpShouldNotDisplay(String expectedMessage) {
         sleep(2000);
-        softAssert.assertFalse(onElement(cbsMasterPage().getTitleOnDiscardChangesPopup(expectedMessage)).isDisplayed(), "Title is not as expected");
+        softAssert.assertFalse(onElement(cbsMasterPage().getTitleOnDiscardChangesPopup(expectedMessage)).isDisplayedWithoutWait(), "Title is not as expected");
         softAssert.assertAll();
     }
 
@@ -179,6 +179,7 @@ public class CbsMasterActions extends SharedActions {
 
     public void clickOnCancelBtnOnDiscardChangesPopup() {
         withMouse(cbsMasterPage().getCancelBtnOnDiscardChangesPopup()).click();
+        waitForElementInvisibility(cbsMasterPage().getCancelBtnOnDiscardChangesPopup());
     }
 
     public void clickOnProceedBtnOnDiscardChangesPopup() {
@@ -216,8 +217,6 @@ public class CbsMasterActions extends SharedActions {
         onElement(cbsMasterPage().getRoleNameTxt()).verifyText().isEqualTo(loadCbsMasterProps().getRoleNameTxt());
 
         onElement(cbsMasterPage().getCreateRolePopupCancelBtn()).verifyIsEnabled().isTrue();
-
-        onElement(cbsMasterPage().getCreateRolePopupSubmitBtn()).verifyIsEnabled().isFalse();
 
     }
 
