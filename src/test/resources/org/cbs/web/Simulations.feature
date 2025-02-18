@@ -3,14 +3,15 @@
 @allure.label.page:/{org}/{cbs}/web
 @allure.label.suite:Regression_Suite
 @allure.label.subSuite:simulations
-Feature: Role Master Feature
-  This feature is having scenarios to test the CBS role master feature.
+@SimulationPage
+Feature: Simulation Feature
+  This feature is having scenarios to test the simulation feature.
 
   Background:
     Given User hit the cbs app url "cbs.app.url".
     And User login with username as "cbs.username" and password as "cbs.password" on cbs admin
 
-  Scenario:Verify accessing Role Master Configuration and grid component.
+  Scenario:Verify simulation page.
     When Verify user landed on the dashboard of the cbs web app.
     And User click on "Simulations" tab under menu on dashboard page.
     And Verify simulations page should display.
@@ -27,5 +28,3 @@ Feature: Role Master Feature
     And User enter "HYDERABAD" in city text box on site profile page.
     And User enter "P&L" in contract type on site profile page.
     And User enter "MG" in revenue assurance type on site profile page.
-
-
