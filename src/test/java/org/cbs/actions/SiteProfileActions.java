@@ -63,6 +63,7 @@ public class SiteProfileActions extends SharedActions {
 
     public void verifySiteProfileNavigation() {
         onElement(siteProfilePage.getTitle()).verifyText().isEqualTo("Site Profile");
+        waitForElementVisible(siteProfilePage.getCreatedSuccessToaster());
         waitForElementInvisibility(siteProfilePage.getCreatedSuccessToaster());
         waitForThePageLoader();
     }
@@ -109,6 +110,14 @@ public class SiteProfileActions extends SharedActions {
         waitForElementClickable(siteProfilePage.getSaveSectionDataBtn());
         withMouse(siteProfilePage.getSaveSectionDataBtn()).click();
         waitForThePageLoader();
+    }
+
+    public void clickBuildingCafeBtn(){
+        waitForThePageLoader();
+        onElement(siteProfilePage.getBuildingCafeBtn()).verifyIsEnabled();
+        waitForElementClickable(siteProfilePage.getBuildingCafeBtn());
+        withMouse(siteProfilePage.getBuildingCafeBtn()).click();
+        waitForElementInvisibility(siteProfilePage.getTitle());
     }
 
 }

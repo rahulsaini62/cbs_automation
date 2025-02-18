@@ -94,4 +94,9 @@ public class SiteProfileSteps {
     public void userClickOnValidateAplBtnOnSiteProfilePage() {
         siteProfileActions.clickValidateAPLBtn();
     }
+
+    @And("User click on building & cafe btn on site profile page.")
+    public void userClickOnBuildingCafeBtnOnSiteProfilePage() {
+        siteProfileActions.clickBuildingCafeBtn();
+    }
 }

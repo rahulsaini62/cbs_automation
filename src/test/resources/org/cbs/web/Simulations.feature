@@ -33,7 +33,8 @@ Feature: Simulation Feature
     And User enter "3.00" in year on year txt box on site profile page.
     And User enter "MG" in revenue assurance type on site profile page.
     And User click on save section data btn on site profile page.
-    And User click on validate apl btn on site profile page.
+    #And User click on validate apl btn on site profile page.
+    And User click on building & cafe btn on site profile page.
 
 
     Then Verify building and cafe page should display.

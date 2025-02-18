@@ -147,4 +147,9 @@ public class SiteProfilePage {
             .name("Save Section Data Btn")
             .build();
 
+    private final Locator buildingCafeBtn = Locator.buildLocator()
+            .web(cssSelector("div.css-k008qs :nth-child(3)"))
+            .name("Building & Cafe Button")
+            .build();
+
 }
