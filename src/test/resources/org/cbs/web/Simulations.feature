@@ -58,4 +58,9 @@ Feature: Simulation Feature
     And Verify newly added cafe should active status under cafe master on building and cafe page.
 
     Then Verify building and cafe page should display.
+    And User clicks on events button.
     Then Verify events page should display.
+    And User enter "2.00" in event revenue index two text box on events page.
+    And User enter "3.00" in food cost index tow text box on events page.
+    And User click copy full term button on events page.
+    Then User click on save section data btn on events page.
