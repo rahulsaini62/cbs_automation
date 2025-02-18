@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.cbs.actions.CommonActions.sleep;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementActions.onElement;
 import static org.cbs.actions.elements.TextBoxActions.onTextBox;
@@ -90,8 +91,18 @@ public class BuildingAndCafeActions extends SharedActions {
                 "Cafe Name Field Label is not displayed");
     }
 
+    public void verifyBuildingLabelShouldDisplayOnCreateCafePopup(String fieldName) {
+        Assert.assertTrue(verifyElementIsDisplayed(buildingAndCafePage().getBuildingDropdownLabelOnCreateCafePopup(fieldName)),
+                "Cafe Name Field Label is not displayed");
+    }
+
     public void verifyCafeNameTxtBxShouldDisplayOnCreateBuildingPopup(String fieldName) {
         Assert.assertTrue(verifyElementIsDisplayed(buildingAndCafePage().getCafeNameTxtBxOnCreateCafePopup(fieldName)),
+                "Cafe Name Field Text Box is not displayed");
+    }
+
+    public void verifyBuildingDropdownShouldDisplayOnCreateBuildingPopup(String fieldName) {
+        Assert.assertTrue(verifyElementIsDisplayed(buildingAndCafePage().getBuildingDropdownOnCreateCafePopup(fieldName)),
                 "Cafe Name Field Text Box is not displayed");
     }
 
@@ -107,16 +118,19 @@ public class BuildingAndCafeActions extends SharedActions {
 
     public void enterInCafeNameTxtBx(String cafeName, String value) {
         onTextBox(buildingAndCafePage().getCafeNameTxtBxOnCreateCafePopup(cafeName)).enterText(value);
+        sleep(1000);
     }
 
     public void selectBuilding(String fieldName, String value) {
-        withMouse(buildingAndCafePage().getCafeNameTxtBxOnCreateCafePopup(fieldName)).click();
-        withMouse(buildingAndCafePage().getBuildingDpDnOnCreateCafePopup(value)).click();
+        withMouse(buildingAndCafePage().getBuildingDropdownOnCreateCafePopup(fieldName)).click();
+        sleep(1000);
+        withMouse(buildingAndCafePage().getBuildingDpDnOnCreateCafePopup(value)).jsxClick();
     }
 
     public void selectServiceType(String fieldName, String value) {
-        withMouse(buildingAndCafePage().getCafeNameTxtBxOnCreateCafePopup(fieldName)).click();
-        withMouse(buildingAndCafePage().getBuildingDpDnOnCreateCafePopup(value)).click();
+        withMouse(buildingAndCafePage().getBuildingDropdownOnCreateCafePopup(fieldName)).click();
+        sleep(1000);
+        withMouse(buildingAndCafePage().getBuildingDpDnOnCreateCafePopup(value)).jsxClick();
     }
 
     public void clickOnSubmitBtnOnCreateCafePopup() {

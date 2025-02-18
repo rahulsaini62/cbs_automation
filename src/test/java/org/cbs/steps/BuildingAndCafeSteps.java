@@ -84,10 +84,10 @@ public class BuildingAndCafeSteps {
         buildingAndCafeActions.verifyTitleOnCreateCafePopup();
         buildingAndCafeActions.verifyCafeNameLabelShouldDisplayOnCreateCafePopup("Cafe Name");
         buildingAndCafeActions.verifyCafeNameTxtBxShouldDisplayOnCreateBuildingPopup("Cafe Name");
-        buildingAndCafeActions.verifyCafeNameLabelShouldDisplayOnCreateCafePopup("Building");
-        buildingAndCafeActions.verifyCafeNameTxtBxShouldDisplayOnCreateBuildingPopup("Building");
-        buildingAndCafeActions.verifyCafeNameLabelShouldDisplayOnCreateCafePopup("Service Type");
-        buildingAndCafeActions.verifyCafeNameTxtBxShouldDisplayOnCreateBuildingPopup("Service Type");
+        buildingAndCafeActions.verifyBuildingLabelShouldDisplayOnCreateCafePopup("Building");
+        buildingAndCafeActions.verifyBuildingDropdownShouldDisplayOnCreateBuildingPopup("Building");
+        buildingAndCafeActions.verifyBuildingLabelShouldDisplayOnCreateCafePopup("Service Type");
+        buildingAndCafeActions.verifyBuildingDropdownShouldDisplayOnCreateBuildingPopup("Service Type");
         buildingAndCafeActions.verifyCancelBtnShouldDisplayOnCreateCafePopup();
         buildingAndCafeActions.verifySubmitBtnShouldDisplayOnCreateCafePopup();
     }

@@ -25,14 +25,14 @@ public class SiteProfileSteps {
 
     @And("User enter name in simulation name text box on site profile page.")
     public void userEnterNameInSimulationNameTextBoxOnSiteProfilePage() {
-        String name = faker.name().firstName();
-        siteProfileActions.enterTextInTxtBox(siteProfilePage().getSimulationNameTxtBox(),name);
+        String name = "automation_" + faker.name().firstName();
+        siteProfileActions.enterTextInTxtBox(siteProfilePage().getSimulationNameTxtBox(), name);
     }
 
     @And("User enter name in prospective site name text box on site profile page.")
     public void userEnterNameInProspectiveSiteNameTextBoxOnSiteProfilePage() {
         String siteName = faker.commerce().productName();
-        siteProfileActions.enterTextInTxtBox(siteProfilePage().getProspectiveSiteNameTxtBox(),siteName);
+        siteProfileActions.enterTextInTxtBox(siteProfilePage().getProspectiveSiteNameTxtBox(), siteName);
     }
 
     @And("User enter {string} in select reference site on site profile page.")
@@ -47,7 +47,7 @@ public class SiteProfileSteps {
 
     @And("User enter {string} in operating model text box on site profile page.")
     public void userEnterInOperatingModelTextBoxOnSiteProfilePage(String arg0) {
-       siteProfileActions.enterTextInOperatingModel(arg0);
+        siteProfileActions.enterTextInOperatingModel(arg0);
     }
 
     @And("User enter {string} in city text box on site profile page.")
@@ -59,6 +59,7 @@ public class SiteProfileSteps {
     public void userEnterInContractTypeOnSiteProfilePage(String arg0) {
         siteProfileActions.enterTextInContractType(arg0);
     }
+
     @And("User enter {string} in revenue assurance type on site profile page.")
     public void userEnterInRevenueAssuranceTypeOnSiteProfilePage(String arg0) {
         siteProfileActions.enterTextInRevenueAssuranceType(arg0);
