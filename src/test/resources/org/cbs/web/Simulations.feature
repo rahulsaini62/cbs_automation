@@ -27,4 +27,12 @@ Feature: Simulation Feature
     And User enter "Hybrid" in operating model text box on site profile page.
     And User enter "HYDERABAD" in city text box on site profile page.
     And User enter "P&L" in contract type on site profile page.
+    And User select "24" in bid submission date on site profile page.
+    And User select "15" in estimated mobilization date on site profile page.
+    And User enter "2.00" in  gas cost txt box on site profile page.
+    And User enter "3.00" in year on year txt box on site profile page.
     And User enter "MG" in revenue assurance type on site profile page.
+    And User click on save section data btn on site profile page.
+    And User click on validate apl btn on site profile page.
+
+

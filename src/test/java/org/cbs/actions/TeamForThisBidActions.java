@@ -33,4 +33,5 @@ public class TeamForThisBidActions extends SharedActions {
         onElement(teamForThisBidPage().getSubmitBtn()).verifyIsEnabled();
         withMouse(teamForThisBidPage().getSubmitBtn()).click();
     }
+
 }

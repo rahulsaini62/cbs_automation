@@ -105,7 +105,6 @@ public class SiteProfilePage {
                 .web(xpath(String.format("//div[contains(@class, 'react-datepicker__day') and contains(text(),'%s')]",day)))
                 .name("Date Selector")
                 .build();
-
     }
 
     private final Locator  estimateMobilizationDateInput = Locator.buildLocator()
@@ -122,4 +121,30 @@ public class SiteProfilePage {
             .web(xpath("//div[contains(text(),'Created Successfully')]"))
             .name("Created Successfully Toaster")
             .build();
+
+    private final Locator dateNextNav = Locator.buildLocator()
+            .web(cssSelector("button[aria-label='Next Month']"))
+            .name("Date Next Nav")
+            .build();
+
+    private final Locator gasCostTxtBox = Locator.buildLocator()
+            .web(xpath("//p[contains(text(),'Gas')]/../..//input[contains(@class,'css-1x5jdmq')]"))
+            .name("Gas/Fuel Cost % (of Revenue) Txt Box")
+            .build();
+
+    private final Locator yearOnYearTxtBox = Locator.buildLocator()
+            .web(xpath("//p[contains(text(),'Year')]/../..//input[contains(@class,'css-1x5jdmq')]"))
+            .name("Year on Year % Change in Selling Price Txt Box")
+            .build();
+
+    private final Locator validateAPLBtn = Locator.buildLocator()
+            .web(cssSelector("div.js-end :nth-child(1)"))
+            .name("Validate APL Button")
+            .build();
+
+    private final Locator saveSectionDataBtn = Locator.buildLocator()
+            .web(cssSelector("div.js-end :nth-child(2)"))
+            .name("Save Section Data Btn")
+            .build();
+
 }

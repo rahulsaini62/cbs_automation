@@ -11,12 +11,11 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.CommonActions.sleep;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementActions.onElement;
-import static org.cbs.actions.elements.ElementFinder.waitForElementInvisibility;
-import static org.cbs.actions.elements.ElementFinder.waitForElementVisible;
+import static org.cbs.actions.elements.ElementFinder.*;
 import static org.cbs.actions.elements.TextBoxActions.onTextBox;
 import static org.cbs.manager.ParallelSession.getSession;
 
-public class SiteProfileActions extends SharedActions{
+public class SiteProfileActions extends SharedActions {
     private final PlatformType platformType;
     private final SiteProfilePage siteProfilePage;
     private static final Logger LOGGER = getLogger();
@@ -26,51 +25,90 @@ public class SiteProfileActions extends SharedActions{
         this.siteProfilePage = new SiteProfilePage();
     }
 
-    public void enterTextInTxtBox(Locator locator,String input){
+    public void enterTextInTxtBox(Locator locator, String input) {
         withMouse(locator).click();
         onTextBox(locator).enterText(input);
         onTextBox(locator).enterText(Keys.chord(Keys.RETURN));
     }
-    public void enterTextSelectReferenceSite(String input){
+
+    public void enterTextSelectReferenceSite(String input) {
         withMouse(siteProfilePage.getSelectReferenceSiteDrpDown()).click();
         onTextBox(siteProfilePage.getSelectReferenceSiteTxtBox()).enterText(input);
         onTextBox(siteProfilePage.getSelectReferenceSiteTxtBox()).enterText(Keys.chord(Keys.RETURN));
     }
 
-    public void enterTextInSector(String input){
+    public void enterTextInSector(String input) {
         withMouse(siteProfilePage.getSectorDrpDown()).click();
         onTextBox(siteProfilePage.getSectorTxtBox()).enterText(input);
         onTextBox(siteProfilePage.getSectorTxtBox()).enterText(Keys.chord(Keys.RETURN));
     }
 
-    public void enterTextInOperatingModel(String input){
+    public void enterTextInOperatingModel(String input) {
         withMouse(siteProfilePage.getOperatingModelDrpDown()).click();
         onTextBox(siteProfilePage.getOperatingModelTxtBox()).enterText(input);
         onTextBox(siteProfilePage.getOperatingModelTxtBox()).enterText(Keys.chord(Keys.RETURN));
     }
 
-    public void enterTextInCity(String input){
+    public void enterTextInCity(String input) {
         withMouse(siteProfilePage.getCityDrpDown()).click();
         onTextBox(siteProfilePage.getCityTxtBox()).enterText(input);
         onTextBox(siteProfilePage.getCityTxtBox()).enterText(Keys.chord(Keys.RETURN));
     }
 
-    public void enterTextInContractType(String input){
+    public void enterTextInContractType(String input) {
         withMouse(siteProfilePage.getContractTypeDrpDown()).click();
         onTextBox(siteProfilePage.getContractTypeTxtBox()).enterText(input);
         onTextBox(siteProfilePage.getContractTypeTxtBox()).enterText(Keys.chord(Keys.RETURN));
     }
 
-    public void verifySiteProfileNavigation(){
+    public void verifySiteProfileNavigation() {
         onElement(siteProfilePage.getTitle()).verifyText().isEqualTo("Site Profile");
         waitForElementInvisibility(siteProfilePage.getCreatedSuccessToaster());
         waitForThePageLoader();
     }
 
-    public void enterTextInRevenueAssuranceType(String input){
+    public void enterTextInRevenueAssuranceType(String input) {
         withMouse(siteProfilePage.getRevenueAssuranceDrpDown()).click();
         onTextBox(siteProfilePage.getRevenueAssuranceTypeTxtBox()).enterText(input);
         onTextBox(siteProfilePage.getRevenueAssuranceTypeTxtBox()).enterText(Keys.chord(Keys.RETURN));
+    }
+
+    public void bidSubmissionDateSelector(String input) {
+        withMouse(siteProfilePage.getBidSubmissionDateInput()).click();
+        waitForElementVisible(siteProfilePage.dateSelector(input));
+        withMouse(siteProfilePage.dateSelector(input)).click();
+    }
+
+    public void estimatedMobilizationDateSelector(String input) {
+        withMouse(siteProfilePage.getEstimateMobilizationDateInput()).click();
+        waitForElementVisible(siteProfilePage.dateSelector(input));
+        withMouse(siteProfilePage.getDateNextNav()).click();
+        withMouse(siteProfilePage.dateSelector(input)).click();
+    }
+
+    public void enterTextInGasCostTxtBox(String input) {
+        selectAllAndClearTxtBx(siteProfilePage.getGasCostTxtBox());
+        onTextBox(siteProfilePage.getGasCostTxtBox()).enterText(input);
+
+    }
+
+    public void enterTextInYearOnYearTxtBox(String input) {
+        selectAllAndClearTxtBx(siteProfilePage.getYearOnYearTxtBox());
+        onTextBox(siteProfilePage.getYearOnYearTxtBox()).enterText(input);
+    }
+
+    public void clickValidateAPLBtn(){
+        waitForElementInvisibility(siteProfilePage.getCreatedSuccessToaster());
+        onElement(siteProfilePage.getValidateAPLBtn()).verifyIsEnabled();
+        waitForElementClickable(siteProfilePage.getValidateAPLBtn());
+        withMouse(siteProfilePage.getValidateAPLBtn()).click();
+        waitForThePageLoader();
+    }
+    public void clickSaveSectionData(){
+        onElement(siteProfilePage.getSaveSectionDataBtn()).verifyIsEnabled();
+        waitForElementClickable(siteProfilePage.getSaveSectionDataBtn());
+        withMouse(siteProfilePage.getSaveSectionDataBtn()).click();
+        waitForThePageLoader();
     }
 
 }

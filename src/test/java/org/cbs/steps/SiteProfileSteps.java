@@ -63,4 +63,35 @@ public class SiteProfileSteps {
     public void userEnterInRevenueAssuranceTypeOnSiteProfilePage(String arg0) {
         siteProfileActions.enterTextInRevenueAssuranceType(arg0);
     }
+
+    @And("User select {string} in bid submission date on site profile page.")
+    public void userSelectInBidSubmissionDateOnSiteProfilePage(String arg0) {
+        siteProfileActions.bidSubmissionDateSelector(arg0);
+    }
+
+    @And("User select {string} in estimated mobilization date on site profile page.")
+    public void userSelectInEstimatedMobilizationDateOnSiteProfilePage(String arg0) {
+        siteProfileActions.estimatedMobilizationDateSelector(arg0);
+    }
+
+    @And("User enter {string} in year on year txt box on site profile page.")
+    public void userEnterInYearOnYearTxtBoxOnSiteProfilePage(String arg0) {
+        siteProfileActions.enterTextInYearOnYearTxtBox(arg0);
+
+    }
+
+    @And("User enter {string} in  gas cost txt box on site profile page.")
+    public void userEnterInGasCostTxtBoxOnSiteProfilePage(String arg0) {
+        siteProfileActions.enterTextInGasCostTxtBox(arg0);
+    }
+
+    @And("User click on save section data btn on site profile page.")
+    public void userClickOnSaveSectionDataBtnOnSiteProfilePage() {
+        siteProfileActions.clickSaveSectionData();
+    }
+
+    @And("User click on validate apl btn on site profile page.")
+    public void userClickOnValidateAplBtnOnSiteProfilePage() {
+        siteProfileActions.clickValidateAPLBtn();
+    }
 }
