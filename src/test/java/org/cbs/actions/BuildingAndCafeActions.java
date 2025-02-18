@@ -10,11 +10,13 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.CommonActions.sleep;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementActions.onElement;
+import static org.cbs.actions.elements.ElementFinder.waitForElementInvisibility;
 import static org.cbs.actions.elements.TextBoxActions.onTextBox;
 import static org.cbs.manager.ParallelSession.getSession;
 import static org.cbs.pages.BuildingAndCafePage.buildingAndCafePage;
 import static org.cbs.pages.CbsMasterPage.cbsMasterPage;
 import static org.cbs.pages.LoginPage.loginPage;
+import static org.cbs.pages.SiteProfilePage.siteProfilePage;
 
 public class BuildingAndCafeActions extends SharedActions {
     SoftAssert softAssert = new SoftAssert();
@@ -26,6 +28,7 @@ public class BuildingAndCafeActions extends SharedActions {
     }
 
     public void verifyBuildingAndCafePageShouldDisplay() {
+        waitForElementInvisibility(siteProfilePage().getCreatedSuccessToaster());
         waitForThePageLoader();
         Assert.assertTrue(verifyElementIsDisplayed(buildingAndCafePage().getBuildingMasterTitle()),
                 "Building & Cafe page is not displayed");
