@@ -24,6 +24,7 @@ public class BuildingAndCafeActions extends SharedActions {
     }
 
     public void verifyBuildingAndCafePageShouldDisplay() {
+        waitForThePageLoader();
         Assert.assertTrue(verifyElementIsDisplayed(buildingAndCafePage().getBuildingMasterTitle()),
                 "Building & Cafe page is not displayed");
     }

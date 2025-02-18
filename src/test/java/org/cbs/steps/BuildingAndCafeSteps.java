@@ -25,6 +25,7 @@ public class BuildingAndCafeSteps {
 
     @Then("Verify building and cafe page should display.")
     public void verifyBuildingAndCafePageShouldDisplay() {
+
         buildingAndCafeActions.verifyBuildingAndCafePageShouldDisplay();
     }
 
