@@ -7,9 +7,12 @@ import io.cucumber.java.en.When;
 import net.datafaker.Faker;
 import org.cbs.actions.BuildingAndCafeActions;
 import org.cbs.actions.LoginActions;
+import org.openqa.selenium.Keys;
 import org.testng.Assert;
 
 import static org.cbs.actions.SharedActions.verifyElementIsDisplayed;
+import static org.cbs.actions.elements.ClickableActions.withMouse;
+import static org.cbs.actions.elements.TextBoxActions.onTextBox;
 import static org.cbs.manager.ParallelSession.getSession;
 import static org.cbs.pages.BuildingAndCafePage.buildingAndCafePage;
 
@@ -84,10 +87,10 @@ public class BuildingAndCafeSteps {
         buildingAndCafeActions.verifyTitleOnCreateCafePopup();
         buildingAndCafeActions.verifyCafeNameLabelShouldDisplayOnCreateCafePopup("Cafe Name");
         buildingAndCafeActions.verifyCafeNameTxtBxShouldDisplayOnCreateBuildingPopup("Cafe Name");
-        buildingAndCafeActions.verifyCafeNameLabelShouldDisplayOnCreateCafePopup("Building");
-        buildingAndCafeActions.verifyCafeNameTxtBxShouldDisplayOnCreateBuildingPopup("Building");
-        buildingAndCafeActions.verifyCafeNameLabelShouldDisplayOnCreateCafePopup("Service Type");
-        buildingAndCafeActions.verifyCafeNameTxtBxShouldDisplayOnCreateBuildingPopup("Service Type");
+        buildingAndCafeActions.verifyBuildingLabelShouldDisplayOnCreateCafePopup("Building");
+        buildingAndCafeActions.verifyBuildingDropdownShouldDisplayOnCreateBuildingPopup("Building");
+        buildingAndCafeActions.verifyBuildingLabelShouldDisplayOnCreateCafePopup("Service Type");
+        buildingAndCafeActions.verifyBuildingDropdownShouldDisplayOnCreateBuildingPopup("Service Type");
         buildingAndCafeActions.verifyCancelBtnShouldDisplayOnCreateCafePopup();
         buildingAndCafeActions.verifySubmitBtnShouldDisplayOnCreateCafePopup();
     }
@@ -96,8 +99,9 @@ public class BuildingAndCafeSteps {
     @When("User fill create cafe details and submit create cafe popup.")
     public void userFillCreateCafeDetailsAndSubmitCreateCafePopup() {
         getSession().getSharedData().put("cafeName", faker.lorem().characters(20));
+
         buildingAndCafeActions.enterInCafeNameTxtBx("Cafe Name", getSession().getSharedData().get("cafeName").toString());
-        buildingAndCafeActions.selectBuilding("Building", getSession().getSharedData().get("cafeName").toString());
+        buildingAndCafeActions.selectBuilding("Building",getSession().getSharedData().get("buildingName").toString());
         buildingAndCafeActions.selectServiceType("Service Type", "02fwq9l2c876751geg0m");
         buildingAndCafeActions.clickOnSubmitBtnOnCreateCafePopup();
 

@@ -128,6 +128,24 @@ public class BuildingAndCafePage {
                 .build();
     }
 
+    public final Locator getBuildingTextBoxOnCreateCafePopup (String name){
+        return Locator.buildLocator()
+                .web(xpath("//p[text()='"+name+"']/..//input"))
+                .android(accessibilityId("test-CHECKOUT"))
+                .ios(accessibilityId("test-CHECKOUT"))
+                .name("Building Name Text Box")
+                .build();
+    }
+
+    public final Locator getBuildingDropdownOnCreateCafePopup (String name){
+        return Locator.buildLocator()
+                .web(xpath("//p[text()='"+name+"']/..//div[contains(@class,'dropdown')]"))
+                .android(accessibilityId("test-CHECKOUT"))
+                .ios(accessibilityId("test-CHECKOUT"))
+                .name("Building Name Text Box")
+                .build();
+    }
+
     private final Locator cancelBtnOnCreateCafePopup = Locator.buildLocator()
             .web(xpath("//div[@class='popup-body']//button[@type='button']"))
             .android(accessibilityId("test-CHECKOUT"))
@@ -148,6 +166,15 @@ public class BuildingAndCafePage {
                 .android(accessibilityId("test-CHECKOUT"))
                 .ios(accessibilityId("test-CHECKOUT"))
                 .name("Building Name Text Box")
+                .build();
+    }
+
+    public final Locator getBuildingDropdownLabelOnCreateCafePopup(String name) {
+        return Locator.buildLocator()
+                .web(xpath("//p[text()='"+name+"']"))
+                .android(accessibilityId("test-CHECKOUT"))
+                .ios(accessibilityId("test-CHECKOUT"))
+                .name("Create Cafe Button")
                 .build();
     }
 
