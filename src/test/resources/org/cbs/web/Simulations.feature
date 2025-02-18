@@ -59,8 +59,3 @@ Feature: Simulation Feature
 
     Then Verify building and cafe page should display.
     Then Verify events page should display.
-
-
-
-
-

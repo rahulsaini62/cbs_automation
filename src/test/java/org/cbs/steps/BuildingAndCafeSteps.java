@@ -47,7 +47,7 @@ public class BuildingAndCafeSteps {
     @And("Verify ui of create building popup.")
     public void verifyUiOfCreateBuildingPopup() {
         buildingAndCafeActions.verifyTitleOnCreateBuildingPopup();
-        buildingAndCafeActions.verifyBuildingNameLabelShouldDisplayOnCreateBuildingPopup("");
+        buildingAndCafeActions.verifyBuildingNameLabelShouldDisplayOnCreateBuildingPopup("Building Name");
         buildingAndCafeActions.verifyBuildingNameTxtBxShouldDisplayOnCreateBuildingPopup();
         buildingAndCafeActions.verifyCancelBtnShouldDisplayOnCreateBuildingPopup();
         buildingAndCafeActions.verifySubmitBtnShouldDisplayOnCreateBuildingPopup();
