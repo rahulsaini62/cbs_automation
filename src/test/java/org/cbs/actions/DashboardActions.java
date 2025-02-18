@@ -6,6 +6,7 @@ import org.cbs.pages.DashboardPage;
 import org.cbs.pages.LoginPage;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.cbs.actions.CommonActions.sleep;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementActions.onElement;
 import static org.cbs.actions.elements.TextBoxActions.onTextBox;
@@ -25,5 +26,6 @@ public class DashboardActions extends SharedActions{
 
     public void clickOnGivenTabUnderMenu(String tabName) {
         withMouse(commonPage().getCbsMasterTabUnderMenu(tabName)).click();
+        sleep(2000);
     }
 }

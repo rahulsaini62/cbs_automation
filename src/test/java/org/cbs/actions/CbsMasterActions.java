@@ -31,7 +31,7 @@ import static org.junit.Assert.assertTrue;
 public class CbsMasterActions extends SharedActions {
     SoftAssert softAssert = new SoftAssert();
     private final PlatformType platformType;
-    private static final Logger LOGGER = getLogger();
+    private static final Logger log = getLogger();
 
     public CbsMasterActions() {
         this.platformType = getSession().getPlatformType();

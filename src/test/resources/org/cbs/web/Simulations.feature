@@ -36,3 +36,30 @@ Feature: Simulation Feature
     And User click on validate apl btn on site profile page.
 
 
+    Then Verify building and cafe page should display.
+    When User click create building button on building and cafe page.
+
+    Then  Verify create building popup should display.
+    And Verify ui of create building popup.
+    When User random enter building name on create building popup.
+    And User click submit button on create building popup.
+    Then Verify "Created successfully" toast message should display.
+    And Verify newly added building should display under building master on building and cafe page.
+    And Verify newly added building should active status under building master on building and cafe page.
+
+    When User click create cafe button on building and cafe page.
+    Then  Verify create cafe popup should display.
+    And Verify ui of create cafe popup.
+    When User fill create cafe details and submit create cafe popup.
+    Then Verify "Created successfully" toast message should display.
+
+    And Verify newly added cafe should display under cafe master on building and cafe page.
+    And Verify newly added cafe should active status under cafe master on building and cafe page.
+
+    Then Verify building and cafe page should display.
+    Then Verify events page should display.
+
+
+
+
+
