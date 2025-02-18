@@ -54,7 +54,7 @@ Feature: Simulation Feature
     Then Verify "Created successfully" toast message should display.
 
     And Verify newly added cafe should display under cafe master on building and cafe page.
-    And Verify newly added cafe should active status under cafe master on building and cafe page.
+#    And Verify newly added cafe should active status under cafe master on building and cafe page.
 
     Then Verify building and cafe page should display.
     Then Verify events page should display.

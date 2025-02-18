@@ -2,6 +2,7 @@ package org.cbs.actions;
 
 import org.apache.logging.log4j.Logger;
 import org.cbs.enums.PlatformType;
+import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -122,8 +123,13 @@ public class BuildingAndCafeActions extends SharedActions {
     }
 
     public void selectBuilding(String fieldName, String value) {
+
         withMouse(buildingAndCafePage().getBuildingDropdownOnCreateCafePopup(fieldName)).click();
-        sleep(1000);
+        onTextBox(buildingAndCafePage().getBuildingTextBoxOnCreateCafePopup(fieldName)).enterText(value);
+//        onTextBox(buildingAndCafePage().getBuildingDropdownOnCreateCafePopup(fieldName)).enterText(Keys.chord(Keys.RETURN));
+
+//        withMouse(buildingAndCafePage().getBuildingDropdownOnCreateCafePopup(fieldName)).click();
+//        sleep(1000);
         withMouse(buildingAndCafePage().getBuildingDpDnOnCreateCafePopup(value)).jsxClick();
     }
 

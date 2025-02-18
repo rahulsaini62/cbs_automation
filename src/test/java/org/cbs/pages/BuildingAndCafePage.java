@@ -128,9 +128,18 @@ public class BuildingAndCafePage {
                 .build();
     }
 
-    public final Locator getBuildingDropdownOnCreateCafePopup (String name){
+    public final Locator getBuildingTextBoxOnCreateCafePopup (String name){
         return Locator.buildLocator()
                 .web(xpath("//p[text()='"+name+"']/..//input"))
+                .android(accessibilityId("test-CHECKOUT"))
+                .ios(accessibilityId("test-CHECKOUT"))
+                .name("Building Name Text Box")
+                .build();
+    }
+
+    public final Locator getBuildingDropdownOnCreateCafePopup (String name){
+        return Locator.buildLocator()
+                .web(xpath("//p[text()='"+name+"']/..//div[contains(@class,'dropdown')]"))
                 .android(accessibilityId("test-CHECKOUT"))
                 .ios(accessibilityId("test-CHECKOUT"))
                 .name("Building Name Text Box")
