@@ -109,4 +109,9 @@ public class SiteProfileSteps {
     public void verifyToastMessageShouldDisplayOnSiteProfilePage(String expectedToastMessage) {
         siteProfileActions.verifyGivenToastMessageShouldDisplay(expectedToastMessage);
     }
+
+    @And("User enter {string} in contract duration year text box on site profile page.")
+    public void userEnterInContractDurationYearTextBoxOnSiteProfilePage(String arg0) {
+        siteProfileActions.enterTextInContractDurationYear(arg0);
+    }
 }

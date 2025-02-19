@@ -163,5 +163,14 @@ public class SiteProfilePage {
             .name("Building & Cafe Button")
             .build();
 
+    private final Locator contractDurationYearDrpDwn = Locator.buildLocator()
+            .web(xpath("(//p[contains(text(),'Contract')]/.. //div[contains(@class,'css-1k0rgcj')])[2]"))
+            .name("Contract Duration Year Dropdown")
+            .build();
+
+    private final Locator contractDurationYearTxtBox = Locator.buildLocator()
+            .web(xpath("(//p[contains(text(),'Contract')]/.. //input)[2]"))
+            .name("Contract Duration Year TxtBox")
+            .build();
 
 }
