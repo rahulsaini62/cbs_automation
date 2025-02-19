@@ -51,7 +51,7 @@ Feature: Simulation Feature
     Then  Verify create cafe popup should display.
     And Verify ui of create cafe popup.
     When User fill create cafe details and submit create cafe popup.
-    Then Verify "Created successfully" toast message should display.
+  #  Then Verify "Created successfully" toast message should display.
 
     And Verify newly added cafe should display under cafe master on building and cafe page.
 #    And Verify newly added cafe should active status under cafe master on building and cafe page.

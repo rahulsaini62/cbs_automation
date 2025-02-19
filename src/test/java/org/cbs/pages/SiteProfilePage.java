@@ -148,7 +148,7 @@ public class SiteProfilePage {
             .build();
 
     private final Locator buildingCafeBtn = Locator.buildLocator()
-            .web(cssSelector("div.css-k008qs :nth-child(3)"))
+            .web(xpath("//button[contains(text(),'Building & Cafe')]"))
             .name("Building & Cafe Button")
             .build();
 

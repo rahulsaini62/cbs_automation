@@ -25,6 +25,7 @@ public class DashboardActions extends SharedActions{
     }
 
     public void clickOnGivenTabUnderMenu(String tabName) {
+        waitForThePageLoader();
         withMouse(commonPage().getCbsMasterTabUnderMenu(tabName)).click();
         sleep(2000);
     }

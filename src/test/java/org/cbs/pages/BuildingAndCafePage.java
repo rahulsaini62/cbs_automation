@@ -87,7 +87,7 @@ public class BuildingAndCafePage {
 
     public final Locator getGivenBuildingNameFromBuildingMasterTable(String name) {
         return Locator.buildLocator()
-                .web(xpath("//td[text()='" + name + "']"))
+                .web(xpath(String.format("//td[text()='%s']",name)))
                 .android(accessibilityId("test-CHECKOUT"))
                 .ios(accessibilityId("test-CHECKOUT"))
                 .name("Create Cafe Button")

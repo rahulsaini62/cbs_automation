@@ -144,6 +144,8 @@ public class BuildingAndCafeActions extends SharedActions {
 
     public void clickOnSubmitBtnOnCreateCafePopup() {
         withMouse(buildingAndCafePage().getSubmitBtnOnCreateCafePopup()).click();
+        waitForElementInvisibility(buildingAndCafePage().getSubmitBtnOnCreateCafePopup());
+        waitForThePageLoader();
     }
 
 }

@@ -117,7 +117,6 @@ public class SiteProfileActions extends SharedActions {
         onElement(siteProfilePage.getBuildingCafeBtn()).verifyIsEnabled();
         waitForElementClickable(siteProfilePage.getBuildingCafeBtn());
         withMouse(siteProfilePage.getBuildingCafeBtn()).click();
-        waitForElementInvisibility(siteProfilePage.getTitle());
     }
 
 }
