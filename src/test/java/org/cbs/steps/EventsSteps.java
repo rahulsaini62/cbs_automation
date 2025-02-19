@@ -6,6 +6,8 @@ import net.datafaker.Faker;
 import org.cbs.actions.BuildingAndCafeActions;
 import org.cbs.actions.EventsActions;
 
+import static org.cbs.manager.ParallelSession.getSession;
+
 public class EventsSteps {
 
     private final EventsActions eventsActions;
@@ -28,6 +30,7 @@ public class EventsSteps {
 
     @And("User enter {string} in event revenue index two text box on events page.")
     public void userEnterInEventRevenueIndexTextBoxOnEventsPage(String arg0) {
+        getSession().setSharedData("revenue",arg0);
         eventsActions.enterTextInEventRevenueIndex2TxtBox(arg0);
     }
 
@@ -43,6 +46,7 @@ public class EventsSteps {
 
     @And("User enter {string} in food cost index tow text box on events page.")
     public void userEnterInFoodCostIndexTowTextBoxOnEventsPage(String arg0) {
+        getSession().setSharedData("foodCost",arg0);
         eventsActions.enterTextInFoodCostIndex2TxtBox(arg0);
     }
 
