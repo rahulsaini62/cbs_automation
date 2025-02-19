@@ -52,4 +52,14 @@ public class EventsPage {
             .web(cssSelector("div.css-k008qs :nth-child(4)"))
             .name("Events Button")
             .build();
+
+    private final Locator eventRevenue = Locator.buildLocator()
+            .web(xpath("//tbody//tr[1]//td//input[@value]"))
+            .name("Events Button")
+            .build();
+
+//    private final Locator eventRevenue = Locator.buildLocator()
+//            .web(xpath("//tbody//tr[1]//td//input[@value]"))
+//            .name("Events Button")
+//            .build();
 }

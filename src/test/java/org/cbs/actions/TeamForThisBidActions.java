@@ -8,6 +8,7 @@ import org.cbs.pages.TeamForThisBidPage;
 import org.testng.Assert;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
+import static org.cbs.actions.CommonActions.sleep;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementActions.onElement;
 import static org.cbs.manager.ParallelSession.getSession;
@@ -25,6 +26,7 @@ public class TeamForThisBidActions extends SharedActions {
     }
 
     public void selectTeamForThisBidAsOnTeamForThisBidPage(String value) {
+        sleep(1000);
       withMouse(teamForThisBidPage().getTeamForThisBidValue(value)).click();
       withMouse(teamForThisBidPage().getPageTitle()).click();
     }

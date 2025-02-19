@@ -34,7 +34,7 @@ public class SimulationsActions extends SharedActions {
     }
 
     public void clickOnCreateSimulationBtn(){
-        sleep(3000);
+//        sleep(3000);
         withMouse(simulationsPage().getCreateSimulationBtn()).jsxClick();
     }
 

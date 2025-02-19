@@ -11,6 +11,7 @@ import static org.cbs.actions.CommonActions.sleep;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementActions.onElement;
 import static org.cbs.actions.elements.ElementFinder.waitForElementInvisibility;
+import static org.cbs.actions.elements.ElementFinder.waitForElementVisible;
 import static org.cbs.actions.elements.TextBoxActions.onTextBox;
 import static org.cbs.manager.ParallelSession.getSession;
 import static org.cbs.pages.BuildingAndCafePage.buildingAndCafePage;
@@ -28,13 +29,15 @@ public class BuildingAndCafeActions extends SharedActions {
     }
 
     public void verifyBuildingAndCafePageShouldDisplay() {
-        waitForElementInvisibility(siteProfilePage().getCreatedSuccessToaster());
+//        waitForElementInvisibility(siteProfilePage().getCreatedSuccessToaster());
         waitForThePageLoader();
         Assert.assertTrue(verifyElementIsDisplayed(buildingAndCafePage().getBuildingMasterTitle()),
                 "Building & Cafe page is not displayed");
     }
 
     public void clickOnCreateBuildingBtn() {
+        waitForThePageLoader();
+        waitForElementVisible(buildingAndCafePage().getCreateBuildingBtn());
         withMouse(buildingAndCafePage().getCreateBuildingBtn()).click();
     }
 

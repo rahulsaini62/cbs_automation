@@ -12,13 +12,16 @@ Feature: Simulation Feature
     And User login with username as "cbs.username" and password as "cbs.password" on cbs admin
 
   Scenario:Verify simulation page.
-    When Verify user landed on the dashboard of the cbs web app.
+#    When Verify user landed on the dashboard of the cbs web app.
     And User click on "Simulations" tab under menu on dashboard page.
     And Verify simulations page should display.
     And User click create simulations button on simulations page.
 
     And User select team for this bid as "Abhishek Mishra | abhishek.mishra@appinventiv.com | TokenAuthorizer" on team for this bid page.
     And User click on submit button on team for this bid page.
+
+    Then Verify "Created Successfully" toast message should display on site profile page.
+
     And Verify user navigate to site profile page.
     And User enter name in simulation name text box on site profile page.
     And User enter name in prospective site name text box on site profile page.
@@ -33,6 +36,8 @@ Feature: Simulation Feature
     And User enter "3.00" in year on year txt box on site profile page.
     And User enter "MG" in revenue assurance type on site profile page.
     And User click on save section data btn on site profile page.
+
+    Then Verify "Created successfully" toast message should display.
     #And User click on validate apl btn on site profile page.
     And User click on building & cafe btn on site profile page.
 
@@ -60,4 +65,6 @@ Feature: Simulation Feature
     And User enter "2.00" in event revenue index two text box on events page.
     And User enter "3.00" in food cost index tow text box on events page.
     And User click copy full term button on events page.
+
+    And Verify after click on copy to full team same value should reflect in each column on events page.
     Then User click on save section data btn on events page.
