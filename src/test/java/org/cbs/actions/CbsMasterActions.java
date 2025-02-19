@@ -25,6 +25,7 @@ import static org.cbs.pages.CbsMasterPage.cbsMasterPage;
 import static org.cbs.pages.DashboardPage.commonPage;
 import static org.cbs.pages.LoginPage.loginPage;
 import static org.cbs.pages.SimulationsPage.simulationsPage;
+import static org.cbs.pages.SiteProfilePage.siteProfilePage;
 import static org.cbs.utils.PropertiesUtil.getApplicationProps;
 import static org.junit.Assert.assertTrue;
 
@@ -146,8 +147,10 @@ public class CbsMasterActions extends SharedActions {
     }
 
     public void verifyGivenToastMessageShouldDisplay(String expectedToastMessage) {
+//        waitForElementVisible(cbsMasterPage().getToastMessage());
         softAssert.assertEquals(onElement(cbsMasterPage().getToastMessage()).getText(), expectedToastMessage, "Create Service Type Field Error Message on Create Service Type Popup is not displayed");
         softAssert.assertAll();
+//        withMouse(siteProfilePage().getCrossIconOnToastMsg()).click();
     }
 
     public void verifyDiscardChangesPpShouldNotDisplay(String expectedMessage) {

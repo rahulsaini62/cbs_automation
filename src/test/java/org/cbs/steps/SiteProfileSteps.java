@@ -1,6 +1,7 @@
 package org.cbs.steps;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import net.datafaker.Faker;
 import org.cbs.actions.SiteProfileActions;
 import org.cbs.actions.TeamForThisBidActions;
@@ -25,13 +26,13 @@ public class SiteProfileSteps {
 
     @And("User enter name in simulation name text box on site profile page.")
     public void userEnterNameInSimulationNameTextBoxOnSiteProfilePage() {
-        String name = "automation_" + faker.name().firstName();
+        String name = "automation_" + faker.lorem().characters(25);
         siteProfileActions.enterTextInTxtBox(siteProfilePage().getSimulationNameTxtBox(), name);
     }
 
     @And("User enter name in prospective site name text box on site profile page.")
     public void userEnterNameInProspectiveSiteNameTextBoxOnSiteProfilePage() {
-        String siteName = faker.commerce().productName();
+        String siteName = faker.lorem().characters(30);
         siteProfileActions.enterTextInTxtBox(siteProfilePage().getProspectiveSiteNameTxtBox(), siteName);
     }
 
@@ -89,6 +90,7 @@ public class SiteProfileSteps {
     @And("User click on save section data btn on site profile page.")
     public void userClickOnSaveSectionDataBtnOnSiteProfilePage() {
         siteProfileActions.clickSaveSectionData();
+//        siteProfileActions.waitForThePageLoader();
     }
 
     @And("User click on validate apl btn on site profile page.")
@@ -99,5 +101,12 @@ public class SiteProfileSteps {
     @And("User click on building & cafe btn on site profile page.")
     public void userClickOnBuildingCafeBtnOnSiteProfilePage() {
         siteProfileActions.clickBuildingCafeBtn();
+
+
+    }
+
+    @Then("Verify {string} toast message should display on site profile page.")
+    public void verifyToastMessageShouldDisplayOnSiteProfilePage(String expectedToastMessage) {
+        siteProfileActions.verifyGivenToastMessageShouldDisplay(expectedToastMessage);
     }
 }

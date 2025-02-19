@@ -5,6 +5,7 @@ import org.cbs.builders.Locator;
 
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.xpath;
+
 @Getter
 public class SiteProfilePage {
     private static final SiteProfilePage SITE_PROFILE_PAGE = new SiteProfilePage();
@@ -100,14 +101,14 @@ public class SiteProfilePage {
             .name("Bid Submission Date Input")
             .build();
 
-    public final Locator dateSelector(String day){
+    public final Locator dateSelector(String day) {
         return Locator.buildLocator()
-                .web(xpath(String.format("//div[contains(@class, 'react-datepicker__day') and contains(text(),'%s')]",day)))
+                .web(xpath(String.format("//div[contains(@class, 'react-datepicker__day') and contains(text(),'%s')]", day)))
                 .name("Date Selector")
                 .build();
     }
 
-    private final Locator  estimateMobilizationDateInput = Locator.buildLocator()
+    private final Locator estimateMobilizationDateInput = Locator.buildLocator()
             .web(xpath("//input[contains(@id,'estimateMobilizationDate')]"))
             .name("Estimate Mobilization Date Input")
             .build();
@@ -117,7 +118,7 @@ public class SiteProfilePage {
             .name("Custom Drp Down")
             .build();
 
-    private final Locator createdSuccessToaster =  Locator.buildLocator()
+    private final Locator createdSuccessToaster = Locator.buildLocator()
             .web(xpath("//div[contains(text(),'Created Successfully')]"))
             .name("Created Successfully Toaster")
             .build();
@@ -151,5 +152,16 @@ public class SiteProfilePage {
             .web(xpath("//button[contains(text(),'Building & Cafe')]"))
             .name("Building & Cafe Button")
             .build();
+
+    private final Locator toastMsg = Locator.buildLocator()
+            .web(cssSelector(".Toastify__toast-body"))
+            .name("Building & Cafe Button")
+            .build();
+
+    private final Locator crossIconOnToastMsg = Locator.buildLocator()
+            .web(xpath("//button[@class='Toastify__close-button Toastify__close-button--light']"))
+            .name("Building & Cafe Button")
+            .build();
+
 
 }
