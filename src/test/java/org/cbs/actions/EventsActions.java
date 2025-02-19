@@ -2,8 +2,12 @@ package org.cbs.actions;
 
 import org.apache.logging.log4j.Logger;
 import org.cbs.enums.PlatformType;
+import org.cbs.enums.WaitStrategy;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
@@ -32,11 +36,14 @@ public class EventsActions extends SharedActions {
     }
 
     public void clickOnEvents(){
+        waitForThePageLoader();
         onElement(eventsPage().getEventsBtn()).verifyIsEnabled();
         waitForElementClickable(siteProfilePage().getBuildingCafeBtn());
         withMouse(eventsPage().getEventsBtn()).click();
         waitForElementInvisibility(buildingAndCafePage().getBuildingMasterTitle());
     }
+
+
     public void clickOnSaveSectionDataBtn(){
         onElement(eventsPage().getSaveSectionDataBtn()).verifyIsEnabled();
         waitForElementClickable(eventsPage().getSaveSectionDataBtn());
@@ -58,6 +65,13 @@ public class EventsActions extends SharedActions {
     public void enterTextInFoodCostIndex2TxtBox(String input){
         selectAllAndClearTxtBx(eventsPage().getFoodCostIndex2TxtBox());
         onTextBox(eventsPage().getFoodCostIndex2TxtBox()).enterText(input);
+    }
+
+    public void verifyAfterClickOnCopyToFullTeamSameValueShouldReflectInEachColumnOnEventsPage() {
+
+        final List<String> actEventRevenue = new ArrayList<>();
+        finds(eventsPage().getEventRevenue(), WaitStrategy.VISIBLE).forEach(webElement -> actEventRevenue.add(webElement.getAttribute("value")));
+        System.out.println("111111111----" + actEventRevenue);
     }
 
 }

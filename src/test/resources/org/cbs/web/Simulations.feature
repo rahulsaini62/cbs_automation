@@ -60,4 +60,6 @@ Feature: Simulation Feature
     And User enter "2.00" in event revenue index two text box on events page.
     And User enter "3.00" in food cost index tow text box on events page.
     And User click copy full term button on events page.
+
+    And Verify after click on copy to full team same value should reflect in each column on events page.
     Then User click on save section data btn on events page.

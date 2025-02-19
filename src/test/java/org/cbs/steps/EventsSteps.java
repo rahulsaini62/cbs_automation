@@ -45,4 +45,9 @@ public class EventsSteps {
     public void userEnterInFoodCostIndexTowTextBoxOnEventsPage(String arg0) {
         eventsActions.enterTextInFoodCostIndex2TxtBox(arg0);
     }
+
+    @And("Verify after click on copy to full team same value should reflect in each column on events page.")
+    public void verifyAfterClickOnCopyToFullTeamSameValueShouldReflectInEachColumnOnEventsPage() {
+        eventsActions.verifyAfterClickOnCopyToFullTeamSameValueShouldReflectInEachColumnOnEventsPage();
+    }
 }
