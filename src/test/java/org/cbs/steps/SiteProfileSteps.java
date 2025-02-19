@@ -25,13 +25,13 @@ public class SiteProfileSteps {
 
     @And("User enter name in simulation name text box on site profile page.")
     public void userEnterNameInSimulationNameTextBoxOnSiteProfilePage() {
-        String name = "automation_" + faker.name().firstName();
+        String name = "automation_" + faker.random().toString();
         siteProfileActions.enterTextInTxtBox(siteProfilePage().getSimulationNameTxtBox(), name);
     }
 
     @And("User enter name in prospective site name text box on site profile page.")
     public void userEnterNameInProspectiveSiteNameTextBoxOnSiteProfilePage() {
-        String siteName = faker.commerce().productName();
+        String siteName = faker.random().toString();
         siteProfileActions.enterTextInTxtBox(siteProfilePage().getProspectiveSiteNameTxtBox(), siteName);
     }
 
