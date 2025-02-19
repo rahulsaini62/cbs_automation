@@ -96,18 +96,28 @@ public class EventsActions extends SharedActions {
         System.out.println("eeeeeeee----" + result.size());
         for (int i = 0; i < result.size(); i++) {
             System.out.println(i + "--------------------" + result.get(i));
+
+
             if (i == 0) {
                 List<Double> values = result.get(i);
-                for (int j = 1; j < values.size(); j++) {
-                    System.out.println("1111111111-----");
-                    Assert.assertEquals(values.get(j), 2.00);
-                }
+                values.remove(0);
+                System.out.println("1111111111-----" + values);
+                verifyAllMatch(values, 2.00);
+//                for (int j = 1; j < values.size(); j++) {
+//                    System.out.println("1111111111-----" + values.get(j));
+//                    Assert.assertEquals(values.get(j), 2.00);
+//                }
             } else if (i == (result.size() - 1)) {
                 List<Double> values = result.get(i);
-                for (int j = (values.size() - 1); j > 0; j++) {
-                    System.out.println("222222222222---------");
-                    Assert.assertEquals(values.get(j), 2.00);
-                }
+                values.remove(values.size() - 1);
+                System.out.println("2222222222-----" + values);
+                verifyAllMatch(values, 2.00);
+
+//                List<Double> values = result.get(i);
+//                for (int j = (values.size() - 1); j > 0; j++) {
+//                    System.out.println("222222222222---------"+values.get(j));
+//                    Assert.assertEquals(values.get(j), 2.00);
+//                }
             }
         }
 
