@@ -114,4 +114,9 @@ public class SiteProfileSteps {
     public void userEnterInContractDurationYearTextBoxOnSiteProfilePage(String arg0) {
         siteProfileActions.enterTextInContractDurationYear(arg0);
     }
+
+    @And("User enter {string} in  contract duration month text box on site profile page.")
+    public void userEnterInContractDurationMonthTextBoxOnSiteProfilePage(String arg0) {
+        siteProfileActions.enterTextInContractDurationMonth(arg0);
+    }
 }

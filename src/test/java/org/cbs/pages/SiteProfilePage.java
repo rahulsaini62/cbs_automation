@@ -173,4 +173,14 @@ public class SiteProfilePage {
             .name("Contract Duration Year TxtBox")
             .build();
 
+    private final Locator contractDurationMonthDrpDwn = Locator.buildLocator()
+            .web(xpath("(//p[contains(text(),'Contract')]/.. //div[contains(@class,'css-1k0rgcj')])[3]"))
+            .name("Contract Duration Month Dropdown")
+            .build();
+
+    private final Locator contractDurationMonthTxtBox = Locator.buildLocator()
+            .web(xpath("(//p[contains(text(),'Contract')]/.. //input)[3]"))
+            .name("Contract Duration Month TxtBox")
+            .build();
+
 }

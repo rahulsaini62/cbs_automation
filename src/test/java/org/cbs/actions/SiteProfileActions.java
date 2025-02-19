@@ -71,6 +71,12 @@ public class SiteProfileActions extends SharedActions {
         onTextBox(siteProfilePage.getContractDurationYearTxtBox()).enterText(Keys.chord(Keys.RETURN));
 
     }
+    public void enterTextInContractDurationMonth(String input) {
+        withMouse(siteProfilePage.getContractDurationMonthDrpDwn()).click();
+        onTextBox(siteProfilePage.getContractDurationMonthTxtBox()).enterText(input);
+        onTextBox(siteProfilePage.getContractDurationMonthTxtBox()).enterText(Keys.chord(Keys.RETURN));
+
+    }
 
     public void verifySiteProfileNavigation() {
         onElement(siteProfilePage.getTitle()).verifyText().isEqualTo("Site Profile");
