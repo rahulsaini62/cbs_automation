@@ -2,8 +2,13 @@ package org.cbs.actions;
 
 import org.apache.logging.log4j.Logger;
 import org.cbs.enums.PlatformType;
+import org.cbs.enums.WaitStrategy;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
@@ -31,7 +36,7 @@ public class EventsActions extends SharedActions {
         waitForThePageLoader();
     }
 
-    public void clickOnEvents(){
+    public void clickOnEvents() {
         waitForThePageLoader();
         onElement(eventsPage().getEventsBtn()).verifyIsEnabled();
         waitForElementClickable(siteProfilePage().getBuildingCafeBtn());
@@ -40,27 +45,35 @@ public class EventsActions extends SharedActions {
     }
 
 
-    public void clickOnSaveSectionDataBtn(){
+    public void clickOnSaveSectionDataBtn() {
         onElement(eventsPage().getSaveSectionDataBtn()).verifyIsEnabled();
         waitForElementClickable(eventsPage().getSaveSectionDataBtn());
         withMouse(eventsPage().getSaveSectionDataBtn()).click();
         waitForThePageLoader();
     }
 
-    public void clickOnCopyToFullTermBtn(){
+    public void clickOnCopyToFullTermBtn() {
         onElement(eventsPage().getCopyToFullTermBtn()).verifyIsEnabled();
         waitForElementClickable(eventsPage().getCopyToFullTermBtn());
         withMouse(eventsPage().getCopyToFullTermBtn()).click();
+        waitForThePageLoader();
     }
 
-    public void enterTextInEventRevenueIndex2TxtBox(String input){
+    public void enterTextInEventRevenueIndex2TxtBox(String input) {
         selectAllAndClearTxtBx(eventsPage().getEventRevenueIndex2TxtBox());
         onTextBox(eventsPage().getEventRevenueIndex2TxtBox()).enterText(input);
     }
 
-    public void enterTextInFoodCostIndex2TxtBox(String input){
+    public void enterTextInFoodCostIndex2TxtBox(String input) {
         selectAllAndClearTxtBx(eventsPage().getFoodCostIndex2TxtBox());
         onTextBox(eventsPage().getFoodCostIndex2TxtBox()).enterText(input);
+    }
+
+    public void verifyAfterClickOnCopyToFullTeamSameValueShouldReflectInEachColumnOnEventsPage() {
+
+        final List<String> actEventRevenue = new ArrayList<>();
+        finds(eventsPage().getEventRevenue(), WaitStrategy.VISIBLE).forEach(webElement -> actEventRevenue.add(webElement.getAttribute("value")));
+        System.out.println("111111111----" + actEventRevenue);
     }
 
 }
