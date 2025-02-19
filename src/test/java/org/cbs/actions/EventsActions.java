@@ -35,7 +35,7 @@ public class EventsActions extends SharedActions {
         waitForThePageLoader();
     }
 
-    public void clickOnEvents(){
+    public void clickOnEvents() {
         waitForThePageLoader();
         onElement(eventsPage().getEventsBtn()).verifyIsEnabled();
         waitForElementClickable(siteProfilePage().getBuildingCafeBtn());
@@ -44,34 +44,77 @@ public class EventsActions extends SharedActions {
     }
 
 
-    public void clickOnSaveSectionDataBtn(){
+    public void clickOnSaveSectionDataBtn() {
         onElement(eventsPage().getSaveSectionDataBtn()).verifyIsEnabled();
         waitForElementClickable(eventsPage().getSaveSectionDataBtn());
         withMouse(eventsPage().getSaveSectionDataBtn()).click();
         waitForThePageLoader();
     }
 
-    public void clickOnCopyToFullTermBtn(){
+    public void clickOnCopyToFullTermBtn() {
         onElement(eventsPage().getCopyToFullTermBtn()).verifyIsEnabled();
         waitForElementClickable(eventsPage().getCopyToFullTermBtn());
         withMouse(eventsPage().getCopyToFullTermBtn()).click();
     }
 
-    public void enterTextInEventRevenueIndex2TxtBox(String input){
+    public void enterTextInEventRevenueIndex2TxtBox(String input) {
         selectAllAndClearTxtBx(eventsPage().getEventRevenueIndex2TxtBox());
         onTextBox(eventsPage().getEventRevenueIndex2TxtBox()).enterText(input);
     }
 
-    public void enterTextInFoodCostIndex2TxtBox(String input){
+    public void enterTextInFoodCostIndex2TxtBox(String input) {
         selectAllAndClearTxtBx(eventsPage().getFoodCostIndex2TxtBox());
         onTextBox(eventsPage().getFoodCostIndex2TxtBox()).enterText(input);
     }
 
     public void verifyAfterClickOnCopyToFullTeamSameValueShouldReflectInEachColumnOnEventsPage() {
 
-        final List<String> actEventRevenue = new ArrayList<>();
-        finds(eventsPage().getEventRevenue(), WaitStrategy.VISIBLE).forEach(webElement -> actEventRevenue.add(webElement.getAttribute("value")));
+        final List<Double> actEventRevenue = new ArrayList<>();
+        final List<Double> actFoodCost = new ArrayList<>();
+        finds(eventsPage().getEventRevenueList(), WaitStrategy.VISIBLE).forEach(webElement -> actEventRevenue.add(Double.parseDouble(webElement.getAttribute("value"))));
+        finds(eventsPage().getFoodCostList(), WaitStrategy.VISIBLE).forEach(webElement -> actFoodCost.add(Double.parseDouble(webElement.getAttribute("value"))));
         System.out.println("111111111----" + actEventRevenue);
+        System.out.println("222222222222----" + actFoodCost);
+
+        // List of lists of Doubles
+        List<List<Double>> result = new ArrayList<>();
+
+        // Divide the array into sublists of 12 numbers
+        int start = 0;
+        while (start < actEventRevenue.size()) {
+            int end = Math.min(start + 12, actEventRevenue.size());
+            List<Double> sublist = new ArrayList<>();
+
+            // Add each number to the sublist
+            for (int i = start; i < end; i++) {
+                sublist.add(actEventRevenue.get(i));  // Directly adding the number
+            }
+
+            // Add the sublist to the result
+            result.add(sublist);
+
+            // Move the start index for the next chunk
+            start = end;
+        }
+        System.out.println("eeeeeeee----" + result.size());
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println(i + "--------------------" + result.get(i));
+            if (i == 0) {
+                List<Double> values = result.get(i);
+                for (int j = 1; j < values.size(); j++) {
+                    System.out.println("1111111111-----");
+                    Assert.assertEquals(values.get(j), 2.00);
+                }
+            } else if (i == (result.size() - 1)) {
+                List<Double> values = result.get(i);
+                for (int j = (values.size() - 1); j > 0; j++) {
+                    System.out.println("222222222222---------");
+                    Assert.assertEquals(values.get(j), 2.00);
+                }
+            }
+        }
+
+
     }
 
 }
