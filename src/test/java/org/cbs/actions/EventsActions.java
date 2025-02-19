@@ -35,7 +35,7 @@ public class EventsActions extends SharedActions {
         waitForThePageLoader();
     }
 
-    public void clickOnEvents(){
+    public void clickOnEvents() {
         waitForThePageLoader();
         onElement(eventsPage().getEventsBtn()).verifyIsEnabled();
         waitForElementClickable(siteProfilePage().getBuildingCafeBtn());
@@ -44,25 +44,25 @@ public class EventsActions extends SharedActions {
     }
 
 
-    public void clickOnSaveSectionDataBtn(){
+    public void clickOnSaveSectionDataBtn() {
         onElement(eventsPage().getSaveSectionDataBtn()).verifyIsEnabled();
         waitForElementClickable(eventsPage().getSaveSectionDataBtn());
         withMouse(eventsPage().getSaveSectionDataBtn()).click();
         waitForThePageLoader();
     }
 
-    public void clickOnCopyToFullTermBtn(){
+    public void clickOnCopyToFullTermBtn() {
         onElement(eventsPage().getCopyToFullTermBtn()).verifyIsEnabled();
         waitForElementClickable(eventsPage().getCopyToFullTermBtn());
         withMouse(eventsPage().getCopyToFullTermBtn()).click();
     }
 
-    public void enterTextInEventRevenueIndex2TxtBox(String input){
+    public void enterTextInEventRevenueIndex2TxtBox(String input) {
         selectAllAndClearTxtBx(eventsPage().getEventRevenueIndex2TxtBox());
         onTextBox(eventsPage().getEventRevenueIndex2TxtBox()).enterText(input);
     }
 
-    public void enterTextInFoodCostIndex2TxtBox(String input){
+    public void enterTextInFoodCostIndex2TxtBox(String input) {
         selectAllAndClearTxtBx(eventsPage().getFoodCostIndex2TxtBox());
         onTextBox(eventsPage().getFoodCostIndex2TxtBox()).enterText(input);
     }
@@ -115,12 +115,6 @@ public class EventsActions extends SharedActions {
                 values.remove(values.size() - 1);
                 System.out.println("2222222222-----" + values);
                 verifyAllMatch(values, 2.00);
-
-//                List<Double> values = result.get(i);
-//                for (int j = (values.size() - 1); j > 0; j++) {
-//                    System.out.println("222222222222---------"+values.get(j));
-//                    Assert.assertEquals(values.get(j), 2.00);
-//                }
             }
         }
 
