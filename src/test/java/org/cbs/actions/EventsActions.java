@@ -32,14 +32,11 @@ public class EventsActions extends SharedActions {
     }
 
     public void clickOnEvents(){
-        waitForThePageLoader();
         onElement(eventsPage().getEventsBtn()).verifyIsEnabled();
         waitForElementClickable(siteProfilePage().getBuildingCafeBtn());
         withMouse(eventsPage().getEventsBtn()).click();
         waitForElementInvisibility(buildingAndCafePage().getBuildingMasterTitle());
     }
-
-
     public void clickOnSaveSectionDataBtn(){
         onElement(eventsPage().getSaveSectionDataBtn()).verifyIsEnabled();
         waitForElementClickable(eventsPage().getSaveSectionDataBtn());
