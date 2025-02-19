@@ -36,6 +36,7 @@ public class EventsActions extends SharedActions {
     }
 
     public void clickOnEvents(){
+        waitForThePageLoader();
         onElement(eventsPage().getEventsBtn()).verifyIsEnabled();
         waitForElementClickable(siteProfilePage().getBuildingCafeBtn());
         withMouse(eventsPage().getEventsBtn()).click();
@@ -68,8 +69,10 @@ public class EventsActions extends SharedActions {
 
     public void verifyAfterClickOnCopyToFullTeamSameValueShouldReflectInEachColumnOnEventsPage() {
 
-        final List<String> actEventRevenue = new ArrayList<>();
-        finds(eventsPage().getEventRevenue(), WaitStrategy.VISIBLE).forEach(webElement -> actEventRevenue.add(webElement.getAttribute("value")));
+        final List<Double> actEventRevenue = new ArrayList<>();
+        final List<Double> actFoodCost = new ArrayList<>();
+        finds(eventsPage().getEventRevenueList(), WaitStrategy.VISIBLE).forEach(webElement -> actEventRevenue.add(Double.parseDouble(webElement.getAttribute("value"))));
+        finds(eventsPage().getFoodCostList(), WaitStrategy.VISIBLE).forEach(webElement -> actFoodCost.add(Double.parseDouble(webElement.getAttribute("value"))));
         System.out.println("111111111----" + actEventRevenue);
         System.out.println("222222222222----" + actFoodCost);
 
