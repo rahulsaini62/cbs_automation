@@ -53,13 +53,13 @@ public class EventsPage {
             .name("Events Button")
             .build();
 
-    private final Locator eventRevenue = Locator.buildLocator()
+    private final Locator eventRevenueList = Locator.buildLocator()
             .web(xpath("//tbody//tr[1]//td//input[@value]"))
             .name("Events Button")
             .build();
 
-//    private final Locator eventRevenue = Locator.buildLocator()
-//            .web(xpath("//tbody//tr[1]//td//input[@value]"))
-//            .name("Events Button")
-//            .build();
+    private final Locator foodCostList = Locator.buildLocator()
+            .web(xpath("//tbody//tr[2]//td//input[@value]"))
+            .name("Events Button")
+            .build();
 }
