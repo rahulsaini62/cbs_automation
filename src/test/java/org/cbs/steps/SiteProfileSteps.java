@@ -7,6 +7,7 @@ import org.cbs.actions.SiteProfileActions;
 import org.cbs.actions.TeamForThisBidActions;
 import org.cbs.pages.SiteProfilePage;
 
+import static org.cbs.manager.ParallelSession.getSession;
 import static org.cbs.pages.SiteProfilePage.siteProfilePage;
 
 public class SiteProfileSteps {
@@ -78,6 +79,7 @@ public class SiteProfileSteps {
 
     @And("User enter {string} in year on year txt box on site profile page.")
     public void userEnterInYearOnYearTxtBoxOnSiteProfilePage(String arg0) {
+        getSession().setSharedData("yearOnYearValue",Double.parseDouble(arg0));
         siteProfileActions.enterTextInYearOnYearTxtBox(arg0);
 
     }

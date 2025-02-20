@@ -72,7 +72,7 @@ public class SiteProfileActions extends SharedActions {
 
     }
     public void enterTextInContractDurationMonth(String input) {
-        withMouse(siteProfilePage.getContractDurationMonthDrpDwn()).click();
+        withMouse(siteProfilePage.getContractDurationMonthTxtBox()).click();
         onTextBox(siteProfilePage.getContractDurationMonthTxtBox()).enterText(input);
         onTextBox(siteProfilePage.getContractDurationMonthTxtBox()).enterText(Keys.chord(Keys.RETURN));
 
