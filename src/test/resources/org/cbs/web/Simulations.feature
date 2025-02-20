@@ -35,8 +35,7 @@ Feature: Simulation Feature
     And User select "15" in estimated mobilization date on site profile page.
     And User enter "2.00" in  gas cost txt box on site profile page.
     And User enter "10.00" in year on year txt box on site profile page.
-    And User enter "2 Year" in contract duration year text box on site profile page.
-    And User enter "5 Month" in  contract duration month text box on site profile page.
+    And User enter "4 Year" in contract duration year text box on site profile page.
     And User enter "MG" in revenue assurance type on site profile page.
     And User click on save section data btn on site profile page.
 
@@ -65,8 +64,8 @@ Feature: Simulation Feature
 #    And Verify newly added cafe should active status under cafe master on building and cafe page.
     And User clicks on events button.
     Then Verify events page should display.
-    And User enter "2.00" in event revenue index two text box on events page.
-    And User enter "3.00" in food cost index tow text box on events page.
+    And User enter "20.00" in event revenue index two text box on events page.
+    And User enter "30.00" in food cost index tow text box on events page.
     And User click copy full term button on events page.
 
     And Verify after click on copy to full team same value should reflect in each column on events page.
