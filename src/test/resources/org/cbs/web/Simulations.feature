@@ -36,6 +36,7 @@ Feature: Simulation Feature
     And User enter "2.00" in  gas cost txt box on site profile page.
     And User enter "10.00" in year on year txt box on site profile page.
     And User enter "4 Year" in contract duration year text box on site profile page.
+    And User enter "5 Month" in contract duration month text box on site profile page.
     And User enter "MG" in revenue assurance type on site profile page.
     And User click on save section data btn on site profile page.
 
@@ -70,3 +71,4 @@ Feature: Simulation Feature
 
     And Verify after click on copy to full team same value should reflect in each column on events page.
     Then User click on save section data btn on events page.
+

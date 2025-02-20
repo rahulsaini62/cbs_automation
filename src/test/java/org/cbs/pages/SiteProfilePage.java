@@ -174,12 +174,12 @@ public class SiteProfilePage {
             .build();
 
     private final Locator contractDurationMonthDrpDwn = Locator.buildLocator()
-            .web(xpath("(//p[contains(text(),'Contract')]/.. //div[contains(@class,'css-1k0rgcj')])[3]"))
+            .web(xpath("(//p[contains(text(),'Contract')]/.. //div[contains(@class,'css-1k0rgcj')])[3]/..//div"))
             .name("Contract Duration Month Dropdown")
             .build();
 
     private final Locator contractDurationMonthTxtBox = Locator.buildLocator()
-            .web(xpath("(//p[contains(text(),'Contract')]/.. //input)[3]"))
+            .web(xpath("(//p[contains(text(),'Contract')]/.. //input)[3]/."))
             .name("Contract Duration Month TxtBox")
             .build();
 
