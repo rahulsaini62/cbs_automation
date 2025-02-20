@@ -11,10 +11,12 @@ import org.testng.Assert;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.CommonActions.sleep;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
+import static org.cbs.actions.elements.ElementActions.onElement;
 import static org.cbs.actions.elements.TextBoxActions.onTextBox;
 import static org.cbs.manager.ParallelSession.getSession;
 import static org.cbs.pages.CbsMasterPage.cbsMasterPage;
 import static org.cbs.pages.SimulationsPage.simulationsPage;
+import static org.junit.Assert.assertTrue;
 
 @Getter
 public class SimulationsActions extends SharedActions {

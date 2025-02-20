@@ -142,7 +142,7 @@ public class SiteProfileActions extends SharedActions {
         waitForElementVisible(siteProfilePage().getToastMsg());
         softAssert.assertEquals(onElement(siteProfilePage().getToastMsg()).getText(), expectedToastMessage, "Create Service Type Field Error Message on Create Service Type Popup is not displayed");
         softAssert.assertAll();
-        withMouse(siteProfilePage().getCrossIconOnToastMsg()).click();
+        waitForElementInvisibility(siteProfilePage.getToastMsg());
     }
 
 }

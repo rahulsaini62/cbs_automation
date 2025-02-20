@@ -41,4 +41,18 @@ public class TeamForThisBidPage {
             .name("Submit Button")
             .build();
 
+    public final Locator getUserValue(String userName){
+        return Locator.buildLocator()
+                .web(xpath(String.format("//td[contains(text(),'%s')]",userName)))
+                .name("User Name")
+                .build();
+    }
+
+    public final Locator getUserActionIcon(String userName){
+        return Locator.buildLocator()
+                .web(xpath(String.format("//td[contains(text(),'%s')]/../..//button",userName)))
+                .name("User Name Action Icon")
+                .build();
+    }
+
 }

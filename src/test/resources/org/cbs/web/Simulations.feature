@@ -18,6 +18,7 @@ Feature: Simulation Feature
     And User click create simulations button on simulations page.
 
     And User select team for this bid as "Abhishek Mishra | abhishek.mishra@appinventiv.com | TokenAuthorizer" on team for this bid page.
+    Then Verify selected user name and action shows in user list and action field on team for this bid page.
     And User click on submit button on team for this bid page.
 
     Then Verify "Created Successfully" toast message should display on site profile page.
