@@ -174,7 +174,7 @@ public class SiteProfilePage {
             .build();
 
     private final Locator contractDurationMonthDrpDwn = Locator.buildLocator()
-            .web(xpath("(//p[contains(text(),'Contract')]/.. //div[contains(@class,'css-1k0rgcj')])[3]/..//div"))
+            .web(xpath("(//p[contains(text(),'Contract Duration')]/.. //div[contains(@class,'dropdown')])[2]"))
             .name("Contract Duration Month Dropdown")
             .build();
 
