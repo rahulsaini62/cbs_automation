@@ -119,4 +119,5 @@ public class SiteProfileSteps {
     public void userEnterInContractDurationMonthTextBoxOnSiteProfilePage(String arg0) {
         siteProfileActions.enterTextInContractDurationMonth(arg0);
     }
+
 }
