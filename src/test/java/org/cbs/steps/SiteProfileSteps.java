@@ -79,7 +79,7 @@ public class SiteProfileSteps {
 
     @And("User enter {string} in year on year txt box on site profile page.")
     public void userEnterInYearOnYearTxtBoxOnSiteProfilePage(String arg0) {
-        getSession().setSharedData("yearOnYearValue",Double.parseDouble(arg0));
+        getSession().setSharedData("yearOnYearValue",arg0);
         siteProfileActions.enterTextInYearOnYearTxtBox(arg0);
 
     }
@@ -114,12 +114,14 @@ public class SiteProfileSteps {
 
     @And("User enter {string} in contract duration year text box on site profile page.")
     public void userEnterInContractDurationYearTextBoxOnSiteProfilePage(String arg0) {
+        getSession().setSharedData("contractDurationYear",Character.toString(arg0.charAt(0)));
         siteProfileActions.enterTextInContractDurationYear(arg0);
     }
 
 
     @And("User enter {string} in contract duration month text box on site profile page.")
     public void userEnterInContractDurationMonthTextBoxOnSiteProfilePage(String arg0) {
+        getSession().setSharedData("contractDurationMonth",Character.toString(arg0.charAt(0)));
         siteProfileActions.enterTextInContractDurationMonth(arg0);
     }
 }

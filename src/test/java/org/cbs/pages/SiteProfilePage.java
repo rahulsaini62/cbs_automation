@@ -183,5 +183,10 @@ public class SiteProfilePage {
             .name("Contract Duration Month TxtBox")
             .build();
 
+    private final Locator estimatedMobilizationDateInputTxt = Locator.buildLocator()
+            .web(cssSelector("#estimateMobilizationDate"))
+            .name("Estimated Mobilization Date Input Txt ")
+            .build();
+
 
 }

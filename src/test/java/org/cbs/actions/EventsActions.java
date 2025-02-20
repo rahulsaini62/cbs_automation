@@ -99,14 +99,13 @@ public class EventsActions extends SharedActions {
             // Move the start index for the next chunk
             start = end;
         }
+        String dateStr = getSession().getSharedData("estimateMobilizationDate");
+        Double percentage = Double.parseDouble(getSession().getSharedData("yearOnYearValue"))/100;
 
         for (int i = 0; i < result.size(); i++) {
-            System.out.println(i + "--------------------" + result.get(i));
-
             if (i == 0) {
                 List<Double> values = result.get(i);
 
-                String dateStr = "15/03/2025";
 
                 // Define the formatter to match the format "dd/MM/yyyy"
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -132,12 +131,11 @@ public class EventsActions extends SharedActions {
                 verifyAllMatch(values, Double.parseDouble(getSession().getSharedData("revenue")));
             } else if (i > 0 & i < result.size() - 1) {
                 List<Double> values = result.get(i);
-                Double increment = result.get(i - 1).get(1) + (result.get(i - 1).get(1) * 0.10);
+                Double increment = result.get(i - 1).get(1) + (result.get(i - 1).get(1) * percentage );
                 verifyAllMatch(values, Math.round(increment * 100.0) / 100.0);
             } else if (i == (result.size() - 1)) {
                 List<Double> values = result.get(i);
 
-                String dateStr = "15/03/2025";
 
                 // Define the formatter to match the format "dd/MM/yyyy"
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -146,13 +144,12 @@ public class EventsActions extends SharedActions {
                 LocalDate givenDate = LocalDate.parse(dateStr, formatter);
 
                 // Add 4 years to the given date
-                LocalDate futureDate = givenDate.plusYears(4);
+                LocalDate futureDate = givenDate.plusYears(Integer.parseInt(getSession().getSharedData("contractDurationYear")));
 
                 // Get the number of days in the future month
                 int daysInFutureMonth = futureDate.lengthOfMonth();
 
                 // Print the number of days in the future month
-                System.out.println("Number of days in the future month: " + daysInFutureMonth);
 
                 // Get the first day of the future month
                 LocalDate firstDayOfFutureMonth = futureDate.withDayOfMonth(1);
@@ -163,17 +160,14 @@ public class EventsActions extends SharedActions {
                 // Calculate the total number of days in the month (length of the month)
                 int totalDaysInMonth = futureDate.lengthOfMonth();
 
-                // Print the results
-                if (values.size() > 1) {
 
-                    values.remove(values.size() - 1);
-                    Double increment = result.get(i - 1).get(1) + (result.get(i - 1).get(1) * 0.10);
-                    verifyAllMatch(values, Math.round(increment * 100.0) / 100.0);
-                } else {
-                    Double increment = result.get(i - 1).get(1) + (result.get(i - 1).get(1) * 0.10);
-                    Double l = ((Double.parseDouble(String.valueOf(daysBefore)) / (Double.parseDouble(String.valueOf(totalDaysInMonth))) * increment));
-                    Assert.assertEquals(values.get(0), Math.round(l * 100.0) / 100.0);
+                Double increment = result.get(i - 1).get(1) + (result.get(i - 1).get(1) * percentage);
+                if(values.size()>1){
+                    verifyAllMatch(values.subList(0, values.size()-2), Math.round(increment * 100.0) / 100.0);
                 }
+                 Double l = ((Double.parseDouble(String.valueOf(daysBefore)) / (Double.parseDouble(String.valueOf(totalDaysInMonth))) * increment));
+                    Assert.assertEquals(values.get(values.size()-1), Math.round(l * 100.0) / 100.0);
+
 
             }
         }

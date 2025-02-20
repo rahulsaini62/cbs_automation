@@ -35,9 +35,9 @@ Feature: Simulation Feature
     And User select "15" in estimated mobilization date on site profile page.
     And User enter "2.00" in  gas cost txt box on site profile page.
     And User enter "4 Year" in contract duration year text box on site profile page.
-    And User enter "5 Month" in contract duration month text box on site profile page.
+    And User enter "2 Month" in contract duration month text box on site profile page.
     And User enter "MG" in revenue assurance type on site profile page.
-    And User enter "10.00" in year on year txt box on site profile page.
+    And User enter "11.00" in year on year txt box on site profile page.
     And User click on save section data btn on site profile page.
 
     Then Verify "Created successfully" toast message should display.

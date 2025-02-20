@@ -102,6 +102,9 @@ public class SiteProfileActions extends SharedActions {
         waitForElementVisible(siteProfilePage.dateSelector(input));
         withMouse(siteProfilePage.getDateNextNav()).click();
         withMouse(siteProfilePage.dateSelector(input)).click();
+        getSession().setSharedData
+                ("estimateMobilizationDate",
+                        onTextBox(siteProfilePage.getEstimateMobilizationDateInput()).getAttribute("value"));
     }
 
     public void enterTextInGasCostTxtBox(String input) {
