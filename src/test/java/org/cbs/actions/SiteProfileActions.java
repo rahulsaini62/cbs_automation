@@ -71,6 +71,12 @@ public class SiteProfileActions extends SharedActions {
         onTextBox(siteProfilePage.getContractDurationYearTxtBox()).enterText(Keys.chord(Keys.RETURN));
 
     }
+    public void enterTextInContractDurationMonth(String input) {
+        withMouse(siteProfilePage.getContractDurationMonthDrpDwn()).click();
+        onTextBox(siteProfilePage.getContractDurationMonthTxtBox()).enterText(input);
+        onTextBox(siteProfilePage.getContractDurationMonthTxtBox()).enterText(Keys.chord(Keys.RETURN));
+
+    }
 
     public void verifySiteProfileNavigation() {
         onElement(siteProfilePage.getTitle()).verifyText().isEqualTo("Site Profile");
@@ -136,7 +142,7 @@ public class SiteProfileActions extends SharedActions {
         waitForElementVisible(siteProfilePage().getToastMsg());
         softAssert.assertEquals(onElement(siteProfilePage().getToastMsg()).getText(), expectedToastMessage, "Create Service Type Field Error Message on Create Service Type Popup is not displayed");
         softAssert.assertAll();
-        withMouse(siteProfilePage().getCrossIconOnToastMsg()).click();
+        waitForElementInvisibility(siteProfilePage.getToastMsg());
     }
 
 }

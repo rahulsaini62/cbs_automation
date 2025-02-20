@@ -11,6 +11,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.CommonActions.sleep;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementActions.onElement;
+import static org.cbs.actions.elements.TextBoxActions.onTextBox;
 import static org.cbs.manager.ParallelSession.getSession;
 import static org.cbs.pages.SimulationsPage.simulationsPage;
 import static org.cbs.pages.TeamForThisBidPage.teamForThisBidPage;
@@ -35,5 +36,12 @@ public class TeamForThisBidActions extends SharedActions {
         onElement(teamForThisBidPage().getSubmitBtn()).verifyIsEnabled();
         withMouse(teamForThisBidPage().getSubmitBtn()).click();
     }
+    public void verifyUserValue(String userName){
+        onElement(teamForThisBidPage().getUserValue(userName)).verifyIsDisplayed().isTrue();
+    }
+    public void verifyUserActionIcon(String userName){
+        onTextBox(teamForThisBidPage().getUserActionIcon(userName)).verifyIsDisplayed().isTrue();
+    }
+
 
 }
