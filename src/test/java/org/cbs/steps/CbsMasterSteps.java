@@ -298,7 +298,6 @@ public class CbsMasterSteps {
     @Given("User is on simulation page.")
     public void userIsOnSimulationPage() {
         navigate().to("https://adminqas.mycompass.co.in/simulations");
-        cbsMasterActions.waitForLoader();
     }
 
     @Given("User is on cbs master page.")

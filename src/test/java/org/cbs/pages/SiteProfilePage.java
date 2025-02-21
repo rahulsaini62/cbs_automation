@@ -155,12 +155,12 @@ public class SiteProfilePage {
 
     private final Locator toastMsg = Locator.buildLocator()
             .web(cssSelector(".Toastify__toast-body"))
-            .name("Building & Cafe Button")
+            .name("Toast msg")
             .build();
 
     private final Locator crossIconOnToastMsg = Locator.buildLocator()
             .web(cssSelector(".Toastify__close-button"))
-            .name("Building & Cafe Button")
+            .name("Tost msg cross icon")
             .build();
 
     private final Locator contractDurationYearDrpDwn = Locator.buildLocator()

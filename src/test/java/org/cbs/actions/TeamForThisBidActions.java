@@ -11,6 +11,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.CommonActions.sleep;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementActions.onElement;
+import static org.cbs.actions.elements.ElementFinder.waitForElementInvisibility;
 import static org.cbs.actions.elements.TextBoxActions.onTextBox;
 import static org.cbs.manager.ParallelSession.getSession;
 import static org.cbs.pages.SimulationsPage.simulationsPage;

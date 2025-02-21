@@ -60,7 +60,7 @@ public final class ParallelSession {
         }
         getSession ().clearListeners ();
         getSession ().clearSharedData ();
-//        ofNullable (getSession ().getDriver ()).ifPresent (WebDriver::quit);
+        ofNullable (getSession ().getDriver ()).ifPresent (WebDriver::quit);
         if (getSession ().getPlatformType () != PlatformType.WEB) {
             ofNullable (getSession ().getServiceManager ()).ifPresent (ServiceManager::stopServer);
         }
