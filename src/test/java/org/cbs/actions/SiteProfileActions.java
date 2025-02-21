@@ -82,7 +82,7 @@ public class SiteProfileActions extends SharedActions {
         onElement(siteProfilePage.getTitle()).verifyText().isEqualTo("Site Profile");
 //        waitForElementVisible(siteProfilePage.getCreatedSuccessToaster());
 //        waitForElementInvisibility(siteProfilePage.getCreatedSuccessToaster());
-        waitForThePageLoader();
+//        waitForThePageLoader();
     }
 
     public void enterTextInRevenueAssuranceType(String input) {
@@ -138,13 +138,15 @@ public class SiteProfileActions extends SharedActions {
         onElement(siteProfilePage.getBuildingCafeBtn()).verifyIsEnabled();
         waitForElementClickable(siteProfilePage.getBuildingCafeBtn());
         withMouse(siteProfilePage.getBuildingCafeBtn()).click();
-        waitForThePageLoader();
+//        waitForThePageLoader();
     }
 
     public void verifyGivenToastMessageShouldDisplay(String expectedToastMessage) {
+//        waitForThePageLoader();
         waitForElementVisible(siteProfilePage().getToastMsg());
         softAssert.assertEquals(onElement(siteProfilePage().getToastMsg()).getText(), expectedToastMessage, "Create Service Type Field Error Message on Create Service Type Popup is not displayed");
         softAssert.assertAll();
+//        withMouse(siteProfilePage.getCrossIconOnToastMsg()).click();
         waitForElementInvisibility(siteProfilePage.getToastMsg());
     }
 

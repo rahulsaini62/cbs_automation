@@ -159,7 +159,7 @@ public class SiteProfilePage {
             .build();
 
     private final Locator crossIconOnToastMsg = Locator.buildLocator()
-            .web(xpath("//button[@class='Toastify__close-button Toastify__close-button--light']"))
+            .web(cssSelector(".Toastify__close-button"))
             .name("Building & Cafe Button")
             .build();
 

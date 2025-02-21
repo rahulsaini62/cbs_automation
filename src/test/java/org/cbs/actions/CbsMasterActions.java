@@ -148,8 +148,10 @@ public class CbsMasterActions extends SharedActions {
 
     public void verifyGivenToastMessageShouldDisplay(String expectedToastMessage) {
 //        waitForElementVisible(cbsMasterPage().getToastMessage());
+        waitForElementVisible(cbsMasterPage().getToastMessage());
         softAssert.assertEquals(onElement(cbsMasterPage().getToastMessage()).getText(), expectedToastMessage, "Create Service Type Field Error Message on Create Service Type Popup is not displayed");
         softAssert.assertAll();
+//        withMouse(siteProfilePage().getCrossIconOnToastMsg()).click();
         waitForElementInvisibility(cbsMasterPage().getToastMessage());
 //        withMouse(siteProfilePage().getCrossIconOnToastMsg()).click();
     }
