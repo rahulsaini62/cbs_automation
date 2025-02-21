@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.cbs.actions.CommonActions.sleep;
+import static org.cbs.actions.drivers.NavigateActions.navigate;
 import static org.cbs.actions.elements.ElementActions.onElement;
 import static org.cbs.data.DataReader.loadCbsMasterProps;
 import static org.cbs.manager.ParallelSession.getSession;
@@ -292,5 +293,17 @@ public class CbsMasterSteps {
     @Then("Verify confirmation popup on cancellation after modifying some data on cbs master page.")
     public void verifyConfirmationPopupOnCancellationAfterModifyingSomeDataOnCbsMasterPage() {
         verifyDiscardChangesPopupUi();
+    }
+
+    @Given("User is on simulation page.")
+    public void userIsOnSimulationPage() {
+        navigate().to("https://adminqas.mycompass.co.in/simulations");
+        cbsMasterActions.waitForLoader();
+    }
+
+    @Given("User is on cbs master page.")
+    public void userIsOnCbsMasterPage() {
+        cbsMasterActions.waitForLoader();
+        navigate().to("https://adminqas.mycompass.co.in/cbs-masters");
     }
 }

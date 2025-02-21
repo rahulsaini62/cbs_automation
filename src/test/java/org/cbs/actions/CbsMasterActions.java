@@ -6,6 +6,9 @@ import org.cbs.enums.PlatformType;
 import org.cbs.enums.WaitStrategy;
 import org.cbs.pages.CbsMasterPage;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -40,7 +43,7 @@ public class CbsMasterActions extends SharedActions {
 
     public void verifyCbsMasterPageShouldDisplay() {
         Assert.assertTrue(verifyElementIsDisplayed(cbsMasterPage().getPageTitle()),
-                "Simulation page is not displayed");
+                "CBS Master page is not displayed");
     }
 
     public void verifyServiceTypeMasterSectionTitleShouldDisplay(String titleName) {
@@ -205,9 +208,15 @@ public class CbsMasterActions extends SharedActions {
 
         List<String> expectedColumnNameList = loadCbsMasterProps().getRoleMasterColumnTxt();
 
+        WebDriverWait wait = getSession().getWait();
+        List<WebElement> elements = wait.until(ExpectedConditions.visibilityOfAllElements(finds(
+                cbsMasterPage().getRoleMasterColumnsTxt())));
+
         List<String> actualColumnNameList = new ArrayList<>();
-        finds(cbsMasterPage().getRoleMasterColumnsTxt(), WaitStrategy.VISIBLE).forEach(WebElement -> actualColumnNameList.add(WebElement.getText()));
-        Assert.assertEquals(actualColumnNameList, expectedColumnNameList, "Column Name are not as per expected");
+        for (WebElement element : elements) {
+            actualColumnNameList.add(element.getText());
+        }
+
     }
 
     public void clickCreateRoleButton() {

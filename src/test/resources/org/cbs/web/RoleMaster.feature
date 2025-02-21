@@ -8,32 +8,18 @@ Feature: Role Master Feature
   This feature is having scenarios to test the CBS role master feature.
 
   Background:
-    Given User hit the cbs app url "cbs.app.url".
-    And User login with username as "cbs.username" and password as "cbs.password" on cbs admin
+    Given User is on cbs master page.
 
-  @TC-RM-01
+  @TC-RM-01 @TC-RM-02
   Scenario:Verify accessing Role Master Configuration and grid component.
-    When Verify user landed on the dashboard of the cbs web app.
-    And Verify simulations page should display.
-    And User click on "CBS Masters" tab under menu on dashboard page.
-    And Verify cbs master page should display.
+    When Verify cbs master page should display.
     Then Verify Role Master Configuration is visible on cbs master page.
-
-  @TC-RM-02
-  Scenario:Check if user click on CTA - Create Role.
-    When Verify user landed on the dashboard of the cbs web app.
-    And Verify simulations page should display.
-    And User click on "CBS Masters" tab under menu on dashboard page.
-    And Verify cbs master page should display.
     And User click on create role button on cbs master page.
     Then Verify role master create popup should get open on cbs master page.
 
   @TC-RM-03 @TC-RM-04
   Scenario: Validate the input for Role Name with invalid role name.
-    When Verify user landed on the dashboard of the cbs web app.
-    And Verify simulations page should display.
-    And User click on "CBS Masters" tab under menu on dashboard page.
-    And Verify cbs master page should display.
+    When Verify cbs master page should display.
     And User click on create role button on cbs master page.
     And Verify role master create popup should get open on cbs master page.
     Then User enter below value in role name and verify appropriate error messages under create role popup on cbs master page.
@@ -48,10 +34,7 @@ Feature: Role Master Feature
 
   @TC-RM-05
   Scenario: Check error message for duplicate role name.
-    When Verify user landed on the dashboard of the cbs web app.
-    And Verify simulations page should display.
-    And User click on "CBS Masters" tab under menu on dashboard page.
-    And Verify cbs master page should display.
+    When Verify cbs master page should display.
     And User click on create role button on cbs master page.
     And Verify role master create popup should get open on cbs master page.
     And User enter existing role name in role name txt box on cbs master page.
@@ -60,10 +43,7 @@ Feature: Role Master Feature
 
   @TC-RM-O7
   Scenario: Verify successful submission of data for create role.
-    When Verify user landed on the dashboard of the cbs web app.
-    And Verify simulations page should display.
-    And User click on "CBS Masters" tab under menu on dashboard page.
-    And Verify cbs master page should display.
+    When Verify cbs master page should display.
     And User click on create role button on cbs master page.
     And Verify role master create popup should get open on cbs master page.
     And User enter valid role name in role name txt box on cbs master page.
@@ -73,10 +53,7 @@ Feature: Role Master Feature
 
   @TC_RM_09
   Scenario: Check confirmation popup on cancellation after modifying some data
-    When Verify user landed on the dashboard of the cbs web app.
-    And Verify simulations page should display.
-    And User click on "CBS Masters" tab under menu on dashboard page.
-    And Verify cbs master page should display.
+    When Verify cbs master page should display.
     And User click on create role button on cbs master page.
     And Verify role master create popup should get open on cbs master page.
     And User enter value in role name txt box on cbs master page.
@@ -85,10 +62,7 @@ Feature: Role Master Feature
 
   @TC_RM_10
   Scenario: Verify cancellation action on discard popup create role master .
-    When Verify user landed on the dashboard of the cbs web app.
-    And Verify simulations page should display.
-    And User click on "CBS Masters" tab under menu on dashboard page.
-    And Verify cbs master page should display.
+    When Verify cbs master page should display.
     And User click on create role button on cbs master page.
     And Verify role master create popup should get open on cbs master page.
     And User enter value in role name txt box on cbs master page.

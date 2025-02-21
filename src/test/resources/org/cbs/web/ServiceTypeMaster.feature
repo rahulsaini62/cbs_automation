@@ -7,17 +7,13 @@ Feature: Service Type Master Feature
   This feature is having scenarios to test the CBS Service Type Master feature.
 
   Background:
-    Given User hit the cbs app url "cbs.app.url".
-    And User login with username as "cbs.username" and password as "cbs.password" on cbs admin
+    Given User is on cbs master page.
 
   @TC-STM-01 @TC-STM-02 @#TC-STM-03 @#TC-STM-04
   Scenario: Verify valid login on CBS portal.
-    And  Verify user landed on the dashboard of the cbs web app.
-    And Verify simulations page should display.
-    And User click on "CBS Masters" tab under menu on dashboard page.
 #    TC-STM-12
 #    Then Verify loader display during data fetching on cbs master page.
-    And Verify cbs master page should display.
+    When Verify cbs master page should display.
     #TC-STM-01
     And Verify "Service Type Master" section should display on cbs master page.
     And Verify create service type button should display under service type master section on cbs master page.

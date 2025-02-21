@@ -8,8 +8,7 @@ Feature: Simulation Feature
   This feature is having scenarios to test the simulation feature.
 
   Background:
-    Given User hit the cbs app url "cbs.app.url".
-    And User login with username as "cbs.username" and password as "cbs.password" on cbs admin
+    Given User is on simulation page.
 
   Scenario:Verify simulation page.
 #    When Verify user landed on the dashboard of the cbs web app.
