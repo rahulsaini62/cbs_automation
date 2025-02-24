@@ -66,11 +66,3 @@ Feature: Service Type Master Feature
 #  TC-STM-13
 #    Then Verify pressing enter on a CTA simulates a mouse click event.
 #    And Verify pressing esc on a popup simulates clicking cancel.
-
-
-
-
-
-
-
-

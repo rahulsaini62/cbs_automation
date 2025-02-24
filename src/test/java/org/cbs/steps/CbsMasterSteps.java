@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import net.datafaker.Faker;
 import org.cbs.actions.CbsMasterActions;
 import org.cbs.actions.SharedActions;
+import org.cbs.base.BaseTests;
 import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import static org.cbs.manager.ParallelSession.getSession;
 import static org.cbs.pages.CbsMasterPage.cbsMasterPage;
 import static org.junit.Assert.assertEquals;
 
-public class CbsMasterSteps {
+public class CbsMasterSteps{
     Faker faker = new Faker();
 
     private final CbsMasterActions cbsMasterActions;

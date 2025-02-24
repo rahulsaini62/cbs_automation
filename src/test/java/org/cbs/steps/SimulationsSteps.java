@@ -3,6 +3,10 @@ package org.cbs.steps;
 import io.cucumber.java.en.And;
 import org.cbs.actions.SimulationsActions;
 
+import static org.cbs.actions.elements.ElementFinder.waitForElementInvisibility;
+import static org.cbs.actions.elements.ElementFinder.waitForElementVisible;
+import static org.cbs.pages.CbsMasterPage.cbsMasterPage;
+
 public class SimulationsSteps {
 
     private final SimulationsActions simulationsActions;

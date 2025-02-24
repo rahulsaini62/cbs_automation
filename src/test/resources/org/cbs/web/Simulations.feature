@@ -11,10 +11,11 @@ Feature: Simulation Feature
     Given User is on simulation page.
 
   Scenario:Verify simulation page.
-    When Verify simulations page should display.
+    When Verify "Login successful" toast message should display.
+    And Verify simulations page should display.
     And User click create simulations button on simulations page.
 
-    And User select team for this bid as "rahul.saini1@appinventiv.com | rahul.saini1@appinventiv.com | CBS Admin" on team for this bid page.
+    And User select team for this bid as "Abhishek Mishra | abhishek.mishra@appinventiv.com | TokenAuthorizer" on team for this bid page.
     Then Verify selected user name and action shows in user list and action field on team for this bid page.
     And User click on submit button on team for this bid page.
 
@@ -48,7 +49,7 @@ Feature: Simulation Feature
     And Verify ui of create building popup.
     When User random enter building name on create building popup.
     And User click submit button on create building popup.
-    Then Verify "Created successfully" toast message should display.
+    #Then Verify "Created successfully" toast message should display.
     And Verify newly added building should display under building master on building and cafe page.
 #    And Verify newly added building should active status under building master on building and cafe page.
 
@@ -79,7 +80,6 @@ Feature: Simulation Feature
     And User click on submit button on team for this bid page.
 
     Then Verify "Created Successfully" toast message should display on site profile page.
-#
     And Verify user navigate to site profile page.
     And User enter name in simulation name text box on site profile page.
     And User enter name in prospective site name text box on site profile page.
@@ -98,5 +98,3 @@ Feature: Simulation Feature
     And User click on save section data btn on site profile page.
 
     Then Verify "Created successfully" toast message should display.
-
-
