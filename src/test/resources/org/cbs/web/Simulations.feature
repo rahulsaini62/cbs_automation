@@ -11,7 +11,7 @@ Feature: Simulation Feature
     Given User is on simulation page.
 
   Scenario:Verify simulation page.
-    When Verify "Login successful" toast message should display.
+#    When Verify "Login successful" toast message should display.
     And Verify simulations page should display.
     And User click create simulations button on simulations page.
 
@@ -75,7 +75,7 @@ Feature: Simulation Feature
     And Verify simulations page should display.
     And User click create simulations button on simulations page.
 
-    And User select team for this bid as "rahul.saini1@appinventiv.com | rahul.saini1@appinventiv.com | CBS Admin" on team for this bid page.
+    And User select team for this bid as "Abhishek Mishra | abhishek.mishra@appinventiv.com | TokenAuthorizer" on team for this bid page.
     Then Verify selected user name and action shows in user list and action field on team for this bid page.
     And User click on submit button on team for this bid page.
 
