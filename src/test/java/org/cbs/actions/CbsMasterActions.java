@@ -216,6 +216,7 @@ public class CbsMasterActions extends SharedActions {
         for (WebElement element : elements) {
             actualColumnNameList.add(element.getText());
         }
+        waitForThePageLoader();
 
     }
 

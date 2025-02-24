@@ -14,6 +14,7 @@ Feature: Role Master Feature
   Scenario:Verify accessing Role Master Configuration and grid component.
     When Verify cbs master page should display.
     Then Verify Role Master Configuration is visible on cbs master page.
+
     And User click on create role button on cbs master page.
     Then Verify role master create popup should get open on cbs master page.
 
