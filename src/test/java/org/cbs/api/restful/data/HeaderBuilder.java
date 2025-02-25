@@ -11,6 +11,7 @@ public class HeaderBuilder {
     public Map<String, String> buildHeaders() {
         Map<String, String> headers = new HashMap<>();
         headers.put("authorization", getSession().getSharedData("token"));
+        headers.put("x-api-key", "FhPYSItYj0iLFj3PElgU2g==");
 //        headers.put("device_id", getSession().getSharedData("deviceId"));
         return headers;
     }
