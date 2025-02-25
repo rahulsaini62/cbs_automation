@@ -11,10 +11,10 @@ import static org.cbs.actions.CommonActions.sleep;
 import static org.cbs.actions.drivers.DriverActions.withDriver;
 import static org.cbs.actions.drivers.NavigateActions.navigate;
 import static org.cbs.actions.elements.ClickableActions.withMouse;
-import static org.cbs.actions.elements.ElementFinder.waitForElementClickable;
-import static org.cbs.actions.elements.ElementFinder.waitForURLContains;
+import static org.cbs.actions.elements.ElementFinder.*;
 import static org.cbs.actions.elements.TextBoxActions.onTextBox;
 import static org.cbs.manager.ParallelSession.getSession;
+import static org.cbs.pages.DashboardPage.commonPage;
 import static org.cbs.pages.LoginPage.loginPage;
 import static org.cbs.utils.PropertiesUtil.getApplicationProps;
 
@@ -47,11 +47,11 @@ public class LoginActions extends SharedActions {
         if (verifyElementIsDisplayed(loginPage().getStaySignInBtn())) {
             withMouse(loginPage().getStaySignInBtn()).click();
         }
-        sleep(4000);
+        sleep(2000);
 //        withMouse(loginPage().getStaySignInBtn()).click();
 //        waitForURLContains("code");
 //        waitForElementVisible(commonPage().getPageLoader());
-//        waitForElementInvisibility(commonPage().getPageLoader());
+        waitForElementInvisibility(commonPage().getPageLoader());
         setTokenAndDeviceIdFromLocalStorage();
     }
 
@@ -67,7 +67,7 @@ public class LoginActions extends SharedActions {
         String localStorageData = withDriver().executeScript("return localStorage.getItem(arguments[0]);",
                 "access_token");
         LOGGER.info("Access token value: {}", localStorageData);
-
+        System.out.println("1111------"+localStorageData);
         getSession().setSharedData("token", "Bearer" + " " + localStorageData);
 
     }

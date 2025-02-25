@@ -155,7 +155,7 @@ public class CbsMasterPage {
             .build();
 
     private final Locator roleMasterColumnsTxt = Locator.buildLocator()
-            .web(xpath("//p[text()='Role Master']/../..//tr[1]//div[contains(@class,'Labels')]"))
+            .web(xpath("//p[text()='Role Master']/../..//tr//div[contains(@class,'Labels')]"))
             .name("Role Master Columns Txt")
             .build();
 

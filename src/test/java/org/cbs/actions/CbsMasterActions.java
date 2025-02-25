@@ -1,7 +1,14 @@
 package org.cbs.actions;
 
+import com.google.gson.Gson;
 import io.cucumber.datatable.DataTable;
 import org.apache.logging.log4j.Logger;
+import org.cbs.actions.api.ApiActions;
+import org.cbs.api.restful.data.HeaderBuilder;
+import org.cbs.api.restful.response.RoleMaster;
+import org.cbs.api.restful.response.RoleMasterResponseDate;
+import org.cbs.builders.ApiRequest;
+import org.cbs.builders.ApiResponse;
 import org.cbs.enums.PlatformType;
 import org.cbs.enums.WaitStrategy;
 import org.cbs.pages.CbsMasterPage;
@@ -14,6 +21,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.CommonActions.sleep;
@@ -22,7 +30,9 @@ import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementActions.onElement;
 import static org.cbs.actions.elements.ElementFinder.*;
 import static org.cbs.actions.elements.TextBoxActions.onTextBox;
+import static org.cbs.api.restful.request.RoleMaster.getRoleMasterLogsRequest;
 import static org.cbs.data.DataReader.loadCbsMasterProps;
+import static org.cbs.enums.ApiConfigKey.TEST_RESTFUL_ADMIN;
 import static org.cbs.manager.ParallelSession.getSession;
 import static org.cbs.pages.CbsMasterPage.cbsMasterPage;
 import static org.cbs.pages.DashboardPage.commonPage;
@@ -36,6 +46,7 @@ public class CbsMasterActions extends SharedActions {
     SoftAssert softAssert = new SoftAssert();
     private final PlatformType platformType;
     private static final Logger log = getLogger();
+    HeaderBuilder headerBuilder = new HeaderBuilder();
 
     public CbsMasterActions() {
         this.platformType = getSession().getPlatformType();
@@ -306,8 +317,52 @@ public class CbsMasterActions extends SharedActions {
         useKeys(Keys.ESCAPE);
     }
 
-    public void clickCancelOnCreateRolePopup(){
+    public void clickCancelOnCreateRolePopup() {
         withMouse(cbsMasterPage().getCreateRolePopupCancelBtn()).click();
+    }
+
+
+    public RoleMasterResponseDate getRoleMasterListApi() {
+        ApiRequest request;
+        ApiResponse response;
+        final Map<String, String> header = headerBuilder.buildHeaders();
+        System.out.println("11111111---"+header);
+//        final Map<String, String> query = headerBuilder.query ();
+        request = getRoleMasterLogsRequest(header);
+        response = ApiActions.withRequest(request, TEST_RESTFUL_ADMIN.name()
+                        .toLowerCase())
+                .execute();
+
+        // verifying Status code
+        response.verifyStatusCode()
+                .isEqualTo(200);
+        final String jsonResponseString = response.getBody();
+        Gson gson = new Gson();
+        RoleMasterResponseDate roleMasterResponseDate = gson.fromJson(jsonResponseString, RoleMasterResponseDate.class);
+//        System.out.println("1111111111----------" + roleMasterResponseDate.getData().stream().filter(RoleMaster-> RoleMaster.getName().equals("akjdsklv")).toString());
+
+        // Define the name to search for
+        String targetName = "ABC_TES"; // You can change this to any name you're looking for
+
+        // Verify and find the code for the given name
+        List<RoleMaster> roleMasters = roleMasterResponseDate.getData();
+        String foundCode = null;
+
+        for (RoleMaster roleMaster : roleMasters) {
+            if (roleMaster.getName() != null && roleMaster.getName().equals(targetName)) {
+                foundCode = roleMaster.getCode();
+                break;
+            }
+        }
+
+        // Output the result
+        if (foundCode != null) {
+            System.out.println("Found code for name " + targetName + ": " + foundCode);
+        } else {
+            System.out.println("No matching role found for name " + targetName);
+        }
+
+        return roleMasterResponseDate;
     }
 
 }

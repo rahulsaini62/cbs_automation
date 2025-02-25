@@ -136,6 +136,7 @@ public class CbsMasterSteps{
 
     @And("User click on create role button on cbs master page.")
     public void userClickOnCreateRoleButtonOnCbsMasterPage() {
+        cbsMasterActions.getRoleMasterListApi();
         cbsMasterActions.clickCreateRoleButton();
     }
 
@@ -241,6 +242,8 @@ public class CbsMasterSteps{
     public void verifySameEntryShouldShownInCbsRoleTableOnCbsMasterPage() {
         ArrayList<String> roleNameValues = cbsMasterActions.getRoleNameValues();
         cbsMasterActions.verifyContains(roleNameValues, getSession().getSharedData("validName"));
+
+
     }
 
     @Then("Verify discard changes popup ui.")

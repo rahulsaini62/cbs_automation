@@ -65,7 +65,7 @@
     },
     "api": {
       "test_restful_admin": {
-        "base_uri": "https://cbsapimqa.azure-api.net/auth/v1/",
+        "base_uri": "https://api-cbs-qas.mycompass.co.in/",
         "timeout": {
           "connection_timeout": 60,
           "read_timeout": 60,
