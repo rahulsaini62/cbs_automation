@@ -22,7 +22,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     services:
       xvfb:
         image: selenium/standalone-chrome
@@ -43,6 +43,7 @@ jobs:
         with:
           java-version: '22'
           distribution: 'oracle'
+
           
       # # Set up ChromeDriver
       # - name: Set up ChromeDriver
