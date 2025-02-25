@@ -1,6 +1,9 @@
+
 name: CBS Automation Test
 
 on:
+  schedule:
+    - cron: '30 22 * * 2,4,0'
   workflow_dispatch:
 
 # Permissions for GitHub Pages
@@ -19,7 +22,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: pre-prod
     services:
       xvfb:
         image: selenium/standalone-chrome
@@ -41,34 +44,28 @@ jobs:
           java-version: '22'
           distribution: 'oracle'
           
-      # Set up ChromeDriver
-      - name: Set up ChromeDriver
-        uses: nanasess/setup-chromedriver@v2
-        with:
-          chromedriver-version: '132.0.6834.83'
+      # # Set up ChromeDriver
+      # - name: Set up ChromeDriver
+      #   uses: nanasess/setup-chromedriver@v2
+      #   with:
+      #     chromedriver-version: '133.0.6943.126-1'
+      #    # chromedriver-version: '132.0.6834.83'
 
       # # Start ChromeDriver
       # - run: |
       #     export DISPLAY=:99
       #     chromedriver --url-base=/wd/hub &
       
-      # Install Chrome
-      - name: Install Chrome
-        run: sudo apt-get install -y google-chrome-stable
+      # # Install Chrome
+      # - name: Install Chrome
+      #   run: sudo apt-get install -y google-chrome-stable
 
-      - run: |
-          sudo apt-get update
-          sudo apt-get install -y xvfb
+      # - run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y xvfb
 
       # Replace the values in application.properties with GitHub secrets
-      - name: Replace credentials in application.properties
-        run: |
-          pwd
-          ls -la
-          sed -i "s/mycbsuser/${{ secrets.CBS_USERNAME }}/g" src/main/resources/application.properties
-          sed -i "s/mycbspass/${{ secrets.CBS_PASSWORD }}/g" src/main/resources/application.properties
-          cat src/main/resources/application.properties
-
+      
       # Run Maven tests
       - name: Run Test
         run: export DISPLAY=:99 && mvn test
@@ -121,21 +118,17 @@ jobs:
         with:
           artifact_name: gh-pages
 
-      - name: Set up msmtp
-        run: sudo apt-get install msmtp
+      # Send Allure Report via Email (Optional)
+      - name: Send Email with Allure Report
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Allure Test Report - Quivio"
+          body: "Hello,\n\nThe latest Allure Test Report is attached.\n\nThanks."
+          to: ${{ secrets.TO_EMAIL }}
+          from: ${{ secrets.EMAIL_USERNAME }}
+          attachments: build/allure-report
 
-      - name: Configure msmtp
-        run: |
-          echo "account default" > ~/.msmtprc
-          echo "host smtp.mailtrap.io" >> ~/.msmtprc  # SMTP server, change to your own SMTP
-          echo "port 587" >> ~/.msmtprc
-          echo "from your-email@example.com" >> ~/.msmtprc  # Your email address
-          echo "auth on" >> ~/.msmtprc
-          echo "user your-smtp-user" >> ~/.msmtprc  # SMTP username
-          echo "password your-smtp-password" >> ~/.msmtprc  # SMTP password
-          echo "tls on" >> ~/.msmtprc
-          echo "tls_trust_file /etc/ssl/certs/ca-certificates.crt" >> ~/.msmtprc
-
-      - name: Send email notification
-        run: |
-          echo -e "Subject: GitHub Actions Email\n\nThis is a test email from GitHub Actions." | msmtp recipient-email@example.com  # Change to your recipient email
