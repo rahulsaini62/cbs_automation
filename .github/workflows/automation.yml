@@ -22,7 +22,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: pre-prod
+    runs-on: macos-latest
     services:
       xvfb:
         image: selenium/standalone-chrome
