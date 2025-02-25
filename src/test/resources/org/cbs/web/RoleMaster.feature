@@ -10,51 +10,33 @@ Feature: Role Master Feature
   Background:
     Given User is on cbs master page.
 
-  @TC-RM-01 @TC-RM-02
-  Scenario:Verify accessing Role Master Configuration and grid component.
-    When Verify cbs master page should display.
-    Then Verify Role Master Configuration is visible on cbs master page.
-
-    And User click on create role button on cbs master page.
-    Then Verify role master create popup should get open on cbs master page.
-
-  @TC-RM-03 @TC-RM-04
+  @TC-RM-01 @TC-RM-02 @TC-RM-03 @TC-RM-04 @TC-RM-05 @TC-RM-07 @TC_RM_09
   Scenario: Validate the input for Role Name with invalid role name.
     When Verify cbs master page should display.
+    And Verify Role Master Configuration is visible on cbs master page.
     And User click on create role button on cbs master page.
     And Verify role master create popup should get open on cbs master page.
     Then User enter below value in role name and verify appropriate error messages under create role popup on cbs master page.
-      | roleName                  | error | errorMessage                                       |
-      | "    "                    | yes   | Please enter Role Name                             |
-      | testing  234              | yes   | Role Name should not contain consecutive spaces    |
-      | <maxCharacterLimitExceed> | yes   | Max limit exceeded for Role Name                   |
-      | 1234testing               | no    | No Error Message                                   |
-      | test@#$%                  | no    | No Error Message                                   |
-      | t                         | no    | No Error Message                                   |
-      | "   testing"              | no    | No Error Message                                   |
-
-  @TC-RM-05
-  Scenario: Check error message for duplicate role name.
-    When Verify cbs master page should display.
-    And User click on create role button on cbs master page.
-    And Verify role master create popup should get open on cbs master page.
+      | roleName                  | error | errorMessage                                    |
+      | "    "                    | yes   | Please enter Role Name                          |
+      | testing  234              | yes   | Role Name should not contain consecutive spaces |
+      | <maxCharacterLimitExceed> | yes   | Max limit exceeded for Role Name                |
+      | 1234testing               | no    | No Error Message                                |
+      | test@#$%                  | no    | No Error Message                                |
+      | t                         | no    | No Error Message                                |
+      | "   testing"              | no    | No Error Message                                |
+    #  TC-RM-05
     And User enter existing role name in role name txt box on cbs master page.
     And User click on submit button under create role name popup on cbs master page.
     Then Verify error message for duplicate role name should display on cbs master page.
 
-  @TC-RM-O7
-  Scenario: Verify successful submission of data for create role.
-    When Verify cbs master page should display.
-    And User click on create role button on cbs master page.
-    And Verify role master create popup should get open on cbs master page.
+    #  TC-RM-07
     And User enter valid role name in role name txt box on cbs master page.
     And User click on submit button under create role name popup on cbs master page.
     Then Verify success toaster message display on cbs master page.
     And Verify same entry should shown in cbs role table on cbs master page.
 
-  @TC_RM_09
-  Scenario: Check confirmation popup on cancellation after modifying some data
-    When Verify cbs master page should display.
+#    TC_RM_09
     And User click on create role button on cbs master page.
     And Verify role master create popup should get open on cbs master page.
     And User enter value in role name txt box on cbs master page.

@@ -202,6 +202,7 @@ public class CbsMasterActions extends SharedActions {
     }
 
     public void verifyRoleMasterConfigurationVisibility() {
+        waitForThePageLoader();
         onElement(cbsMasterPage().getRoleMasterTitle()).verifyText().isEqualTo(loadCbsMasterProps().getRoleMasterTitle());
 
         onElement(cbsMasterPage().getCreateRoleBtn()).verifyText().isEqualTo(loadCbsMasterProps().getCreateRoleTxt());

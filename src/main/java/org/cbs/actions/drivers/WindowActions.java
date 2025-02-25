@@ -61,7 +61,7 @@ public class WindowActions implements IWindowActions {
         LOGGER.traceEntry ();
         LOGGER.info ("Closing window...");
 //        ofNullable (this.listener).ifPresent (IWindowActionsListener::onClose);
-        performDriverAction (WebDriver::close);
+//        performDriverAction (WebDriver::close);
         switchToDefault ();
         LOGGER.traceExit ();
     }
