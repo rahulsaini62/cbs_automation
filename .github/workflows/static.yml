@@ -122,3 +122,22 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: gh-pages
+
+      - name: Set up msmtp
+        run: sudo apt-get install msmtp
+
+      - name: Configure msmtp
+        run: |
+          echo "account default" > ~/.msmtprc
+          echo "host smtp.mailtrap.io" >> ~/.msmtprc  # SMTP server, change to your own SMTP
+          echo "port 587" >> ~/.msmtprc
+          echo "from your-email@example.com" >> ~/.msmtprc  # Your email address
+          echo "auth on" >> ~/.msmtprc
+          echo "user your-smtp-user" >> ~/.msmtprc  # SMTP username
+          echo "password your-smtp-password" >> ~/.msmtprc  # SMTP password
+          echo "tls on" >> ~/.msmtprc
+          echo "tls_trust_file /etc/ssl/certs/ca-certificates.crt" >> ~/.msmtprc
+
+      - name: Send email notification
+        run: |
+          echo -e "Subject: GitHub Actions Email\n\nThis is a test email from GitHub Actions." | msmtp recipient-email@example.com  # Change to your recipient email
