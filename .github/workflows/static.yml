@@ -1,43 +1,124 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: CBS Automation Test
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+  # schedule:
+    # - cron: '30 22 * * 2,4,0'
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Permissions for GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# Allow only one concurrent deployment, skipping queued runs
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
+  build:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: pre-prod
+    services:
+      xvfb:
+        image: selenium/standalone-chrome
+        options: --health-cmd "curl --silent --fail localhost:4444/wd/hub/status || exit 1"
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      # Checkout the repository
+      - uses: actions/checkout@v2
+
+      # Set up Maven
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: 3.9.9
+      
+      # Set up JDK 22
+      - name: Set up JDK 22
+        uses: actions/setup-java@v4
+        with:
+          java-version: '22'
+          distribution: 'oracle'
+          
+      # Set up ChromeDriver
+      - name: Set up ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+        with:
+          chromedriver-version: '132.0.6834.83'
+
+      # # Start ChromeDriver
+      # - run: |
+      #     export DISPLAY=:99
+      #     chromedriver --url-base=/wd/hub &
+      
+      # Install Chrome
+      - name: Install Chrome
+        run: sudo apt-get install -y google-chrome-stable
+
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+
+      # Replace the values in application.properties with GitHub secrets
+      - name: Replace credentials in application.properties
+        run: |
+          pwd
+          ls -la
+          sed -i "s/mycbsuser/${{ secrets.CBS_USERNAME }}/g" src/main/resources/application.properties
+          sed -i "s/mycbspass/${{ secrets.CBS_PASSWORD }}/g" src/main/resources/application.properties
+          cat src/main/resources/application.properties
+
+      # Run Maven tests
+      - name: Run Test
+        run: export DISPLAY=:99 && mvn test
+        continue-on-error: true
+
+      # Download and install Allure
+      - name: Download Allure
+        run: |
+          wget https://github.com/allure-framework/allure2/releases/download/2.18.1/allure_2.18.1-1_all.deb
+          sudo dpkg -i allure_2.18.1-1_all.deb
+
+      # Generate Allure Report
+      - name: Generate Allure Report
+        run: |
+          allure generate target/allure-results --clean -o build/allure-report
+
+      # # Ensure the Allure report directory doesn't contain symlinks
+      # - name: Remove symlinks from Allure report
+      #   run: |
+      #     find build/allure-report -type l -exec cp --remove-destination {} {} \;
+      - name: Check files
+        run: |
+          pwd
+          ls -la
+
+      - name: Upload screenshots as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: |
+            ./src/main/resources/application.properties
+          retention-days: 15
+          
+#./screenshots
+
+      # Set up GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          name: gh-pages
+          path: './build/allure-report'
+
+     # Deploy Allure Report to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: gh-pages
