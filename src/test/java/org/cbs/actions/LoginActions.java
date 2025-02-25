@@ -47,11 +47,12 @@ public class LoginActions extends SharedActions {
         if (verifyElementIsDisplayed(loginPage().getStaySignInBtn())) {
             withMouse(loginPage().getStaySignInBtn()).click();
         }
+        sleep(4000);
 //        withMouse(loginPage().getStaySignInBtn()).click();
 //        waitForURLContains("code");
 //        waitForElementVisible(commonPage().getPageLoader());
 //        waitForElementInvisibility(commonPage().getPageLoader());
-//        setTokenAndDeviceIdFromLocalStorage();
+        setTokenAndDeviceIdFromLocalStorage();
     }
 
     public void navigateToAppUrl(String appUrl) {
@@ -64,25 +65,10 @@ public class LoginActions extends SharedActions {
 
     public void setTokenAndDeviceIdFromLocalStorage() {
         String localStorageData = withDriver().executeScript("return localStorage.getItem(arguments[0]);",
-                "persist:root");
+                "access_token");
+        LOGGER.info("Access token value: {}", localStorageData);
 
-        String localDeviceId = withDriver().executeScript("return localStorage.getItem(arguments[0]);",
-                "adminDeviceId");
-
-        JsonObject jsonObject = JsonParser.parseString(localStorageData)
-                .getAsJsonObject();
-
-        JsonObject authObject = JsonParser.parseString(jsonObject.get("auth")
-                        .getAsString())
-                .getAsJsonObject();
-        String localAccessToken = authObject.get("access_token")
-                .getAsString();
-
-        LOGGER.info("Access token value: {}", localAccessToken);
-        LOGGER.info("Device id value: {}", localDeviceId);
-
-        getSession().setSharedData("token", "Bearer" + " " + localAccessToken);
-        getSession().setSharedData("deviceId", localDeviceId);
+        getSession().setSharedData("token", "Bearer" + " " + localStorageData);
 
     }
 

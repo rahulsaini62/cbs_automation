@@ -56,8 +56,3 @@ Feature: Role Master Feature
     And User click proceed button on discard changes popup.
     And Verify discard changes popup should not display.
     Then Verify cbs master page should display.
-
-
-
-
-
