@@ -1,8 +1,6 @@
-
-name: CBS Automation Test
+name: CBS Automation Test (Mac + Docker)
 
 on:
-
   workflow_dispatch:
 
 # Permissions for GitHub Pages
@@ -11,7 +9,7 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping queued runs
+# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -22,13 +20,37 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: macos-latest
-    services:
-      xvfb:
-        image: selenium/standalone-chrome
-        options: --health-cmd "curl --silent --fail localhost:4444/wd/hub/status || exit 1"
+    
     steps:
       # Checkout the repository
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
+      # Install Homebrew (needed for Docker installation)
+      - name: Install Homebrew
+        run: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      
+      # Install Docker on macOS
+      - name: Install Docker
+        run: |
+          brew install docker
+          brew install --cask docker
+          mkdir -p ~/.docker
+          ln -sfn /opt/homebrew/Cellar/docker/*/bin/docker ~/.docker/docker
+          export PATH="/opt/homebrew/bin:$PATH"
+
+      # Start Docker Daemon
+      - name: Start Docker
+        run: |
+          nohup dockerd > /tmp/docker.log 2>&1 & 
+          sleep 10  # Give Docker time to start
+          docker info
+
+      # Start Selenium Chrome container inside Docker
+      - name: Start Selenium Chrome in Docker
+        run: |
+          docker run -d -p 4444:4444 --shm-size=2g selenium/standalone-chrome:latest
+          sleep 10  # Wait for Selenium to initialize
 
       # Set up Maven
       - name: Set up Maven
@@ -43,32 +65,11 @@ jobs:
           java-version: '22'
           distribution: 'oracle'
 
-          
-      # # Set up ChromeDriver
-      # - name: Set up ChromeDriver
-      #   uses: nanasess/setup-chromedriver@v2
-      #   with:
-      #     chromedriver-version: '133.0.6943.126-1'
-      #    # chromedriver-version: '132.0.6834.83'
-
-      # # Start ChromeDriver
-      # - run: |
-      #     export DISPLAY=:99
-      #     chromedriver --url-base=/wd/hub &
-      
-      # # Install Chrome
-      # - name: Install Chrome
-      #   run: sudo apt-get install -y google-chrome-stable
-
-      # - run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y xvfb
-
-      # Replace the values in application.properties with GitHub secrets
-      
-      # Run Maven tests
+      # Run Maven tests (with Selenium running in Docker)
       - name: Run Test
-        run: export DISPLAY=:99 && mvn test
+        run: |
+          export DISPLAY=:99
+          mvn test -Dwebdriver.remote.url=http://localhost:4444/wd/hub
         continue-on-error: true
 
       # Download and install Allure
@@ -82,10 +83,6 @@ jobs:
         run: |
           allure generate target/allure-results --clean -o build/allure-report
 
-      # # Ensure the Allure report directory doesn't contain symlinks
-      # - name: Remove symlinks from Allure report
-      #   run: |
-      #     find build/allure-report -type l -exec cp --remove-destination {} {} \;
       - name: Check files
         run: |
           pwd
@@ -95,11 +92,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
-          path: |
-            ./src/main/resources/application.properties
+          path: ./src/main/resources/application.properties
           retention-days: 15
-          
-#./screenshots
 
       # Set up GitHub Pages
       - name: Setup Pages
@@ -111,14 +105,14 @@ jobs:
           name: gh-pages
           path: './build/allure-report'
 
-     # Deploy Allure Report to GitHub Pages
+      # Deploy Allure Report to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
           artifact_name: gh-pages
 
-      # Send Allure Report via Email (Optional)
+      # Send Allure Report via Email
       - name: Send Email with Allure Report
         uses: dawidd6/action-send-mail@v3
         with:
@@ -129,12 +123,10 @@ jobs:
           subject: "Allure Test Report - CBS Automation"
           body: |
             Hello,
-      
+
             The latest Allure Test Report is available at:
             🔗 [CBS Automation Report](https://rahulsaini62.github.io/cbs_automation/)
-      
+
             Thanks.
           to: ${{ secrets.TO_EMAIL }}
           from: ${{ secrets.EMAIL_USERNAME }}
-
-
