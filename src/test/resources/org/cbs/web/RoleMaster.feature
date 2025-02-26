@@ -8,7 +8,10 @@ Feature: Role Master Feature
   This feature is having scenarios to test the CBS role master feature.
 
   Background:
-    Given User is on cbs master page.
+
+    Given User hit the cbs app url "cbs.app.url".
+    And User login with username as "cbs.username" and password as "cbs.password" on cbs admin
+    And User is on cbs master page.
 
   @TC-RM-01 @TC-RM-02 @TC-RM-03 @TC-RM-04 @TC-RM-05 @TC-RM-07 @TC_RM_09
   Scenario: Validate the input for Role Name with invalid role name.

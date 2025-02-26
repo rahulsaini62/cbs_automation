@@ -7,7 +7,9 @@ Feature: Service Type Master Feature
   This feature is having scenarios to test the CBS Service Type Master feature.
 
   Background:
-    Given User is on cbs master page.
+    Given User hit the cbs app url "cbs.app.url".
+    And User login with username as "cbs.username" and password as "cbs.password" on cbs admin
+    And User is on cbs master page.
 
   @TC-STM-01 @TC-STM-02 @#TC-STM-03 @#TC-STM-04
   Scenario: Verify valid login on CBS portal.

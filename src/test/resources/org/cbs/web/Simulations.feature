@@ -8,7 +8,9 @@ Feature: Simulation Feature
   This feature is having scenarios to test the simulation feature.
 
   Background:
-    Given User is on simulation page.
+    Given User hit the cbs app url "cbs.app.url".
+    And User login with username as "cbs.username" and password as "cbs.password" on cbs admin
+    And User is on cbs master page.
 
   Scenario:Verify simulation page.
 #    When Verify "Login successful" toast message should display.
@@ -70,7 +72,7 @@ Feature: Simulation Feature
     And Verify after click on copy to full team same value should reflect in each column on events page.
     Then User click on save section data btn on events page.
 
-  Scenario:Testing Failed Scenario
+  Scenario: Testing Failed Scenario
     And User click on "Simulations" tab under menu on dashboard page.
     And Verify simulations page should display.
     And User click create simulations button on simulations page.
