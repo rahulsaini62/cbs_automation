@@ -40,7 +40,7 @@
         "browser": "CHROME",
         "page_load_strategy": "NORMAL",
         "highlight": false,
-        "headless": true ,
+        "headless": false ,
         "resize": "MAXIMIZED",
         "custom_size": {
           "width": 1580,

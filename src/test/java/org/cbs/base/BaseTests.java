@@ -20,25 +20,18 @@ import static org.cbs.manager.ParallelSession.createSession;
 import static org.cbs.utils.PropertiesUtil.getApplicationProps;
 
 
+@Slf4j
 public class BaseTests {
 
-    @BeforeAll
-    public static void beforeAll() {
-        LoginActions loginActions = new LoginActions();
+    @Before
+    public void beforeScenario() {
         final String platformType = getApplicationProps("platformType");
         final String driverKey = getApplicationProps("driverKey");
         createSession(format("CBSTests-{0}", platformType),
                 PlatformType.valueOf(platformType), driverKey);
-//        loginActions.navigateToAppUrl ("cbs.app.url");
-//        loginActions.loginWithGivenCred ("cbs.username", "cbs.password");
     }
 
-    @Before
-    public void beforeScenario() {
-        System.out.println("Before Scenario started");
-    }
-
-    @After
+    @After (order = 1)
     public void afterScenario(final Scenario scenario) {
         if (scenario.isFailed()) {
             WindowActions.onWindow()
@@ -48,15 +41,49 @@ public class BaseTests {
             scenario.attach(screenshot, "image/png", "transaction-failed");
             Allure.addAttachment("Failed Screenshot", new ByteArrayInputStream(screenshot));
         }
-    }
-
-    @AfterAll
-    public static void afterAll() {
-        if (!ParallelSession.getSession()
-                .getPlatformType()
-                .equals(PlatformType.valueOf("API")))
-            DriverActions.withDriver()
-                    .saveLogs();
+        DriverActions.withDriver()
+                .saveLogs();
         ParallelSession.clearSession();
     }
+
+
+//    @BeforeAll
+//    public static void beforeAll() {
+////        LoginActions loginActions = new LoginActions();
+//
+////        loginActions.navigateToAppUrl ("cbs.app.url");
+////        loginActions.loginWithGivenCred ("cbs.username", "cbs.password");
+//    }
+//
+//    @Before
+//    public void beforeScenario() {
+//
+//        System.out.println("Before Scenario started");
+//        final String platformType = getApplicationProps("platformType");
+//        final String driverKey = getApplicationProps("driverKey");
+//        createSession(format("CBSTests-{0}", platformType),
+//                PlatformType.valueOf(platformType), driverKey);
+//    }
+//
+//    @After
+//    public void afterScenario(final Scenario scenario) {
+//        if (scenario.isFailed()) {
+//            WindowActions.onWindow()
+//                    .takeScreenshot();
+//            final byte[] screenshot = ((TakesScreenshot) ParallelSession.getSession()
+//                    .getDriver()).getScreenshotAs(OutputType.BYTES);
+//            scenario.attach(screenshot, "image/png", "transaction-failed");
+//            Allure.addAttachment("Failed Screenshot", new ByteArrayInputStream(screenshot));
+//        }
+//    }
+//
+//    @AfterAll
+//    public static void afterAll() {
+//        if (!ParallelSession.getSession()
+//                .getPlatformType()
+//                .equals(PlatformType.valueOf("API")))
+//            DriverActions.withDriver()
+//                    .saveLogs();
+//        ParallelSession.clearSession();
+//    }
 }
