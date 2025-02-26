@@ -248,6 +248,10 @@ public class CbsMasterActions extends SharedActions {
 
     }
 
+    public void clearTextInCreateRoleTxtBox() {
+        selectAllAndClearTxtBx(cbsMasterPage().getCreateRolePopupTxtBox());
+    }
+
     public void enterTextInCreateRoleTxtBox(String text) {
         onTextBox(cbsMasterPage().getCreateRolePopupTxtBox()).enterText(text);
     }
@@ -323,11 +327,10 @@ public class CbsMasterActions extends SharedActions {
 
 
     public RoleMasterResponseDate getRoleMasterListApi() {
+        waitForThePageLoader();
         ApiRequest request;
         ApiResponse response;
         final Map<String, String> header = headerBuilder.buildHeaders();
-        System.out.println("11111111---"+header);
-//        final Map<String, String> query = headerBuilder.query ();
         request = getRoleMasterLogsRequest(header);
         response = ApiActions.withRequest(request, TEST_RESTFUL_ADMIN.name()
                         .toLowerCase())
@@ -342,7 +345,7 @@ public class CbsMasterActions extends SharedActions {
 //        System.out.println("1111111111----------" + roleMasterResponseDate.getData().stream().filter(RoleMaster-> RoleMaster.getName().equals("akjdsklv")).toString());
 
         // Define the name to search for
-        String targetName = "ABC_TES"; // You can change this to any name you're looking for
+        String targetName = getSession().getSharedData("validName"); // You can change this to any name you're looking for
 
         // Verify and find the code for the given name
         List<RoleMaster> roleMasters = roleMasterResponseDate.getData();
@@ -360,6 +363,7 @@ public class CbsMasterActions extends SharedActions {
             System.out.println("Found code for name " + targetName + ": " + foundCode);
         } else {
             System.out.println("No matching role found for name " + targetName);
+            throw new NullPointerException();
         }
 
         return roleMasterResponseDate;

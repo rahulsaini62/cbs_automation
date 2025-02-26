@@ -136,7 +136,6 @@ public class CbsMasterSteps{
 
     @And("User click on create role button on cbs master page.")
     public void userClickOnCreateRoleButtonOnCbsMasterPage() {
-        cbsMasterActions.getRoleMasterListApi();
         cbsMasterActions.clickCreateRoleButton();
     }
 
@@ -229,7 +228,8 @@ public class CbsMasterSteps{
 
     @And("User enter valid role name in role name txt box on cbs master page.")
     public void userEnterValidRoleNameInRoleNameTxtBoxOnCbsMasterPage() {
-        getSession().setSharedData("validName", faker.name().firstName());
+        getSession().setSharedData("validName", faker.lorem().characters(20));
+        cbsMasterActions.clearTextInCreateRoleTxtBox();
         cbsMasterActions.enterTextInCreateRoleTxtBox(getSession().getSharedData("validName"));
     }
 
@@ -309,5 +309,10 @@ public class CbsMasterSteps{
     public void userIsOnCbsMasterPage() {
         cbsMasterActions.waitForLoader();
         navigate().to("https://adminqas.mycompass.co.in/cbs-masters");
+    }
+
+    @And("Verify role master code should generate in backend.")
+    public void verifyRoleMasterCodeShouldGenerateInBackend() {
+        cbsMasterActions.getRoleMasterListApi();
     }
 }
