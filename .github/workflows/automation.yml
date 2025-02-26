@@ -2,8 +2,8 @@
 name: CBS Automation Test
 
 on:
-  schedule:
-    - cron: '30 22 * * 2,4,0'
+  # schedule:
+    # - cron: '30 22 * * 2,4,0'
   workflow_dispatch:
 
 # Permissions for GitHub Pages
@@ -73,6 +73,7 @@ jobs:
           sed -i "s/mytestuseroncbs/${{ secrets.CBS_USERNAME }}/g" src/main/resources/application.properties
           sed -i "s/mycbspass/${{ secrets.CBS_PASSWORD }}/g" src/main/resources/application.properties
           cat src/main/resources/application.properties
+          
       # Run Maven tests
       - name: Run Test
         run: export DISPLAY=:99 && mvn clean test
