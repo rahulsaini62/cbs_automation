@@ -69,7 +69,7 @@ jobs:
       
       # Run Maven tests
       - name: Run Test
-        run: export DISPLAY=:99 && mvn test
+        run: export DISPLAY=:99 && mvn clean test
         continue-on-error: true
 
       # Download and install Allure
