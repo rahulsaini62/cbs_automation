@@ -44,16 +44,16 @@ Feature: Role Master Feature
     And User click cancel button under create role master popup on cbs master page.
     Then Verify confirmation popup on cancellation after modifying some data on cbs master page.
 
-#  @TC_RM_10
-#  Scenario: Verify cancellation action on discard popup create role master .
-#    When Verify cbs master page should display.
-#    And User click on create role button on cbs master page.
-#    And Verify role master create popup should get open on cbs master page.
-#    And User enter value in role name txt box on cbs master page.
-#    And User click cancel button under create role master popup on cbs master page.
-#    And User click cancel button on discard changes popup.
-#    Then Verify role master create popup should get open on cbs master page.
-#    And User click cancel button under create role master popup on cbs master page.
-#    And User click proceed button on discard changes popup.
-#    And Verify discard changes popup should not display.
-#    Then Verify cbs master page should display.
+  @TC_RM_10
+  Scenario: Verify cancellation action on discard popup create role master .
+    When Verify cbs master page should display.
+    And User click on create role button on cbs master page.
+    And Verify role master create popup should get open on cbs master page.
+    And User enter value in role name txt box on cbs master page.
+    And User click cancel button under create role master popup on cbs master page.
+    And User click cancel button on discard changes popup.
+    Then Verify role master create popup should get open on cbs master page.
+    And User click cancel button under create role master popup on cbs master page.
+    And User click proceed button on discard changes popup.
+    And Verify discard changes popup should not display.
+    Then Verify cbs master page should display.
