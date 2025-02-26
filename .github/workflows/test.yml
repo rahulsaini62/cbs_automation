@@ -1,0 +1,66 @@
+name: CBS Automation Test (Headed Mode)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # MacOS is not required for headed mode
+    steps:
+      # Checkout the repository
+      - uses: actions/checkout@v4
+
+      # Install Xvfb (Virtual Display)
+      - name: Install Xvfb
+        run: sudo apt-get install -y xvfb
+
+      # Start Xvfb to simulate a GUI display
+      - name: Start Xvfb
+        run: |
+          Xvfb :99 -screen 0 1920x1080x24 &
+          export DISPLAY=:99
+
+      # Install Chrome
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      # Start Selenium Chrome Container
+      - name: Start Selenium in Docker
+        run: |
+          docker run -d -p 4444:4444 --shm-size=2g selenium/standalone-chrome:latest
+          sleep 10  # Wait for Selenium to initialize
+
+      # Wait for Selenium to be Ready
+      - name: Wait for Selenium
+        run: |
+          for i in {1..10}; do
+            if curl -sSL "http://localhost:4444/wd/hub/status" | grep '"ready":true'; then
+              echo "Selenium is ready!"
+              exit 0
+            fi
+            echo "Waiting for Selenium..."
+            sleep 5
+          done
+          echo "Selenium did not start in time" && exit 1
+
+      # Set up JDK
+      - name: Set up JDK 22
+        uses: actions/setup-java@v4
+        with:
+          java-version: '22'
+          distribution: 'oracle'
+
+      # Set up Maven
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: 3.9.9
+
+      # Run Tests in Headed Mode
+      - name: Run Test (Headed Mode)
+        run: |
+          export DISPLAY=:99
+          mvn test -Dwebdriver.remote.url=http://localhost:4444/wd/hub
+        continue-on-error: true
