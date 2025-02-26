@@ -2,7 +2,6 @@
 name: CBS Automation Test
 
 on:
-
   workflow_dispatch:
 
 # Permissions for GitHub Pages
@@ -44,29 +43,7 @@ jobs:
           distribution: 'oracle'
 
           
-      # # Set up ChromeDriver
-      # - name: Set up ChromeDriver
-      #   uses: nanasess/setup-chromedriver@v2
-      #   with:
-      #     chromedriver-version: '133.0.6943.126-1'
-      #    # chromedriver-version: '132.0.6834.83'
-
-      # # Start ChromeDriver
-      # - run: |
-      #     export DISPLAY=:99
-      #     chromedriver --url-base=/wd/hub &
-      
-      # # Install Chrome
-      # - name: Install Chrome
-      #   run: sudo apt-get install -y google-chrome-stable
-
-      # - run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y xvfb
-
-      # Replace the values in application.properties with GitHub secrets
-      
-      # Run Maven tests
+  
       - name: Run Test
         run: export DISPLAY=:99 && mvn test
         continue-on-error: true
@@ -136,6 +113,3 @@ jobs:
             Thanks.
           to: ${{ secrets.TO_EMAIL }}
           from: ${{ secrets.EMAIL_USERNAME }}
-
-
-update in this for doccker and mac os
