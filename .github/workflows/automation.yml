@@ -20,6 +20,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    
     services:
       xvfb:
         image: selenium/standalone-chrome
@@ -49,6 +50,7 @@ jobs:
           sed -i "s/mycbsuser/${{ secrets.CBS_USERNAME }}/g" src/main/resources/application.properties
           sed -i "s/mycbspass/${{ secrets.CBS_PASSWORD }}/g" src/main/resources/application.properties
           cat src/main/resources/application.properties
+    
 
       # Run Maven tests
       - name: Run Test
