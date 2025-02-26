@@ -48,11 +48,7 @@ jobs:
           java-version: '22'
           distribution: 'oracle'
 
-      # Install Chrome (Ensure Correct Browser Version)
-      - name: Install Chrome
-        run: |
-          sudo apt-get install -y google-chrome-stable
-          google-chrome --version  # Verify installed version
+  
 
       # Run Maven tests in **head mode** (without --headless)
       - name: Run Test (Headed Mode)
