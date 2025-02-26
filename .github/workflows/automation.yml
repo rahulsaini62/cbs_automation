@@ -43,13 +43,13 @@ jobs:
           distribution: 'oracle'
 
       # Replace the values in application.properties with GitHub secrets
-      - name: Replace credentials in application.properties
-        run: |
-          pwd
-          ls -la
-          sed -i "s/mycbsuser/${{ secrets.CBS_USERNAME }}/g" src/main/resources/application.properties
-          sed -i "s/mycbspass/${{ secrets.CBS_PASSWORD }}/g" src/main/resources/application.properties
-          cat src/main/resources/application.properties
+      # - name: Replace credentials in application.properties
+        # run: |
+          # pwd
+          # ls -la
+          # sed -i "s/mycbsuser/${{ secrets.CBS_USERNAME }}/g" src/main/resources/application.properties
+          # sed -i "s/mycbspass/${{ secrets.CBS_PASSWORD }}/g" src/main/resources/application.properties
+          # cat src/main/resources/application.properties
     
 
       # Run Maven tests
