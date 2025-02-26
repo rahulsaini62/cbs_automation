@@ -31,20 +31,6 @@ jobs:
         run: |
           docker run -d -p 4444:4444 --shm-size=2g selenium/standalone-chrome:latest
           sleep 10  # Wait for Selenium to initialize
-
-      # Wait for Selenium to be Ready
-      - name: Wait for Selenium
-        run: |
-          for i in {1..10}; do
-            if curl -sSL "http://localhost:4444/wd/hub/status" | grep '"ready":true'; then
-              echo "Selenium is ready!"
-              exit 0
-            fi
-            echo "Waiting for Selenium..."
-            sleep 5
-          done
-          echo "Selenium did not start in time" && exit 1
-
       # Set up JDK
       - name: Set up JDK 22
         uses: actions/setup-java@v4
