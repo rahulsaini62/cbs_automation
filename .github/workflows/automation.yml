@@ -1,4 +1,4 @@
-name: Quivio Automation Test
+name: CBS Automation Test
 
 on:
   workflow_dispatch:
