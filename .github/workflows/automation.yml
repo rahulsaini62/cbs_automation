@@ -46,11 +46,7 @@ jobs:
           java-version: '22'
           distribution: 'oracle'
 
-      - name: Clear Browser Sessions
-        run: |
-          rm -rf ~/.cache/google-chrome/
-          rm -rf ~/.config/google-chrome/
-
+  
 
       # Replace the values in application.properties with GitHub secrets
       # - name: Replace credentials in application.properties
