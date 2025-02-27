@@ -25,12 +25,14 @@ import static org.cbs.utils.PropertiesUtil.getApplicationProps;
 @Slf4j
 public class BaseTests {
 
+
     @Before
     public void beforeScenario() {
         final String platformType = getApplicationProps("platformType");
         final String driverKey = getApplicationProps("driverKey");
         if (!getCurrentPersona().isEmpty()) {
             ParallelSession.getSession().getDriver().quit();
+            ParallelSession.clearSession();
             System.out.println("*****************");
             System.out.println("*****************");
             System.out.println("*****************");
