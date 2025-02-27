@@ -11,7 +11,6 @@ Feature: Simulation Feature
     Given User hit the cbs app url "cbs.app.url".
     And User login with username as "cbs.username" and password as "cbs.password" on cbs admin
 
-
   Scenario:Verify simulation page.
     And User click on "Simulations" tab under menu on dashboard page.
     And Verify simulations page should display.
@@ -59,8 +58,6 @@ Feature: Simulation Feature
     Then  Verify create cafe popup should display.
     And Verify ui of create cafe popup.
     When User fill create cafe details and submit create cafe popup.
-
-
     And Verify newly added cafe should display under cafe master on building and cafe page.
 #    And Verify newly added cafe should active status under cafe master on building and cafe page.
     And User clicks on events button.

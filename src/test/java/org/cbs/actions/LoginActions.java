@@ -50,12 +50,13 @@ public class LoginActions extends SharedActions {
         if (verifyElementIsDisplayed(loginPage().getStaySignInBtn())) {
             withMouse(loginPage().getStaySignInBtn()).click();
         }
-        sleep(2000);
+//        sleep(2000);
+
 //        withMouse(loginPage().getStaySignInBtn()).click();
 //        waitForURLContains("code");
 //        waitForElementVisible(commonPage().getPageLoader());
 //        waitForElementInvisibility(commonPage().getPageLoader());
-        setTokenAndDeviceIdFromLocalStorage();
+//        setTokenAndDeviceIdFromLocalStorage();
     }
 
     public void navigateToAppUrl(String appUrl) {

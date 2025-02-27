@@ -76,6 +76,8 @@ public class BuildingAndCafeActions extends SharedActions {
 
     public void clickOnSubmitBtnOnCreateBuildingPopup() {
         withMouse(buildingAndCafePage().getSubmitBtnOnCreateBuildingPopup()).click();
+        sleep(2000);
+        waitForElementInvisibility(buildingAndCafePage().getSubmitBtnOnCreateBuildingPopup());
     }
 
     public void verifyGivenBuildingShouldDisplayUnderBuildingMasterOnBuildingAndCafePage(String name) {
