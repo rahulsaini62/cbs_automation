@@ -18,6 +18,7 @@ import java.io.ByteArrayInputStream;
 
 import static java.text.MessageFormat.format;
 import static org.cbs.manager.ParallelSession.createSession;
+import static org.cbs.manager.ParallelSession.getCurrentPersona;
 import static org.cbs.utils.PropertiesUtil.getApplicationProps;
 
 
@@ -28,12 +29,20 @@ public class BaseTests {
     public void beforeScenario() {
         final String platformType = getApplicationProps("platformType");
         final String driverKey = getApplicationProps("driverKey");
+        if (!getCurrentPersona().isEmpty()) {
+            ParallelSession.getSession().getDriver().quit();
+            System.out.println("*****************");
+            System.out.println("*****************");
+            System.out.println("*****************");
+            System.out.println("*****************");
+            System.out.println("*****************");
+        }
         createSession(format("CBSTests-{0}", platformType),
                 PlatformType.valueOf(platformType), driverKey);
         ParallelSession.getSession().getDriver().manage().deleteAllCookies();
     }
 
-    @After (order = 1)
+    @After(order = 1)
     public void afterScenario(final Scenario scenario) {
         if (scenario.isFailed()) {
             WindowActions.onWindow()
