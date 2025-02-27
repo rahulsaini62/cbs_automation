@@ -32,49 +32,49 @@ public class SiteProfileActions extends SharedActions {
     public void enterTextInTxtBox(Locator locator, String input) {
         withMouse(locator).click();
         onTextBox(locator).enterText(input);
-        onTextBox(locator).enterText(Keys.chord(Keys.RETURN));
+        onTextBox(locator).enterText(Keys.chord(pressEnter()));
     }
 
     public void enterTextSelectReferenceSite(String input) {
         withMouse(siteProfilePage.getSelectReferenceSiteDrpDown()).click();
         onTextBox(siteProfilePage.getSelectReferenceSiteTxtBox()).enterText(input);
-        onTextBox(siteProfilePage.getSelectReferenceSiteTxtBox()).enterText(Keys.chord(Keys.RETURN));
+        onTextBox(siteProfilePage.getSelectReferenceSiteTxtBox()).enterText(Keys.chord(pressEnter()));
     }
 
     public void enterTextInSector(String input) {
         withMouse(siteProfilePage.getSectorDrpDown()).click();
         onTextBox(siteProfilePage.getSectorTxtBox()).enterText(input);
-        onTextBox(siteProfilePage.getSectorTxtBox()).enterText(Keys.chord(Keys.RETURN));
+        onTextBox(siteProfilePage.getSectorTxtBox()).enterText(Keys.chord(pressEnter()));
     }
 
     public void enterTextInOperatingModel(String input) {
         withMouse(siteProfilePage.getOperatingModelDrpDown()).click();
         onTextBox(siteProfilePage.getOperatingModelTxtBox()).enterText(input);
-        onTextBox(siteProfilePage.getOperatingModelTxtBox()).enterText(Keys.chord(Keys.RETURN));
+        onTextBox(siteProfilePage.getOperatingModelTxtBox()).enterText(Keys.chord(pressEnter()));
     }
 
     public void enterTextInCity(String input) {
         withMouse(siteProfilePage.getCityDrpDown()).click();
         onTextBox(siteProfilePage.getCityTxtBox()).enterText(input);
-        onTextBox(siteProfilePage.getCityTxtBox()).enterText(Keys.chord(Keys.RETURN));
+        onTextBox(siteProfilePage.getCityTxtBox()).enterText(Keys.chord(pressEnter()));
     }
 
     public void enterTextInContractType(String input) {
         withMouse(siteProfilePage.getContractTypeDrpDown()).click();
         onTextBox(siteProfilePage.getContractTypeTxtBox()).enterText(input);
-        onTextBox(siteProfilePage.getContractTypeTxtBox()).enterText(Keys.chord(Keys.RETURN));
+        onTextBox(siteProfilePage.getContractTypeTxtBox()).enterText(Keys.chord(pressEnter()));
     }
 
     public void enterTextInContractDurationYear(String input) {
         withMouse(siteProfilePage.getContractDurationYearDrpDwn()).click();
         onTextBox(siteProfilePage.getContractDurationYearTxtBox()).enterText(input);
-        onTextBox(siteProfilePage.getContractDurationYearTxtBox()).enterText(Keys.chord(Keys.RETURN));
+        onTextBox(siteProfilePage.getContractDurationYearTxtBox()).enterText(Keys.chord(pressEnter()));
 
     }
     public void enterTextInContractDurationMonth(String input) {
         withMouse(siteProfilePage.getContractDurationMonthTxtBox()).click();
         onTextBox(siteProfilePage.getContractDurationMonthTxtBox()).enterText(input);
-        onTextBox(siteProfilePage.getContractDurationMonthTxtBox()).enterText(Keys.chord(Keys.RETURN));
+        onTextBox(siteProfilePage.getContractDurationMonthTxtBox()).enterText(Keys.chord(pressEnter()));
 
     }
 
@@ -88,7 +88,7 @@ public class SiteProfileActions extends SharedActions {
     public void enterTextInRevenueAssuranceType(String input) {
         withMouse(siteProfilePage.getRevenueAssuranceDrpDown()).click();
         onTextBox(siteProfilePage.getRevenueAssuranceTypeTxtBox()).enterText(input);
-        onTextBox(siteProfilePage.getRevenueAssuranceTypeTxtBox()).enterText(Keys.chord(Keys.RETURN));
+        onTextBox(siteProfilePage.getRevenueAssuranceTypeTxtBox()).enterText(Keys.chord(pressEnter()));
     }
 
     public void bidSubmissionDateSelector(String input) {
@@ -148,6 +148,18 @@ public class SiteProfileActions extends SharedActions {
         softAssert.assertAll();
 //        withMouse(siteProfilePage.getCrossIconOnToastMsg()).click();
         waitForElementInvisibility(siteProfilePage.getToastMsg());
+    }
+
+    public Keys pressEnter(){
+        String os = System.getProperty("os.name")
+                .toLowerCase();
+        Keys modifierKey;
+        if (os.contains("mac")) {
+            modifierKey = Keys.RETURN;
+        } else {
+            modifierKey = Keys.ENTER;
+        }
+        return modifierKey;
     }
 
 }

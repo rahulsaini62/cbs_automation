@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.cbs.actions.LoginActions;
 import org.cbs.actions.SharedActions;
 import org.cbs.api.restful.response.EmailSender;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.cbs.actions.SharedActions;
@@ -17,8 +18,7 @@ import org.cbs.manager.ParallelSession;
 import java.io.ByteArrayInputStream;
 
 import static java.text.MessageFormat.format;
-import static org.cbs.manager.ParallelSession.createSession;
-import static org.cbs.manager.ParallelSession.getCurrentPersona;
+import static org.cbs.manager.ParallelSession.*;
 import static org.cbs.utils.PropertiesUtil.getApplicationProps;
 
 
@@ -29,8 +29,8 @@ public class BaseTests {
     public void beforeScenario() {
         final String platformType = getApplicationProps("platformType");
         final String driverKey = getApplicationProps("driverKey");
-        if (!getCurrentPersona().isEmpty()) {
-            ParallelSession.getSession().getDriver().quit();
+        if (getSession().getDriver() != null) {
+            getSession().getDriver().quit();
             System.out.println("*****************");
             System.out.println("*****************");
             System.out.println("*****************");

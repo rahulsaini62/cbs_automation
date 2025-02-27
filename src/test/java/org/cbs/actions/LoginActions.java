@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.cbs.enums.PlatformType;
 import org.cbs.pages.CbsMasterPage;
 import org.cbs.pages.LoginPage;
+import org.openqa.selenium.JavascriptExecutor;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.cbs.actions.CommonActions.sleep;
