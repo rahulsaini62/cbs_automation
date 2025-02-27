@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.datafaker.Faker;
 import org.cbs.actions.CbsMasterActions;
+import org.cbs.actions.LoginActions;
 import org.cbs.actions.SharedActions;
 import org.cbs.base.BaseTests;
 import org.testng.asserts.SoftAssert;
@@ -137,6 +138,8 @@ public class CbsMasterSteps{
     @And("User click on create role button on cbs master page.")
     public void userClickOnCreateRoleButtonOnCbsMasterPage() {
         cbsMasterActions.clickCreateRoleButton();
+        LoginActions loginActions=new LoginActions();
+        loginActions.setTokenAndDeviceIdFromLocalStorage();
     }
 
     @Then("Verify role master create popup should get open on cbs master page.")

@@ -2,15 +2,15 @@ package org.cbs.api.restful.response;
 
 import javax.mail.*;
 import javax.mail.internet.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 public class EmailSender {
 
-    public static void sendEmail(String toEmail, String subject, String body) {
-        System.out.println("111111111111");
-//        final String fromEmail = "aakash.singh@appinventiv.com"; // sender's email
+    public static void sendEmail(String toEmail, String subject, String body, String filePath) throws MessagingException, IOException {
         final String fromEmail = "rahul.saini1@appinventiv.com"; // sender's email
-        final String password = "Home@839"; // sender's email password
+        final String password = "zocl sqpx pxwl vkfp"; // sender's email password
 
         // Set up the SMTP server properties
         Properties properties = new Properties();
@@ -23,28 +23,40 @@ public class EmailSender {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                System.out.println("222222222222222");
                 return new PasswordAuthentication(fromEmail, password);
             }
         });
 
-        System.out.println("3333333333333");
-        try {
-            // Compose the email
+        // Compose the email
+        MimeMessage message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(fromEmail));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+        message.setSubject(subject);
 
+        // Create the email body
+        MimeBodyPart textPart = new MimeBodyPart();
+        textPart.setText(body);
 
-            System.out.println("33333333333");
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(fromEmail));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-            message.setSubject(subject);
-            message.setText(body);
-
-            // Send the email
-            Transport.send(message);
-            System.out.println("Email Sent Successfully");
-        } catch (MessagingException e) {
-            e.printStackTrace();
+        // Create the file attachment part
+        MimeBodyPart attachmentPart = new MimeBodyPart();
+        File file = new File(filePath);
+        if (file.exists()) {
+            attachmentPart.attachFile(file);
+        } else {
+            System.out.println("Attachment file does not exist!");
+            return;
         }
+
+        // Create a multipart message to combine the body and the attachment
+        Multipart multipart = new MimeMultipart();
+        multipart.addBodyPart(textPart);
+        multipart.addBodyPart(attachmentPart);
+
+        // Set the content of the message
+        message.setContent(multipart);
+
+        // Send the email
+        Transport.send(message);
+        System.out.println("Email Sent Successfully with Attachment");
     }
 }
