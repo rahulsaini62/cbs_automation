@@ -186,6 +186,8 @@ class WebDriverManager implements IDriverManager {
         options.addArguments ("--disable-gpu");
         options.addArguments ("--disable-dev-shm-usage");
         options.addArguments("--disable-blink-features=AutomationControlled");
+        options.addArguments("--incognito");
+
 //        options.addArguments("--disable-infobars");
 //        options.addArguments("--disable-extensions") ;
         ofNullable (webSetting.getBrowserOptions ()).ifPresent (l -> l.forEach (options::addArguments));
