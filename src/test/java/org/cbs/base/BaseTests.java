@@ -29,14 +29,7 @@ public class BaseTests {
     public void beforeScenario() {
         final String platformType = getApplicationProps("platformType");
         final String driverKey = getApplicationProps("driverKey");
-        if (getSession().getDriver() != null) {
-            getSession().getDriver().quit();
-            System.out.println("*****************");
-            System.out.println("*****************");
-            System.out.println("*****************");
-            System.out.println("*****************");
-            System.out.println("*****************");
-        }
+
         createSession(format("CBSTests-{0}", platformType),
                 PlatformType.valueOf(platformType), driverKey);
         ParallelSession.getSession().getDriver().manage().deleteAllCookies();
@@ -58,6 +51,14 @@ public class BaseTests {
         }
         DriverActions.withDriver()
                 .saveLogs();
+        if (getSession().getDriver() != null) {
+            getSession().getDriver().quit();
+            System.out.println("*****************");
+            System.out.println("*****************");
+            System.out.println("*****************");
+            System.out.println("*****************");
+            System.out.println("*****************");
+        }
         ParallelSession.clearSession();
 
     }
