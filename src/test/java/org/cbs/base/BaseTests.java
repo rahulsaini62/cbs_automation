@@ -52,12 +52,15 @@ public class BaseTests {
         DriverActions.withDriver()
                 .saveLogs();
         if (getSession().getDriver() != null) {
-            getSession().getDriver().quit();
             System.out.println("*****************");
             System.out.println("*****************");
             System.out.println("*****************");
             System.out.println("*****************");
             System.out.println("*****************");
+            getSession().getDriver().manage().deleteAllCookies();
+            ((JavascriptExecutor) getSession().getDriver()).executeScript("window.localStorage.clear();");
+            ((JavascriptExecutor) getSession().getDriver()).executeScript("window.sessionStorage.clear();");
+
         }
         ParallelSession.clearSession();
 
