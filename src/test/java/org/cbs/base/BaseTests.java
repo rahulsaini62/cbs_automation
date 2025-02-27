@@ -51,6 +51,7 @@ public class BaseTests {
         }
         DriverActions.withDriver()
                 .saveLogs();
+        ParallelSession.clearSession();
         if (getSession().getDriver() != null) {
             System.out.println("*****************");
             System.out.println("*****************");
@@ -62,7 +63,6 @@ public class BaseTests {
             ((JavascriptExecutor) getSession().getDriver()).executeScript("window.sessionStorage.clear();");
 
         }
-        ParallelSession.clearSession();
 
     }
 
