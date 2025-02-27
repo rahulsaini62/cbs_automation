@@ -1,7 +1,11 @@
 name: CBS Automation Test
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - cbs  # Allow workflow to run on 'cbs' branch
+  workflow_dispatch:  # Allow manual triggering of the workflow
+
 
 # Permissions for GitHub Pages
 permissions:
