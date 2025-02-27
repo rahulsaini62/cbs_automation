@@ -38,10 +38,10 @@ public class BaseTests {
     public void beforeScenario() {
         final String platformType = getApplicationProps("platformType");
         final String driverKey = getApplicationProps("driverKey");
-        if (!getCurrentPersona().isEmpty()) {
-            ParallelSession.getSession().getDriver().quit();
-            ParallelSession.clearSession();
-        }
+//        if (!getCurrentPersona().isEmpty()) {
+//            ParallelSession.getSession().getDriver().quit();
+//            ParallelSession.clearSession();
+//        }
         createSession(format("CBSTests-{0}", platformType),
                 PlatformType.valueOf(platformType), driverKey);
         ParallelSession.getSession().getDriver().manage().deleteAllCookies();
