@@ -103,3 +103,22 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: gh-pages
+
+          # Send Allure Report via Email (Optional)
+      - name: Send Email with Allure Report
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Allure Test Report - CBS Automation"
+          body: |
+            Hello,
+      
+            The latest Allure Test Report is available at:
+            🔗 [CBS Automation Report](https://rahulsaini62.github.io/cbs_automation/)
+      
+            Thanks.
+          to: ${{ secrets.TO_EMAIL }}
+          from: ${{ secrets.EMAIL_USERNAME }}
