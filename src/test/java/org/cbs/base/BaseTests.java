@@ -5,6 +5,7 @@ import io.qameta.allure.Allure;
 import lombok.extern.slf4j.Slf4j;
 import org.cbs.actions.LoginActions;
 import org.cbs.actions.SharedActions;
+import org.cbs.api.restful.response.EmailSender;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.cbs.actions.SharedActions;
@@ -40,10 +41,15 @@ public class BaseTests {
                     .getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", "transaction-failed");
             Allure.addAttachment("Failed Screenshot", new ByteArrayInputStream(screenshot));
+
+//            EmailSender.sendEmail("rahul.saini1@appinventiv.com",
+//                    "Test Failed: " + scenario.getName(),
+//                    "Test failed. Details: " + scenario.getName());
         }
         DriverActions.withDriver()
                 .saveLogs();
         ParallelSession.clearSession();
+
     }
 
 
