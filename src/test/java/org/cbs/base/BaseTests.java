@@ -33,11 +33,6 @@ public class BaseTests {
         if (!getCurrentPersona().isEmpty()) {
             ParallelSession.getSession().getDriver().quit();
             ParallelSession.clearSession();
-            System.out.println("*****************");
-            System.out.println("*****************");
-            System.out.println("*****************");
-            System.out.println("*****************");
-            System.out.println("*****************");
         }
         createSession(format("CBSTests-{0}", platformType),
                 PlatformType.valueOf(platformType), driverKey);
