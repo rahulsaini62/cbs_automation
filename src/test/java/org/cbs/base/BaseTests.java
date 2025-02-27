@@ -59,9 +59,6 @@ public class BaseTests {
             System.out.println("*****************");
             System.out.println("*****************");
             getSession().getDriver().manage().deleteAllCookies();
-            ((JavascriptExecutor) getSession().getDriver()).executeScript("window.localStorage.clear();");
-            ((JavascriptExecutor) getSession().getDriver()).executeScript("window.sessionStorage.clear();");
-
         }
 
     }
