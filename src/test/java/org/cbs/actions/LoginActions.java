@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.logging.log4j.Logger;
 import org.cbs.enums.PlatformType;
+import org.cbs.pages.CbsMasterPage;
 import org.cbs.pages.LoginPage;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -14,6 +15,7 @@ import static org.cbs.actions.elements.ClickableActions.withMouse;
 import static org.cbs.actions.elements.ElementFinder.*;
 import static org.cbs.actions.elements.TextBoxActions.onTextBox;
 import static org.cbs.manager.ParallelSession.getSession;
+import static org.cbs.pages.CbsMasterPage.cbsMasterPage;
 import static org.cbs.pages.DashboardPage.commonPage;
 import static org.cbs.pages.LoginPage.loginPage;
 import static org.cbs.utils.PropertiesUtil.getApplicationProps;
@@ -51,7 +53,7 @@ public class LoginActions extends SharedActions {
 //        withMouse(loginPage().getStaySignInBtn()).click();
 //        waitForURLContains("code");
 //        waitForElementVisible(commonPage().getPageLoader());
-        waitForElementInvisibility(commonPage().getPageLoader());
+//        waitForElementInvisibility(commonPage().getPageLoader());
         setTokenAndDeviceIdFromLocalStorage();
     }
 
@@ -61,13 +63,13 @@ public class LoginActions extends SharedActions {
 
     public void loginWithGivenCred(final String userName, final String password) {
         populateLoginFormAndSignIn(userName, password);
+        waitForElementInvisibility(cbsMasterPage().getLoginSuccessPopup());
     }
 
     public void setTokenAndDeviceIdFromLocalStorage() {
         String localStorageData = withDriver().executeScript("return localStorage.getItem(arguments[0]);",
                 "access_token");
         LOGGER.info("Access token value: {}", localStorageData);
-        System.out.println("1111------"+localStorageData);
         getSession().setSharedData("token", "Bearer" + " " + localStorageData);
 
     }

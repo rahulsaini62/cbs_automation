@@ -79,6 +79,7 @@ public class BuildingAndCafeActions extends SharedActions {
     }
 
     public void verifyGivenBuildingShouldDisplayUnderBuildingMasterOnBuildingAndCafePage(String name) {
+        waitForThePageLoader();
         Assert.assertTrue(verifyElementIsDisplayed(buildingAndCafePage().getGivenBuildingNameFromBuildingMasterTable(name)),
                 "Newly Building named as " + name + " is not displayed");
     }

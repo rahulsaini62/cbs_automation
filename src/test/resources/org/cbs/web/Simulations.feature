@@ -10,10 +10,10 @@ Feature: Simulation Feature
   Background:
     Given User hit the cbs app url "cbs.app.url".
     And User login with username as "cbs.username" and password as "cbs.password" on cbs admin
-    And User is on cbs master page.
+
 
   Scenario:Verify simulation page.
-#    When Verify "Login successful" toast message should display.
+    And User click on "Simulations" tab under menu on dashboard page.
     And Verify simulations page should display.
     And User click create simulations button on simulations page.
 

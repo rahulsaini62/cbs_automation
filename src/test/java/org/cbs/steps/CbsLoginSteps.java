@@ -22,5 +22,6 @@ public class CbsLoginSteps {
     public void userLoginWithUsernameAsAndPasswordAsOnCbsAdmin (final String username, final String password) {
         this.loginActions.loginWithGivenCred (username, password);
 
+
     }
 }

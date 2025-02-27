@@ -30,6 +30,7 @@ public class BaseTests {
         final String driverKey = getApplicationProps("driverKey");
         createSession(format("CBSTests-{0}", platformType),
                 PlatformType.valueOf(platformType), driverKey);
+        ParallelSession.getSession().getDriver().manage().deleteAllCookies();
     }
 
     @After (order = 1)
